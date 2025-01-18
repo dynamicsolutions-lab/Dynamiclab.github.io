@@ -1,26 +1,311 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nome do Seu Produto</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Zé da Venda - Transforme suas vendas com IA">
+<title>Zé da Venda - Assistente de Vendas com IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+--primary-dark: #006d77;
+--primary: #00a6b4;
+--primary-light: #48cae4;
+--accent-green: #28b786;
+--gradient-start: #006d77;
+--gradient-end: #28b786;
+--white: #ffffff;
+--gray-50: #f8f9fa;
+--gray-100: #f1f3f5;
+--gray-700: #495057;
+--danger: #dc3545;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: var(--gray-700);
+  background: var(--gray-50);
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.top-banner {
+  background: var(--danger);
+  color: var(--white);
+  text-align: center;
+  padding: 12px;
+  font-weight: 600;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { background-color: var(--danger); }
+  50% { background-color: #e74c3c; }
+  100% { background-color: var(--danger); }
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  color: var(--white);
+  padding: 60px 0;
+  text-align: center;
+}
+
+.hero img {
+  max-width: 300px;
+  margin-bottom: 30px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.price-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  margin: 30px auto;
+  max-width: 500px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.price-highlight {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--white);
+  margin: 15px 0;
+}
+
+.payment-options {
+  font-size: 1.1rem;
+  margin: 15px 0;
+}
+
+.pix-discount {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 15px;
+  border-radius: 50px;
+  margin: 10px 0;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--accent-green);
+  color: var(--white);
+  padding: 18px 36px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin: 20px 0;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(40, 183, 134, 0.3);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(40, 183, 134, 0.4);
+}
+
+.features {
+  padding: 60px 0;
+  background: var(--white);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.feature-card {
+  background: var(--gray-50);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-card h3 {
+  color: var(--primary-dark);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bonus-section {
+  background: linear-gradient(135deg, var(--gradient-end), var(--gradient-start));
+  color: var(--white);
+  padding: 60px 0;
+}
+
+.bonus-card {
+  background: var(--white);
+  border-radius: 15px;
+  padding: 25px;
+  margin: 15px 0;
+  color: var(--gray-700);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.testimonials {
+  padding: 60px 0;
+  background: var(--gray-50);
+}
+
+.testimonial-card {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 15px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+footer {
+  background: var(--primary-dark);
+  color: var(--white);
+  padding: 40px 0;
+  text-align: center;
+}
+
+footer a {
+  color: var(--primary-light);
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero img {
+    max-width: 200px;
+  }
+
+  .price-highlight {
+    font-size: 2rem;
+  }
+
+  .container {
+    width: 95%;
+    padding: 0 10px;
+  }
+}
+
+</style>
 </head>
 <body>
-    <header>
-        <h1>Nome do Seu Produto</h1>
-        <p>Uma descrição breve e chamativa sobre seu produto.</p>
-    </header>
-    <section class="produto">
-        <img src="img/meu-produto.jpg" alt="Imagem do Seu Produto">
-        <h2>Descrição Detalhada do Produto</h2>
-        <p>Informações detalhadas sobre os benefícios, características e vantagens do seu produto.</p>
-        <p><strong>Preço:</strong> R$XX,XX</p> 
-         <!-- Botão de compra Kirvano -->
-        <a href="URL_DO_SEU_PRODUTO_KIRVANO" class="botao-comprar" target="_blank">Comprar Agora</a>
-    </section>
-    <footer>
-        <p>© 2024 Sua Empresa. Todos os direitos reservados.</p>
-    </footer>
+<div class="top-banner">
+⚡ ÚLTIMAS 10 VAGAS - Preço aumenta em 24h! ⚡
+</div>
+
+<section class="hero">
+<div class="container">
+<img src="https://i.imgur.com/A2Vo57G.png" alt="Logo Zé da Venda">
+
+  <h1>TRANSFORME SUAS VENDAS HOJE! 🎯</h1>
+  <p>Seu assistente de vendas com IA direto no seu WhatsApp</p>
+
+  <div class="price-card">
+    <h2>OFERTA ÚLTIMA CHANCE:</h2>
+    <div class="price-highlight">💎 R$74,99/mês</div>
+    <div class="payment-options">
+      <div class="pix-discount">5% OFF no PIX</div>
+      <div>ou 12x sem juros</div>
+    </div>
+  </div>
+
+  <a href="https://wa.me/qr/TOXW7X2YEG3IJ1" class="cta-button">
+    GARANTA SUA VAGA AGORA! →
+  </a>
+</div>
+
+</section>
+
+<section class="features">
+<div class="container">
+<h2>VOCÊ RECEBE:</h2>
+<div class="features-grid">
+<div class="feature-card">
+<h3>🤖 IA de Vendas Exclusiva</h3>
+<p>Assistente inteligente direto no seu WhatsApp para aumentar suas vendas</p>
+</div>
+<div class="feature-card">
+<h3>👑 Consultoria VIP com Zé</h3>
+<p>Acompanhamento personalizado para maximizar seus resultados</p>
+</div>
+<div class="feature-card">
+<h3>💡 Ideias Infinitas + Suporte</h3>
+<p>Nunca fique sem ideias para vender mais e tenha suporte quando precisar</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="bonus-section">
+<div class="container">
+<h2>SUPER BÔNUS EXCLUSIVOS</h2>
+<div class="features-grid">
+<div class="bonus-card">
+<h3>🎯 Cliente Fiel Automático</h3>
+<p>Sistema para fidelizar seus clientes automaticamente</p>
+</div>
+<div class="bonus-card">
+<h3>📱 Sistema Mobile Vendas</h3>
+<p>Gerencie suas vendas de qualquer lugar pelo celular</p>
+</div>
+<div class="bonus-card">
+<h3>💰 Desconto Vitalício</h3>
+<p>Mantenha esse preço especial para sempre</p>
+</div>
+</div>
+
+  <a href="https://wa.me/qr/TOXW7X2YEG3IJ1" class="cta-button">
+    QUERO TRANSFORMAR MINHAS VENDAS! →
+  </a>
+</div>
+
+</section>
+
+<section class="testimonials">
+<div class="container">
+<h2>O QUE DIZEM NOSSOS CLIENTES</h2>
+<div class="testimonial-card">
+<p>"Com o Zé da Venda, minhas vendas aumentaram já na primeira semana. A IA é incrível e a consultoria fez toda diferença!"</p>
+<strong>- Maria Silva, Empreendedora</strong>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<p>© 2025 Zé da Venda - Todos os direitos reservados.</p>
+<p>Desenvolvido por <a href="https://tinyurl.com/robo-quezia">Quézia</a></p>
+</div>
+</footer>
 </body>
 </html>
