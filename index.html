@@ -49,25 +49,28 @@
         }
 
         .logo {
-            font-family: 'The Seasons', sans-serif; /* Define a fonte do logo */
-            font-size: 2.5rem; /* Define o tamanho da fonte do logo */
-            font-weight: 400; /* Define a espessura da fonte do logo */
-            letter-spacing: 1px; /* Adiciona espaçamento entre as letras */
-            margin-bottom: 1rem; /* Adiciona margem inferior */
-            color: #ffffff; /* Define a cor do logo como branco puro */
-            text-shadow: 0 0 10px #ffffff, /* Adiciona sombra ao texto */
-                        0 0 20px #ffffff,
-                        0 0 30px #ffffff;
+            margin-bottom: 4rem; /* Adiciona margem inferior */
         }
 
+        .logo img {
+            max-width: 500px; /* Define a largura máxima da imagem */
+            height: auto; /* Mantém a proporção da imagem */
+        }
+
+
         h1 {
-            font-size: 3.5rem; /* Define o tamanho da fonte do título */
-            font-weight: 800; /* Define a espessura da fonte do título */
-            margin-bottom: 1.5rem; /* Adiciona margem inferior */
-            background: linear-gradient(45deg, #00ffff, #ff00ff); /* Define um gradiente como fundo do texto */
-            -webkit-background-clip: text; /* Aplica o gradiente ao texto */
-            -webkit-text-fill-color: transparent; /* Torna o texto transparente para mostrar o gradiente */
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5); /* Adiciona sombra ao texto */
+            font-size: 3.5rem;
+            font-weight: 1200;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(169, 169, 169, 0.5);
+            color: #a9a9a9; /* Define a cor padrão como cinza cromado */
+        }
+
+        .innovation-text {
+            background: linear-gradient(45deg, #FFD700, #FDB931); /* Define um gradiente amarelo vibrante */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5); /* Adiciona sombra ao texto */
         }
 
         .tagline {
@@ -100,8 +103,8 @@
         }
 
         @media (max-width: 768px) {
-            .logo {
-                font-size: 1.8rem; /* Reduz o tamanho da fonte do logo em telas menores */
+            .logo img {
+                max-width: 200px; /* Reduz o tamanho da imagem em telas menores */
             }
             h1 {
                 font-size: 2.5rem; /* Reduz o tamanho da fonte do título em telas menores */
@@ -115,8 +118,10 @@
 <body>
     <div id="particles-js"></div>
     <div class="content">
-        <div class="logo">DYNAMIC SOLUTIONS</div>
-        <h1>Inovação em Movimento</h1>
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/dynamicsolutions-lab/Dynamiclab.github.io/dbd779b1ec8ec7d9a371926098197a7ae5d4fdb9/img/logodyn.svg" alt="Dynamic Solutions Logo">
+        </div>
+        <h1><span class="innovation-text">Inovação</span> em Movimento</h1>
         <p class="tagline">Transformamos desafios em oportunidades através de soluções tecnológicas inovadoras e personalizadas para impulsionar o sucesso do seu negócio.</p>
         <a href="#contato" class="cta-button">Fale Conosco</a>
     </div>
