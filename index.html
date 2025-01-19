@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Solutions | Inovação em IA & Transformação Digital</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <canvas id="canvas"></canvas>
+<body style="margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Roboto', sans-serif; color: #f9f9f9;">
 
-    <header>
-        <div class="container">
+    <canvas id="canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></canvas>
+
+    <header style="position: fixed; width: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); padding: 10px 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 15px; display: flex; justify-content: space-between; align-items: center;">
+            <!-- SVG e navegação -->
             <svg class="logo-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="height: 40px;">
                 <defs>
                     <linearGradient id="lvGold" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -33,25 +33,103 @@
                     </text>
                 </g>
             </svg>
-            <nav>
-                <a href="#solucoes">Soluções</a>
-                <a href="#resultados">Resultados</a>
-                <a href="#depoimentos">Depoimentos</a>
-                <a href="#contato" class="btn btn-primary">Fale Conosco</a>
+            <nav style="display: flex; gap: 15px;">
+                <a href="#solucoes" style="font-weight: 400; padding: 5px 0; color: inherit; text-decoration: none; transition: color 0.3s ease;">Soluções</a>
+                <a href="#resultados" style="font-weight: 400; padding: 5px 0; color: inherit; text-decoration: none; transition: color 0.3s ease;">Resultados</a>
+                <a href="#depoimentos" style="font-weight: 400; padding: 5px 0; color: inherit; text-decoration: none; transition: color 0.3s ease;">Depoimentos</a>
+                <a href="#contato" class="btn btn-primary" style="display: inline-block; padding: 8px 16px; border-radius: 20px; font-weight: 500; text-decoration: none; background: linear-gradient(45deg, #00FFFF, #FF00FF); color: #000; transition: all 0.3s ease;">Fale Conosco</a>
             </nav>
         </div>
     </header>
 
-    <section class="hero content">
-        <h1>Transformando o Futuro<br>com Inteligência Artificial</h1>
-        <p>Soluções personalizadas de IA que revolucionam sua presença digital e impulsionam seus resultados.</p>
-        <div class="btn-group">
-            <a href="#demo" class="btn btn-primary">Solicitar Demo</a>
-            <a href="#solucoes" class="btn btn-secondary" style="background: transparent; border: 2px solid #00FFFF; color: #00FFFF;">Conhecer Soluções</a>
+    <section class="hero content" style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; box-sizing: border-box; z-index: 1; position: relative;">
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 2em; margin-bottom: 15px; background: linear-gradient(45deg, #00FFFF, #FF00FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Transformando o Futuro<br>com Inteligência Artificial</h1>
+        <p style="font-size: 1em; margin-bottom: 30px; max-width: 80%; overflow: hidden;">Soluções personalizadas de IA que revolucionam sua presença digital e impulsionam seus resultados.</p>
+        <div class="btn-group" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+            <a href="#demo" class="btn btn-primary" style="display: inline-block; padding: 8px 16px; border-radius: 20px; font-weight: 500; text-decoration: none; background: linear-gradient(45deg, #00FFFF, #FF00FF); color: #000; transition: all 0.3s ease;">Solicitar Demo</a>
+            <a href="#solucoes" class="btn btn-secondary" style="display: inline-block; padding: 8px 16px; border-radius: 20px; font-weight: 500; text-decoration: none; background: transparent; border: 2px solid #00FFFF; color: #00FFFF; transition: all 0.3s ease;">Conhecer Soluções</a>
         </div>
     </section>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const particles = [];
+        const numParticles = 100;
+        const connectionDistance = 150;
+
+        for (let i = 0; i < numParticles; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 2,
+                vy: (Math.random() - 0.5) * 2,
+                radius: 2
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+
+                if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#8A2BE2';
+                ctx.fill();
+
+                particles.forEach(otherParticle => {
+                    const dx = particle.x - otherParticle.x;
+                    const dy = particle.y - otherParticle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(138, 43, 226, ${1 - distance/connectionDistance})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(otherParticle.x, otherParticle.y);
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        let mouse = { x: null, y: null };
+
+        canvas.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+
+            particles.forEach(particle => {
+                const dx = mouse.x - particle.x;
+                const dy = mouse.y - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 200) {
+                    particle.x += dx * 0.02;
+                    particle.y += dy * 0.02;
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
