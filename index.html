@@ -1,422 +1,108 @@
-<!DOCTYPE html> <html lang="pt-br"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Dynamic Solutions | Inovação em IA & Transformação Digital</title> <meta name="description" content="Transforme seu negócio com soluções personalizadas de IA. Mentoria especializada e criação de avatares digitais para sua marca."> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet"> <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> <style> /* Variáveis de Cores */ :root { --neon-blue: #00FFFF; --neon-pink: #FF00FF; --dark-bg: #0a0a0a; --light-text: #f9f9f9; --gray-text: #cccccc; --highlight-color: #FF4500; --metallic-gray: #4a4a4a; --gradient-start: #1a1a1a; --gradient-end: #333333; }
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Solutions | Inovação em IA & Transformação Digital</title>
+    <meta name="description" content="Transforme seu negócio com soluções personalizadas de IA. Mentoria especializada e criação de avatares digitais para sua marca.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body style="font-family: 'Roboto', sans-serif; color: #f9f9f9; background-color: #0a0a0a; overflow-x: hidden; margin: 0;">
 
-```
-    /* Estilos Globais */
-    *, *::before, *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        scroll-behavior: smooth;
-    }
+<!-- Header Fixo -->
+<header style="position: fixed; width: 100%; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 15px 0; z-index: 1000; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center;">
+        <!-- Logo SVG no header -->
+        <svg class="logo-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="height: 60px; transition: all 0.3s ease;">
+            <defs>
+                <linearGradient id="lvGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#B8860B;stop-opacity:1" />
+                    <stop offset="25%" style="stop-color:#E6C460;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#B8860B;stop-opacity:1" />
+                    <stop offset="75%" style="stop-color:#E6C460;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+                </linearGradient>
+                <pattern id="monogramPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <path d="M25,25 L75,25 L75,75 L25,75 Z" fill="none" stroke="url(#lvGold)" stroke-width="1" opacity="0.1"/>
+                    <path d="M50,0 L100,50 L50,100 L0,50 Z" fill="none" stroke="url(#lvGold)" stroke-width="1" opacity="0.1"/>
+                </pattern>
+                <filter id="luxuryFinish">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
+                    <feSpecularLighting in="blur" surfaceScale="4" specularConstant="1.5" specularExponent="20" lighting-color="#ffffff">
+                        <fePointLight x="300" y="200" z="200"/>
+                    </feSpecularLighting>
+                    <feComposite in2="SourceAlpha" operator="in"/>
+                    <feComposite in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+                </filter>
+                <linearGradient id="overlayGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#B8860B;stop-opacity:0.4" />
+                    <stop offset="50%" style="stop-color:#E6C460;stop-opacity:0.4" />
+                    <stop offset="100%" style="stop-color:#B8860B;stop-opacity:0.4" />
+                </linearGradient>
+            </defs>
+            <rect width="600" height="400" fill="#000000"/>
+            <rect width="600" height="400" fill="url(#monogramPattern)"/>
+            <g filter="url(#luxuryFinish)">
+                <text x="300" y="180" font-family="Didot, serif" font-weight="400" font-size="48" fill="url(#lvGold)" text-anchor="middle" letter-spacing="8">
+                    DYNAMIC
+                </text>
+                <text x="300" y="240" font-family="Didot, serif" font-weight="300" font-size="24" fill="url(#lvGold)" text-anchor="middle" letter-spacing="16">
+                    SOLUTIONS
+                </text>
+            </g>
+        </svg>
+        <nav style="display: flex; gap: 30px;">
+            <a href="#solucoes" style="font-weight: 400; position: relative; padding: 5px 0; text-decoration: none; color: inherit; transition: color 0.3s ease;">Soluções</a>
+            <a href="#resultados" style="font-weight: 400; position: relative; padding: 5px 0; text-decoration: none; color: inherit; transition: color 0.3s ease;">Resultados</a>
+            <a href="#depoimentos" style="font-weight: 400; position: relative; padding: 5px 0; text-decoration: none; color: inherit; transition: color 0.3s ease;">Depoimentos</a>
+            <a href="#contato" class="btn btn-primary" style="display: inline-block; padding: 10px 20px; border-radius: 30px; font-weight: 500; background: linear-gradient(45deg, #00FFFF, #FF00FF); color: #000; text-decoration: none; transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 1;">Fale Conosco</a>
+        </nav>
+    </div>
+</header>
 
-    body {
-        font-family: 'Roboto', sans-serif;
-        color: var(--light-text);
-        background-color: var(--dark-bg);
-        overflow-x: hidden;
-    }
-
-    a {
-        text-decoration: none;
-        color: inherit;
-        transition: color 0.3s ease;
-    }
-
-    a:hover {
-        color: var(--highlight-color);
-    }
-
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-
-    .gradient-text {
-        background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .section-title {
-        font-family: 'Playfair Display', serif;
-        font-size: 2.5em;
-        text-align: center;
-        margin-bottom: 50px;
-    }
-
-    .btn {
-        display: inline-block;
-        padding: 15px 30px;
-        border-radius: 30px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-    }
-
-    .btn-primary {
-        background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
-        color: #000;
-    }
-
-    .btn-primary::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
-        opacity: 0;
-        z-index: -1;
-        transition: all 0.3s ease;
-    }
-
-    .btn-primary:hover::before {
-        opacity: 1;
-    }
-
-    .btn-secondary {
-        background: transparent;
-        border: 2px solid var(--neon-blue);
-        color: var(--neon-blue);
-    }
-
-    .btn-secondary:hover {
-        background: var(--neon-blue);
-        color: #000;
-    }
-
-    .floating {
-        animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-20px); }
-        100% { transform: translateY(0px); }
-    }
-
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    /* Header */
-    header {
-        position: fixed;
-        width: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        padding: 15px 0;
-        z-index: 1000;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    header .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    header .logo-svg {
-        height: 60px;
-        transition: all 0.3s ease;
-    }
-
-    header nav {
-        display: flex;
-        gap: 30px;
-    }
-
-    header nav a {
-        font-weight: 400;
-        position: relative;
-        padding: 5px 0;
-    }
-
-    header nav a:hover {
-        color: var(--highlight-color);
-    }
-
-    header nav a:before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--highlight-color);
-        transition: width 0.3s ease;
-    }
-
-    header nav a:hover:before {
-        width: 100%;
-    }
-
-    header nav .btn {
-        padding: 10px 20px;
-    }
-
-    /* Hero Section */
-    .hero {
-        height: 100vh;
-        background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
-        background-size: 400% 400%;
-        animation: gradientBG 15s ease infinite;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .hero::before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400"><defs><linearGradient id="lvGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23B8860B;stop-opacity:1" /><stop offset="25%" style="stop-color:%23E6C460;stop-opacity:1" /><stop offset="50%" style="stop-color:%23B8860B;stop-opacity:1" /><stop offset="75%" style="stop-color:%23E6C460;stop-opacity:1" /><stop offset="100%" style="stop-color:%23B8860B;stop-opacity:1" /></linearGradient><pattern id="monogramPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M25,25 L75,25 L75,75 L25,75 Z" fill="none" stroke="url(%23lvGold)" stroke-width="1" opacity="0.1"/><path d="M50,0 L100,50 L50,100 L0,50 Z" fill="none" stroke="url(%23lvGold)" stroke-width="1" opacity="0.1"/></pattern><filter id="luxuryFinish"><feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/><feSpecularLighting in="blur" surfaceScale="4" specularConstant="1.5" specularExponent="20" lighting-color="%23ffffff"><fePointLight x="300" y="200" z="200"/></feSpecularLighting><feComposite in2="SourceAlpha" operator="in"/><feComposite in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/></filter><linearGradient id="overlayGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23B8860B;stop-opacity:0.4" /><stop offset="50%" style="stop-color:%23E6C460;stop-opacity:0.4" /><stop offset="100%" style="stop-color:%23B8860B;stop-opacity:0.4" /></linearGradient></defs><rect width="600" height="400" fill="%23000000"/><rect width="600" height="400" fill="url(%23monogramPattern)"/><g filter="url(%23luxuryFinish)"><text x="300" y="180" font-family="Didot, serif" font-weight="400" font-size="48" fill="url(%23lvGold)" text-anchor="middle" letter-spacing="8">DYNAMIC</text><text x="300" y="240" font-family="Didot, serif" font-weight="300" font-size="24" fill="url(%23lvGold)" text-anchor="middle" letter-spacing="16">SOLUTIONS</text></g><g transform="translate(300,200)"><path d="M-150,0 Q-75,-50 0,0 Q75,50 150,0" fill="none" stroke="url(%23overlayGold)" stroke-width="2"><animate attributeName="d" dur="6s" repeatCount="indefinite" values="M-150,0 Q-75,-50 0,0 Q75,50 150,0;M-150,0 Q-75,50 0,0 Q75,-50 150,0;M-150,0 Q-75,-50 0,0 Q75,50 150,0" calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1"/></path><g opacity="0.6"><path d="M-100,-20 L100,-20" stroke="url(%23overlayGold)" stroke-width="1"><animate attributeName="transform" attributeType="XML" type="translate" values="0,0; 0,10; 0,0" dur="4s" repeatCount="indefinite"/></path><path d="M-100,20 L100,20" stroke="url(%23overlayGold)" stroke-width="1"><animate attributeName="transform" attributeType="XML" type="translate" values="0,0; 0,-10; 0,0" dur="4s" repeatCount="indefinite"/></path></g></g><g><path d="M250,150 L350,150" stroke="url(%23overlayGold)" stroke-width="1.5" fill="none"><animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="4s" repeatCount="indefinite"/></path><path d="M250,250 L350,250" stroke="url(%23overlayGold)" stroke-width="1.5" fill="none"><animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="4s" repeatCount="indefinite" begin="2s"/></path></g><g><circle cx="300" cy="200" r="1" fill="url(%23lvGold)"><animate attributeName="cx" values="250;350;250" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="180;220;180" dur="6s" repeatCount="indefinite"/></circle><circle cx="300" cy="200" r="1" fill="url(%23lvGold)"><animate attributeName="cx" values="350;250;350" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="220;180;220" dur="6s" repeatCount="indefinite"/></circle></g></svg>') center/cover;
-        opacity: 0.1;
-    }
-
-    .hero-content {
-        text-align: center;
-        color: #f9f9f9;
-        position: relative;
-        padding: 20px;
-    }
-
-    .hero-content h1 {
-        font-family: 'Playfair Display', serif;
-        font-size: 3.5em;
-        margin-bottom: 20px;
-        letter-spacing: 2px;
-    }
-
-    .hero-content p {
-        font-size: 1.2em;
-        margin-bottom: 40px;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .hero-content .btn-group {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-    }
-
-    /* Soluções Section */
-    #solucoes {
-        padding: 100px 0;
-        background: var(--metallic-gray);
-    }
-
-    #solucoes .card-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-    }
-
-    #solucoes .card {
-        background: #222;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-    }
-
-    #solucoes .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    }
-
-    #solucoes .card-img {
-        height: 200px;
-        background-size: cover;
-        background-position: center;
-    }
-
-    #solucoes .card-content {
-        padding: 30px;
-    }
-
-    #solucoes .card-content h3 {
-        font-size: 1.5em;
-        margin-bottom: 15px;
-        color: var(--neon-blue);
-    }
-
-    #solucoes .card-content p {
-        color: #ccc;
-        line-height: 1.6;
-    }
-
-    #solucoes .card-content a {
-        display: inline-block;
-        margin-top: 20px;
-        font-weight: 500;
-        color: var(--neon-blue);
-    }
-
-    /* Resultados Section */
-    #resultados {
-        padding: 100px 0;
-        background: linear-gradient(45deg, #333, #000);
-        color: #f9f9f9;
-    }
-
-    #resultados .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
-        text-align: center;
-    }
-
-    #resultados .stats-grid h3 {
-        font-size: 3em;
-        font-weight: 700;
-        color: var(--neon-pink);
-    }
-
-    /* Depoimentos Section */
-    #depoimentos {
-        padding: 100px 0;
-        background: var(--metallic-gray);
-    }
-
-    #depoimentos .carousel {
-        display: flex;
-        gap: 30px;
-        overflow-x: auto;
-        padding: 20px 0;
-        scroll-snap-type: x mandatory;
-    }
-
-    #depoimentos .testimonial {
-        min-width: 300px;
-        background: #222;
-        padding: 30px;
-        border-radius: 20px;
-        scroll-snap-align: start;
-        text-align: center;
-    }
-
-    #depoimentos .testimonial img {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        margin-bottom: 20px;
-    }
-
-    #depoimentos .testimonial p {
-        color: #ccc;
-        line-height: 1.6;
-        margin-bottom: 20px;
-    }
-
-    #depoimentos .testimonial h4 {
-        color: var(--neon-blue);
-    }
-
-    #depoimentos .testimonial span {
-        color: #ccc;
-    }
-
-    /* Contato Section */
-    #contato {
-        padding: 100px 0;
-        background: var(--metallic-gray);
-        text-align: center;
-    }
-
-    #contato p {
-        font-size: 1.2em;
-        margin-bottom: 30px;
-        color: #ccc;
-    }
-
-    #contato .btn {
-        padding: 15px 30px;
-    }
-
-    /* Footer */
-    footer {
-        background: #000;
-        color: #f9f9f9;
-        text-align: center;
-        padding: 20px 0;
-    }
-
-    /* Responsividade */
-    @media (max-width: 768px) {
-        .hero-content h1 {
-            font-size: 2.5em;
-        }
-
-        .hero-content p {
-            font-size: 1em;
-        }
-
-        .section-title {
-            font-size: 2em;
-        }
-
-        .btn {
-            padding: 10px 20px;
-        }
-    }
-</style>
-```
-
-</head> <body> <!-- Header Fixo --> <header> <div class="container"> <!-- Logo SVG no header --> <svg class="logo-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg"> <defs> <linearGradient id="lvGold" x1="0%" y1="0%" x2="100%" y2="100%"> <stop offset="0%" style="stop-color:#B8860B;stop-opacity:1" /> <stop offset="25%" style="stop-color:#E6C460;stop-opacity:1" /> <stop offset="50%" style="stop-color:#B8860B;stop-opacity:1" /> <stop offset="75%" style="stop-color:#E6C460;stop-opacity:1" /> <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" /> </linearGradient> <pattern id="monogramPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"> <path d="M25,25 L75,25 L75,75 L25,75 Z" fill="none" stroke="url(#lvGold)" stroke-width="1" opacity="0.1"/> <path d="M50,0 L100,50 L50,100 L0,50 Z" fill="none" stroke="url(#lvGold)" stroke-width="1" opacity="0.1"/> </pattern> <filter id="luxuryFinish"> <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/> <feSpecularLighting in="blur" surfaceScale="4" specularConstant="1.5" specularExponent="20" lighting-color="#ffffff"> <fePointLight x="300" y="200" z="200"/> </feSpecularLighting> <feComposite in2="SourceAlpha" operator="in"/> <feComposite in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/> </filter> <linearGradient id="overlayGold" x1="0%" y1="0%" x2="100%" y2="100%"> <stop offset="0%" style="stop-color:#B8860B;stop-opacity:0.4" /> <stop offset="50%" style="stop-color:#E6C460;stop-opacity:0.4" /> <stop offset="100%" style="stop-color:#B8860B;stop-opacity:0.4" /> </linearGradient> </defs> <rect width="600" height="400" fill="#000000"/> <rect width="600" height="400" fill="url(#monogramPattern)"/> <g filter="url(#luxuryFinish)"> <text x="300" y="180" font-family="Didot, serif" font-weight="400" font-size="48" fill="url(#lvGold)" text-anchor="middle" letter-spacing="8"> DYNAMIC </text> <text x="300" y="240" font-family="Didot, serif" font-weight="300" font-size="24" fill="url(#lvGold)" text-anchor="middle" letter-spacing="16"> SOLUTIONS </text> </g> </svg> <nav> <a href="#solucoes">Soluções</a> <a href="#resultados">Resultados</a> <a href="#depoimentos">Depoimentos</a> <a href="#contato" class="btn btn-primary">Fale Conosco</a> </nav> </div> </header>
-
-```
 <!-- Hero Section -->
-<section class="hero">
-    <div class="hero-content" data-aos="fade-up">
-        <h1 class="gradient-text">Transformando o Futuro<br>com Inteligência Artificial</h1>
-        <p>Soluções personalizadas de IA que revolucionam sua presença digital e impulsionam seus resultados.</p>
-        <div class="btn-group">
-            <a href="#demo" class="btn btn-primary">Solicitar Demo</a>
-            <a href="#solucoes" class="btn btn-secondary">Conhecer Soluções</a>
+<section class="hero" style="height: 100vh; background: linear-gradient(45deg, #1a1a1a, #333333); background-size: 400% 400%; animation: gradientBG 15s ease infinite; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+    <div class="hero-content" data-aos="fade-up" style="text-align: center; color: #f9f9f9; position: relative; padding: 20px;">
+        <h1 class="gradient-text" style="font-family: 'Playfair Display', serif; font-size: 3.5em; margin-bottom: 20px; letter-spacing: 2px; background: linear-gradient(45deg, #00FFFF, #FF00FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Transformando o Futuro<br>com Inteligência Artificial</h1>
+        <p style="font-size: 1.2em; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">Soluções personalizadas de IA que revolucionam sua presença digital e impulsionam seus resultados.</p>
+        <div class="btn-group" style="display: flex; gap: 20px; justify-content: center;">
+            <a href="#demo" class="btn btn-primary" style="display: inline-block; padding: 15px 30px; border-radius: 30px; font-weight: 500; background: linear-gradient(45deg, #00FFFF, #FF00FF); color: #000; text-decoration: none; transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 1;">Solicitar Demo</a>
+            <a href="#solucoes" class="btn btn-secondary" style="display: inline-block; padding: 15px 30px; border-radius: 30px; font-weight: 500; background: transparent; border: 2px solid #00FFFF; color: #00FFFF; text-decoration: none; transition: all 0.3s ease;">Conhecer Soluções</a>
         </div>
     </div>
 </section>
 
 <!-- Seção de Soluções -->
-<section id="solucoes">
-    <div class="container">
-        <h2 class="section-title gradient-text" data-aos="fade-up">Nossas Soluções</h2>
-        <div class="card-grid">
-            <div class="card" data-aos="fade-up">
-                <div class="card-img" style="background-image: url('https://via.placeholder.com/300x200');"></div>
-                <div class="card-content">
-                    <h3>Avatares com IA</h3>
-                    <p>Crie sua presença digital única com avatares personalizados alimentados por IA avançada.</p>
-                    <a href="#contato">Saiba mais <img src="assets/icons/arrow-right.svg" alt="Seta" style="width: 15px; margin-left: 5px; vertical-align: middle;"></a>
+<section id="solucoes" style="padding: 100px 0; background: #4a4a4a;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <h2 class="section-title gradient-text" data-aos="fade-up" style="font-family: 'Playfair Display', serif; font-size: 2.5em; text-align: center; margin-bottom: 50px; background: linear-gradient(45deg, #00FFFF, #FF00FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Nossas Soluções</h2>
+        <div class="card-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div class="card" data-aos="fade-up" style="background: #222; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                <div class="card-img" style="height: 200px; background-size: cover; background-position: center; background-image: url('https://via.placeholder.com/300x200');"></div>
+                <div class="card-content" style="padding: 30px;">
+                    <h3 style="font-size: 1.5em; margin-bottom: 15px; color: #00FFFF;">Avatares com IA</h3>
+                    <p style="color: #ccc; line-height: 1.6;">Crie sua presença digital única com avatares personalizados alimentados por IA avançada.</p>
+                    <a href="#contato" style="display: inline-block; margin-top: 20px; font-weight: 500; color: #00FFFF; text-decoration: none;">Saiba mais <img src="assets/icons/arrow-right.svg" alt="Seta" style="width: 15px; margin-left: 5px; vertical-align: middle;"></a>
                 </div>
             </div>
-            <div class="card" data-aos="fade-up" data-aos-delay="100">
-                <div class="card-img" style="background-image: url('https://via.placeholder.com/300x200');"></div>
-                <div class="card-content">
-                    <h3>Mentoria de Vendas</h3>
-                    <p>Mentores especializados prontos para impulsionar suas vendas através do WhatsApp.</p>
-                    <a href="#contato">Saiba mais <img src="assets/icons/arrow-right.svg" alt="Seta" style="width: 15px; margin-left: 5px; vertical-align: middle;"></a>
+            <div class="card" data-aos="fade-up" data-aos-delay="100" style="background: #222; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                <div class="card-img" style="height: 200px; background-size: cover; background-position: center; background-image: url('https://via.placeholder.com/300x200');"></div>
+                <div class="card-content" style="padding: 30px;">
+                    <h3 style="font-size: 1.5em; margin-bottom: 15px; color: #00FFFF;">Mentoria de Vendas</h3>
+                    <p style="color: #ccc; line-height: 1.6;">Mentores especializados prontos para impulsionar suas vendas através do WhatsApp.</p>
+                    <a href="#contato" style="display: inline-block; margin-top: 20px; font-weight: 500; color: #00FFFF; text-decoration: none;">Saiba mais <img src="assets/icons/arrow-right.svg" alt="Seta" style="width: 15px; margin-left: 5px; vertical-align: middle;"></a>
                 </div>
             </div>
-            <div class="card" data-aos="fade-up" data-aos-delay="200">
-                <div class="card-img" style="background-image: url('https://via.placeholder.com/300x200');"></div>
-                <div class="card-content">
-                    <h3>Estratégia Digital</h3>
-                    <p>Planejamento estratégico personalizado para maximizar seus resultados online.</p>
-                    <a href="#contato">Saiba mais <img src="assets/icons/arrow-right.svg" alt="Seta" style="width: 15px; margin-left: 5px; vertical-align: middle;"></a>
+            <div class="card" data-aos="fade-up" data-aos-delay="200" style="background: #222; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                <div class="card-img" style="height: 200px; background-size: cover; background-position: center; background-image: url('https://via.placeholder.com/300x200');"></div>
+                <div class="card-content" style="padding: 30px;">
+                    <h3 style="font-size: 1.5em; margin-bottom: 15px; color: #00FFFF;">Estratégia Digital</h3>
+                    <p style="color: #ccc; line-height: 1.6;">Planejamento estratégico personalizado para maximizar seus resultados online.</p>
+                    <a href="#contato" style="display: inline-block; margin-top: 20px; font-weight: 500; color: #00FFFF; text-decoration: none;">Saiba mais <img src="assets/icons/arrow-right.svg" alt="Seta" style="width: 15px; margin-left: 5px; vertical-align: middle;"></a>
                 </div>
             </div>
         </div>
@@ -424,24 +110,24 @@
 </section>
 
 <!-- Seção de Resultados -->
-<section id="resultados">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-up">Resultados que Impressionam</h2>
-        <div class="stats-grid">
+<section id="resultados" style="padding: 100px 0; background: linear-gradient(45deg, #333, #000); color: #f9f9f9;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <h2 class="section-title" data-aos="fade-up" style="font-family: 'Playfair Display', serif; font-size: 2.5em; text-align: center; margin-bottom: 50px;">Resultados que Impressionam</h2>
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center;">
             <div data-aos="fade-up">
-                <h3>+500</h3>
+                <h3 style="font-size: 3em; font-weight: 700; color: #FF00FF;">+500</h3>
                 <p>Clientes Satisfeitos</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="100">
-                <h3>95%</h3>
+                <h3 style="font-size: 3em; font-weight: 700; color: #FF00FF;">95%</h3>
                 <p>Taxa de Sucesso</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="200">
-                <h3>+1000</h3>
+                <h3 style="font-size: 3em; font-weight: 700; color: #FF00FF;">+1000</h3>
                 <p>Avatares Criados</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="300">
-                <h3>24/7</h3>
+                <h3 style="font-size: 3em; font-weight: 700; color: #FF00FF;">24/7</h3>
                 <p>Suporte Disponível</p>
             </div>
         </div>
@@ -449,46 +135,46 @@
 </section>
 
 <!-- Seção de Depoimentos -->
-<section id="depoimentos">
-    <div class="container">
-        <h2 class="section-title gradient-text" data-aos="fade-up">O que Nossos Clientes Dizem</h2>
-        <div class="carousel">
-            <div class="testimonial" data-aos="fade-up">
-                <img src="https://via.placeholder.com/80" alt="Cliente">
-                <p>"A Dynamic Solutions transformou completamente minha presença digital. Os resultados superaram todas as expectativas!"</p>
-                <h4>Maria Silva</h4>
-                <span>Empreendedora Digital</span>
+<section id="depoimentos" style="padding: 100px 0; background: #4a4a4a;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <h2 class="section-title gradient-text" data-aos="fade-up" style="font-family: 'Playfair Display', serif; font-size: 2.5em; text-align: center; margin-bottom: 50px; background: linear-gradient(45deg, #00FFFF, #FF00FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">O que Nossos Clientes Dizem</h2>
+        <div class="carousel" style="display: flex; gap: 30px; overflow-x: auto; padding: 20px 0; scroll-snap-type: x mandatory;">
+            <div class="testimonial" data-aos="fade-up" style="min-width: 300px; background: #222; padding: 30px; border-radius: 20px; scroll-snap-align: start; text-align: center;">
+                <img src="https://via.placeholder.com/80" alt="Cliente" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 20px;">
+                <p style="color: #ccc; line-height: 1.6; margin-bottom: 20px;">"A Dynamic Solutions transformou completamente minha presença digital. Os resultados superaram todas as expectativas!"</p>
+                <h4 style="color: #00FFFF;">Maria Silva</h4>
+                <span style="color: #ccc;">Empreendedora Digital</span>
             </div>
-            <div class="testimonial" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://via.placeholder.com/80" alt="Cliente">
-                <p>"A mentoria de vendas foi um divisor de águas no meu negócio. Resultado impressionante!"</p>
-                <h4>João Santos</h4>
-                <span>Consultor de Vendas</span>
+            <div class="testimonial" data-aos="fade-up" data-aos-delay="100" style="min-width: 300px; background: #222; padding: 30px; border-radius: 20px; scroll-snap-align: start; text-align: center;">
+                <img src="https://via.placeholder.com/80" alt="Cliente" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 20px;">
+                <p style="color: #ccc; line-height: 1.6; margin-bottom: 20px;">"A mentoria de vendas foi um divisor de águas no meu negócio. Resultado impressionante!"</p>
+                <h4 style="color: #00FFFF;">João Santos</h4>
+                <span style="color: #ccc;">Consultor de Vendas</span>
             </div>
-            <div class="testimonial" data-aos="fade-up" data-aos-delay="200">
-                <img src="https://via.placeholder.com/80" alt="Cliente">
-                <p>"O avatar personalizado trouxe um novo nível de profissionalismo para minha marca!"</p>
-                <h4>Ana Costa</h4>
-                <span>Influenciadora Digital</span>
+            <div class="testimonial" data-aos="fade-up" data-aos-delay="200" style="min-width: 300px; background: #222; padding: 30px; border-radius: 20px; scroll-snap-align: start; text-align: center;">
+                <img src="https://via.placeholder.com/80" alt="Cliente" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 20px;">
+                <p style="color: #ccc; line-height: 1.6; margin-bottom: 20px;">"O avatar personalizado trouxe um novo nível de profissionalismo para minha marca!"</p>
+                <h4 style="color: #00FFFF;">Ana Costa</h4>
+                <span style="color: #ccc;">Influenciadora Digital</span>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Seção de Contato -->
-<section id="contato">
-    <div class="container">
-        <h2 class="section-title gradient-text" data-aos="fade-up">Pronto para Transformar seu Negócio?</h2>
-        <p data-aos="fade-up">Entre em contato conosco e descubra como a Dynamic Solutions pode impulsionar seus resultados.</p>
-        <a href="https://wa.me/SEUNUMERODOWHATSAPP" class="btn btn-primary floating" data-aos="fade-up">
+<section id="contato" style="padding: 100px 0; background: #4a4a4a; text-align: center;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <h2 class="section-title gradient-text" data-aos="fade-up" style="font-family: 'Playfair Display', serif; font-size: 2.5em; text-align: center; margin-bottom: 50px; background: linear-gradient(45deg, #00FFFF, #FF00FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Pronto para Transformar seu Negócio?</h2>
+        <p data-aos="fade-up" style="font-size: 1.2em; margin-bottom: 30px; color: #ccc;">Entre em contato conosco e descubra como a Dynamic Solutions pode impulsionar seus resultados.</p>
+        <a href="https://wa.me/SEUNUMERODOWHATSAPP" class="btn btn-primary floating" data-aos="fade-up" style="display: inline-block; padding: 15px 30px; border-radius: 30px; font-weight: 500; background: linear-gradient(45deg, #00FFFF, #FF00FF); color: #000; text-decoration: none; transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 1;">
             <img src="assets/icons/whatsapp.svg" alt="WhatsApp Icon" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;"> Fale Conosco no WhatsApp
         </a>
     </div>
 </section>
 
 <!-- Footer -->
-<footer>
-    <div class="container">
+<footer style="background: #000; color: #f9f9f9; text-align: center; padding: 20px 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
         <!-- Logo SVG no rodapé -->
         <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="width: 150px; height: auto;">
             <defs>
@@ -538,6 +224,6 @@
         once: true,
     });
 </script>
-```
 
-</body> </html>
+</body>
+</html>
