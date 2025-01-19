@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Solutions | Transformando Negócios com Tecnologia</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Raleway:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* Reset de estilos para garantir consistência entre navegadores */
         * {
             margin: 0;
             padding: 0;
@@ -13,90 +15,98 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Arial', sans-serif;
-            min-height: 100vh;
-            background: #000000; /* Fundo preto sólido */
-            color: #ffffff;
-            overflow-x: hidden;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
+            font-family: 'Raleway', sans-serif; /* Define a fonte padrão do corpo */
+            min-height: 100vh; /* Garante que o body tenha pelo menos a altura da viewport */
+            background: #000000; /* Define o fundo como preto */
+            color: #ffffff; /* Define a cor do texto como branco */
+            overflow-x: hidden; /* Impede a rolagem horizontal */
+            user-select: none; /* Impede a seleção de texto */
+            -webkit-user-select: none; /* Impede a seleção de texto no Safari */
+            -moz-user-select: none; /* Impede a seleção de texto no Firefox */
+            -ms-user-select: none; /* Impede a seleção de texto no IE/Edge */
         }
 
         #particles-js {
-            position: fixed;
+            position: fixed; /* Fixa o fundo de partículas */
             width: 100%;
             height: 100%;
-            z-index: 1;
-            pointer-events: all;
+            z-index: 1; /* Garante que as partículas fiquem atrás do conteúdo */
+            pointer-events: all; /* Permite interação com as partículas */
         }
 
         .content {
-            position: relative;
-            z-index: 2;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            pointer-events: none;
+            position: relative; /* Posiciona o conteúdo sobre as partículas */
+            z-index: 2; /* Garante que o conteúdo fique na frente das partículas */
+            height: 100vh; /* Garante que o conteúdo tenha a altura da viewport */
+            display: flex; /* Usa flexbox para centralizar o conteúdo */
+            flex-direction: column; /* Organiza os itens em coluna */
+            justify-content: center; /* Centraliza verticalmente */
+            align-items: center; /* Centraliza horizontalmente */
+            text-align: center; /* Centraliza o texto */
+            padding: 2rem; /* Adiciona espaçamento interno */
+            pointer-events: none; /* Impede a interação com o conteúdo */
         }
 
         .logo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #FFD700; /* Dourado para o logo */
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 15px rgba(255, 215, 0, 0.3);
+            font-family: 'Syncopate', sans-serif; /* Define a fonte do logo */
+            font-size: 2.5rem; /* Define o tamanho da fonte do logo */
+            font-weight: 700; /* Define a espessura da fonte do logo */
+            letter-spacing: 1px; /* Adiciona espaçamento entre as letras */
+            margin-bottom: 1rem; /* Adiciona margem inferior */
+            color: #800080; /* Define a cor do logo como roxo comum */
+            text-shadow: 0 0 10px #800080, /* Adiciona sombra ao texto */
+                        0 0 20px #800080,
+                        0 0 30px #800080;
         }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, #FFD700, #FDB931); /* Gradiente dourado */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 15px rgba(255, 215, 0, 0.2);
+            font-size: 3.5rem; /* Define o tamanho da fonte do título */
+            font-weight: 800; /* Define a espessura da fonte do título */
+            margin-bottom: 1.5rem; /* Adiciona margem inferior */
+            background: linear-gradient(45deg, #00ffff, #ff00ff); /* Define um gradiente como fundo do texto */
+            -webkit-background-clip: text; /* Aplica o gradiente ao texto */
+            -webkit-text-fill-color: transparent; /* Torna o texto transparente para mostrar o gradiente */
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5); /* Adiciona sombra ao texto */
         }
 
         .tagline {
-            font-size: 1.5rem;
-            color: #ffffff; /* Branco para o subtítulo */
-            margin-bottom: 2rem;
-            max-width: 800px;
-            line-height: 1.6;
+            font-size: 1.5rem; /* Define o tamanho da fonte da tagline */
+            font-weight: 300; /* Define a espessura da fonte da tagline */
+            color: #ffffff; /* Define a cor da tagline como branco */
+            margin-bottom: 2rem; /* Adiciona margem inferior */
+            max-width: 800px; /* Define a largura máxima da tagline */
+            line-height: 1.6; /* Define a altura da linha da tagline */
         }
 
         .cta-button {
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #000000; /* Texto preto para contraste */
-            background: linear-gradient(45deg, #FFD700, #FDB931); /* Gradiente dourado */
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-decoration: none;
-            pointer-events: all;
+            font-family: 'Raleway', sans-serif; /* Define a fonte do botão */
+            padding: 1rem 2.5rem; /* Define o espaçamento interno do botão */
+            font-size: 1.1rem; /* Define o tamanho da fonte do botão */
+            font-weight: 600; /* Define a espessura da fonte do botão */
+            color: #000000; /* Define a cor do texto do botão como preto */
+            background: linear-gradient(45deg, #00FFFF, #1E90FF); /* Define um gradiente como fundo do botão */
+            border: none; /* Remove a borda do botão */
+            border-radius: 30px; /* Define o arredondamento da borda do botão */
+            cursor: pointer; /* Define o cursor como pointer */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adiciona transição ao botão */
+            text-decoration: none; /* Remove a decoração de texto do link */
+            pointer-events: all; /* Permite a interação com o botão */
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+            transform: translateY(-2px); /* Move o botão um pouco para cima ao passar o mouse */
+            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.4); /* Adiciona sombra ao botão ao passar o mouse */
         }
 
         @media (max-width: 768px) {
+            .logo {
+                font-size: 1.8rem; /* Reduz o tamanho da fonte do logo em telas menores */
+            }
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.5rem; /* Reduz o tamanho da fonte do título em telas menores */
             }
             .tagline {
-                font-size: 1.2rem;
+                font-size: 1.2rem; /* Reduz o tamanho da fonte da tagline em telas menores */
             }
         }
     </style>
@@ -121,7 +131,7 @@
                     }
                 },
                 color: {
-                    value: "#FFE55C" /* Amarelo vibrante para as partículas */
+                    value: "#FFE55C"
                 },
                 shape: {
                     type: "circle"
@@ -149,7 +159,7 @@
                 line_linked: {
                     enable: true,
                     distance: 150,
-                    color: "#FFE55C", /* Amarelo vibrante para as linhas */
+                    color: "#FFE55C",
                     opacity: 0.4,
                     width: 1
                 },
