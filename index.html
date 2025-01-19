@@ -1,135 +1,200 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Solutions | Inovação em IA & Transformação Digital</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Dynamic Solutions | Transformando Negócios com Tecnologia</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            min-height: 100vh;
+            background: #000000; /* Fundo preto sólido */
+            color: #ffffff;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: all;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            pointer-events: none;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FFD700; /* Dourado para o logo */
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #FFD700, #FDB931); /* Gradiente dourado */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: #ffffff; /* Branco para o subtítulo */
+            margin-bottom: 2rem;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #000000; /* Texto preto para contraste */
+            background: linear-gradient(45deg, #FFD700, #FDB931); /* Gradiente dourado */
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            pointer-events: all;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .tagline {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
-<body style="margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Roboto', sans-serif; color: #f9f9f9;">
-
-    <canvas id="canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></canvas>
-
-    <header style="position: fixed; width: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); padding: 10px 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 15px; display: flex; justify-content: space-between; align-items: center;">
-            <svg class="logo-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="height: 40px;">
-                <defs>
-                    <linearGradient id="lvGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#B8860B;stop-opacity:1" />
-                        <stop offset="25%" style="stop-color:#E6C460;stop-opacity:1" />
-                        <stop offset="50%" style="stop-color:#B8860B;stop-opacity:1" />
-                        <stop offset="75%" style="stop-color:#E6C460;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <rect width="600" height="400" fill="#000000"/>
-                <g>
-                    <text x="300" y="180" font-family="Didot, serif" font-weight="400" font-size="48" fill="url(#lvGold)" text-anchor="middle" letter-spacing="8">
-                        DYNAMIC
-                    </text>
-                    <text x="300" y="240" font-family="Didot, serif" font-weight="300" font-size="24" fill="url(#lvGold)" text-anchor="middle" letter-spacing="16">
-                        SOLUTIONS
-                    </text>
-                </g>
-            </svg>
-            <nav style="display: flex; gap: 15px;">
-                <a href="#solucoes" style="font-weight: 400; padding: 5px 0; color: inherit; text-decoration: none; transition: color 0.3s ease;">Soluções</a>
-                <a href="#resultados" style="font-weight: 400; padding: 5px 0; color: inherit; text-decoration: none; transition: color 0.3s ease;">Resultados</a>
-                <a href="#depoimentos" style="font-weight: 400; padding: 5px 0; color: inherit; text-decoration: none; transition: color 0.3s ease;">Depoimentos</a>
-                <a href="#contato" class="btn btn-primary" style="display: inline-block; padding: 8px 16px; border-radius: 20px; font-weight: 500; text-decoration: none; background: linear-gradient(45deg, #00FFFF, #FF00FF); color: #000; transition: all 0.3s ease;">Fale Conosco</a>
-            </nav>
-        </div>
-    </header>
-
-    <section class="hero content" style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; box-sizing: border-box; z-index: 1; position: relative;">
-        <h1 style="font-family: 'Playfair Display', serif; font-size: 2em; margin-bottom: 15px; background: linear-gradient(45deg, #00FFFF, #FF00FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Transformando o Futuro<br>com Inteligência Artificial</h1>
-        <p style="font-size: 1em; margin-bottom: 30px; max-width: 80%; overflow: hidden;">Soluções personalizadas de IA que revolucionam sua presença digital e impulsionam seus resultados.</p>
-        <div class="btn-group" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-            <a href="#demo" class="btn btn-primary" style="display: inline-block; padding: 8px 16px; border-radius: 20px; font-weight: 500; text-decoration: none; background: linear-gradient(45deg, #00FFFF, #FF00FF); color: #000; transition: all 0.3s ease;">Solicitar Demo</a>
-            <a href="#solucoes" class="btn btn-secondary" style="display: inline-block; padding: 8px 16px; border-radius: 20px; font-weight: 500; text-decoration: none; background: transparent; border: 2px solid #00FFFF; color: #00FFFF; transition: all 0.3s ease;">Conhecer Soluções</a>
-        </div>
-    </section>
+<body>
+    <div id="particles-js"></div>
+    <div class="content">
+        <div class="logo">DYNAMIC SOLUTIONS</div>
+        <h1>Inovação em Movimento</h1>
+        <p class="tagline">Transformamos desafios em oportunidades através de soluções tecnológicas inovadoras e personalizadas para impulsionar o sucesso do seu negócio.</p>
+        <a href="#contato" class="cta-button">Fale Conosco</a>
+    </div>
 
     <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resize();
-        window.addEventListener('resize', resize);
-
-        const particles = [];
-        const numParticles = 100;
-        const connectionDistance = 150;
-
-        for (let i = 0; i < numParticles; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 2,
-                vy: (Math.random() - 0.5) * 2,
-                radius: 2
-            });
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(particle => {
-                particle.x += particle.vx;
-                particle.y += particle.vy;
-
-                if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-                if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
-
-                ctx.beginPath();
-                ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-                ctx.fillStyle = '#8A2BE2';
-                ctx.fill();
-
-                particles.forEach(otherParticle => {
-                    const dx = particle.x - otherParticle.x;
-                    const dy = particle.y - otherParticle.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < connectionDistance) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(138, 43, 226, ${1 - distance/connectionDistance})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particle.x, particle.y);
-                        ctx.lineTo(otherParticle.x, otherParticle.y);
-                        ctx.stroke();
+        particlesJS("particles-js", {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
                     }
-                });
-            });
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-
-        let mouse = { x: null, y: null };
-
-        canvas.addEventListener('mousemove', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            mouse.x = e.clientX - rect.left;
-            mouse.y = e.clientY - rect.top;
-
-            particles.forEach(particle => {
-                const dx = mouse.x - particle.x;
-                const dy = mouse.y - particle.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 200) {
-                    particle.x += dx * 0.02;
-                    particle.y += dy * 0.02;
+                },
+                color: {
+                    value: "#FFE55C" /* Amarelo vibrante para as partículas */
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.6,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#FFE55C", /* Amarelo vibrante para as linhas */
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 3,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: true,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
                 }
-            });
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "grab"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 180,
+                        line_linked: {
+                            opacity: 0.8
+                        }
+                    },
+                    push: {
+                        particles_nb: 6
+                    }
+                }
+            },
+            retina_detect: true
         });
     </script>
-
 </body>
 </html>
