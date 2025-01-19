@@ -12,7 +12,6 @@
 
     <header style="position: fixed; width: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); padding: 10px 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
         <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 15px; display: flex; justify-content: space-between; align-items: center;">
-            <!-- SVG e navegação -->
             <svg class="logo-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="height: 40px;">
                 <defs>
                     <linearGradient id="lvGold" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -115,8 +114,9 @@
         let mouse = { x: null, y: null };
 
         canvas.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
 
             particles.forEach(particle => {
                 const dx = mouse.x - particle.x;
