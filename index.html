@@ -4,209 +4,155 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Solutions | Transformando Negócios com Tecnologia</title>
+    
+    <!-- Bibliotecas e CDNs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Fontes -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=The+Seasons:wght@400&display=swap" rel="stylesheet">
-    <style>
-        /* Reset de estilos para garantir consistência entre navegadores */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Raleway', sans-serif; /* Define a fonte padrão do corpo */
-            min-height: 100vh; /* Garante que o body tenha pelo menos a altura da viewport */
-            background: #000000; /* Define o fundo como preto */
-            color: #ffffff; /* Define a cor do texto como branco */
-            overflow-x: hidden; /* Impede a rolagem horizontal */
-            user-select: none; /* Impede a seleção de texto */
-            -webkit-user-select: none; /* Impede a seleção de texto no Safari */
-            -moz-user-select: none; /* Impede a seleção de texto no Firefox */
-            -ms-user-select: none; /* Impede a seleção de texto no IE/Edge */
-        }
-
-        #particles-js {
-            position: fixed; /* Fixa o fundo de partículas */
-            width: 100%;
-            height: 100%;
-            z-index: 1; /* Garante que as partículas fiquem atrás do conteúdo */
-            pointer-events: all; /* Permite interação com as partículas */
-        }
-
-        .content {
-            position: relative; /* Posiciona o conteúdo sobre as partículas */
-            z-index: 2; /* Garante que o conteúdo fique na frente das partículas */
-            height: 100vh; /* Garante que o conteúdo tenha a altura da viewport */
-            display: flex; /* Usa flexbox para centralizar o conteúdo */
-            flex-direction: column; /* Organiza os itens em coluna */
-            justify-content: center; /* Centraliza verticalmente */
-            align-items: center; /* Centraliza horizontalmente */
-            text-align: center; /* Centraliza o texto */
-            padding: 2rem; /* Adiciona espaçamento interno */
-            pointer-events: none; /* Impede a interação com o conteúdo */
-        }
-
-        .logo {
-            margin-bottom: 4rem; /* Adiciona margem inferior */
-        }
-
-        .logo img {
-            max-width: 500px; /* Define a largura máxima da imagem */
-            height: auto; /* Mantém a proporção da imagem */
-        }
-        <h1 {
-    font-size: 6rem; /* Aumenta o tamanho da fonte para 6rem */
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-    margin-top: 4rem; /* Adiciona 4rem de espaço acima da headline */
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-    color: #ffffff;
-}
-
-        
-        
-        
-        
-        .tagline {
-            font-size: 1.5rem; /* Define o tamanho da fonte da tagline */
-            font-weight: 300; /* Define a espessura da fonte da tagline */
-            color: #ffffff; /* Define a cor da tagline como branco */
-            margin-bottom: 2rem; /* Adiciona margem inferior */
-            max-width: 800px; /* Define a largura máxima da tagline */
-            line-height: 1.6; /* Define a altura da linha da tagline */
-        }
-
-        .cta-button {
-            font-family: 'Raleway', sans-serif; /* Define a fonte do botão */
-            padding: 1rem 2.5rem; /* Define o espaçamento interno do botão */
-            font-size: 1.1rem; /* Define o tamanho da fonte do botão */
-            font-weight: 600; /* Define a espessura da fonte do botão */
-            color: #000000; /* Define a cor do texto do botão como preto */
-            background: linear-gradient(45deg, #FFD700, #FDB931); /* Define um gradiente como fundo do botão */
-            border: none; /* Remove a borda do botão */
-            border-radius: 30px; /* Define o arredondamento da borda do botão */
-            cursor: pointer; /* Define o cursor como pointer */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adiciona transição ao botão */
-            text-decoration: none; /* Remove a decoração de texto do link */
-            pointer-events: all; /* Permite a interação com o botão */
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px); /* Move o botão um pouco para cima ao passar o mouse */
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4); /* Adiciona sombra ao botão ao passar o mouse */
-        }
-
-        @media (max-width: 768px) {
-            .logo img {
-                max-width: 200px; /* Reduz o tamanho da imagem em telas menores */
-            }
-            h1 {
-                font-size: 2.5rem; /* Reduz o tamanho da fonte do título em telas menores */
-            }
-            .tagline {
-                font-size: 1.2rem; /* Reduz o tamanho da fonte da tagline em telas menores */
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Estilos Próprios -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Fundo de Partículas -->
     <div id="particles-js"></div>
-    <div class="content">
-        <div class="logo">
-            <img src="https://raw.githubusercontent.com/dynamicsolutions-lab/Dynamiclab.github.io/2ffe8a66e27b4c4c0dc4d0832230bbd5e9fcbd3b/img/logo2.svg" alt="Dynamic Solutions Logo">
-        </div>
-        <h1><span class="innovation-text">Inovação</span> em Movimento</h1>
-        <p class="tagline">Transformamos desafios em oportunidades através de soluções tecnológicas inovadoras e personalizadas para impulsionar o sucesso do seu negócio.</p>
-        <a href="#contato" class="cta-button">Fale Conosco</a>
-    </div>
 
-    <script>
-        particlesJS("particles-js", {
-            particles: {
-                number: {
-                    value: 80,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: "#FFE55C"
-                },
-                shape: {
-                    type: "circle"
-                },
-                opacity: {
-                    value: 0.6,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 1,
-                        opacity_min: 0.1,
-                        sync: false
-                    }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 2,
-                        size_min: 0.1,
-                        sync: false
-                    }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#FFE55C",
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 3,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false,
-                    attract: {
-                        enable: true,
-                        rotateX: 600,
-                        rotateY: 1200
-                    }
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: "grab"
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: "push"
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 180,
-                        line_linked: {
-                            opacity: 0.8
-                        }
-                    },
-                    push: {
-                        particles_nb: 6
-                    }
-                }
-            },
-            retina_detect: true
-        });
-    </script>
+    <!-- Seção Hero -->
+    <section class="content">
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/dynamicsolutions-lab/Dynamiclab.github.io/2ffe8a66e27b4c4c0dc4d0832230bbd5e9fcbd3b/img/logo2.svg" 
+                 alt="Dynamic Solutions Logo">
+        </div>
+        <h1 data-aos="fade-up"><span class="innovation-text">Inovação</span> em Movimento</h1>
+        <p class="tagline" data-aos="fade-up" data-aos-delay="200">
+            Transformamos desafios em oportunidades através de soluções tecnológicas 
+            inovadoras e personalizadas para impulsionar o sucesso do seu negócio.
+        </p>
+        <a href="#contato" class="cta-button" data-aos="fade-up" data-aos-delay="400">
+            Fale Conosco
+        </a>
+    </section>
+
+    <!-- Seção de Soluções -->
+    <section class="section solutions reveal-section" id="solucoes">
+        <div class="section-content">
+            <h2 class="section-title" data-aos="fade-up">Soluções Inovadoras</h2>
+            <div class="solutions-grid">
+                <!-- Card 1 -->
+                <div class="solution-card magnetic-card" data-aos="fade-up">
+                    <div class="magnetic-content">
+                        <div class="solution-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>Avatares com IA</h3>
+                        <p>Revolucione sua presença digital com avatares hiper-realistas 
+                           potencializados por IA de última geração</p>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="solution-card magnetic-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="magnetic-content">
+                        <div class="solution-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Mentoria de Vendas</h3>
+                        <p>Multiplique seus resultados com estratégias exclusivas 
+                           de vendas pelo WhatsApp</p>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="solution-card magnetic-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="magnetic-content">
+                        <div class="solution-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Estratégia Digital</h3>
+                        <p>Conquiste o mundo digital com estratégias personalizadas 
+                           e dados orientados</p>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Seção de Métricas/Resultados -->
+    <section class="metrics-section reveal-section" id="resultados">
+        <canvas id="metricsCanvas"></canvas>
+        <div class="section-content">
+            <h2 class="section-title dark" data-aos="fade-up">Resultados Comprovados</h2>
+            <div class="results-grid">
+                <!-- Métrica 1 -->
+                <div class="metric-card" data-aos="fade-up">
+                    <div class="pulse-effect"></div>
+                    <div class="metric-number" data-value="500">0</div>
+                    <div class="metric-label">Clientes Transformados</div>
+                </div>
+
+                <!-- Métrica 2 -->
+                <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pulse-effect"></div>
+                    <div class="metric-number" data-value="95">0</div>
+                    <div class="metric-label">Taxa de Sucesso (%)</div>
+                </div>
+
+                <!-- Métrica 3 -->
+                <div class="metric-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="pulse-effect"></div>
+                    <div class="metric-number" data-value="1000">0</div>
+                    <div class="metric-label">Avatares Criados</div>
+                </div>
+
+                <!-- Métrica 4 -->
+                <div class="metric-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="pulse-effect"></div>
+                    <div class="metric-number" data-value="24">0</div>
+                    <div class="metric-label">Suporte 24/7</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Depoimentos -->
+    <section class="section testimonials reveal-section" id="depoimentos">
+        <div class="testimonial-particles"></div>
+        <div class="section-content">
+            <h2 class="section-title" data-aos="fade-up">Histórias de Sucesso</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial-card" data-aos="fade-up">
+                    <div class="quote-mark">"</div>
+                    <p class="testimonial-text">A Dynamic Solutions revolucionou minha presença digital. 
+                        Meu faturamento triplicou em apenas 3 meses!</p>
+                    <div class="testimonial-author">
+                        <p class="author-name">Maria Silva</p>
+                        <p class="author-title">Influenciadora Digital</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA Final -->
+            <div class="cta-section" data-aos="fade-up">
+                <h3>Pronto para Transformar seu Negócio?</h3>
+                <p>Junte-se aos cases de sucesso da Dynamic Solutions</p>
+                <a href="https://wa.me/seunumerodetelefone" class="cta-button premium-button">
+                    Iniciar Transformação Digital
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
 </body>
 </html>
