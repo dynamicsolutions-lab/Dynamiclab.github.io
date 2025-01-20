@@ -17,9 +17,254 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Estilos Próprios -->
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Reset e Configurações Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --premium-gold: linear-gradient(45deg, #FFD700, #FDB931, #B8860B);
+            --luxury-black: linear-gradient(45deg, #000000, #1a1a1a, #2c2c2c);
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            --neon-gold: #FFD700;
+            --neon-shadow: 0 0 10px rgba(255, 215, 0, 0.5),
+                          0 0 20px rgba(255, 215, 0, 0.3),
+                          0 0 30px rgba(255, 215, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            min-height: 100vh;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* Seção Hero/Inicial */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: all;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            pointer-events: none;
+        }
+
+        .logo {
+            margin-bottom: 4rem;
+        }
+
+        .logo img {
+            max-width: 500px;
+            height: auto;
+        }
+
+        h1 {
+            font-size: 6rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            margin-top: 4rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            color: #ffffff;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        /* Botões e CTAs */
+        .cta-button {
+            font-family: 'Raleway', sans-serif;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #000000;
+            background: linear-gradient(45deg, #FFD700, #FDB931);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            pointer-events: all;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Seção de Métricas com Efeito Neural Responsivo */
+        .metrics-section {
+            position: relative;
+            background: #000;
+            padding: 4rem 2rem;
+            overflow: hidden;
+            min-height: 100vh;
+            perspective: 1000px;
+        }
+
+        .metrics-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, #FFD700 1px, transparent 1px),
+                linear-gradient(to bottom, #FFD700 1px, transparent 1px);
+            background-size: 25px 25px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        /* Continuação do CSS */
+        .constellation-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent,
+                rgba(255, 215, 0, 0.3),
+                transparent
+            );
+            animation: linePulse 3s infinite;
+        }
+
+        /* Cards e Grids */
+        .section-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .metric-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .metric-number {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #FFD700, #FDB931);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .metric-label {
+            font-size: 1.2rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Efeitos de Energia */
+        .pulse-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center,
+                rgba(255, 215, 0, 0.2) 0%,
+                transparent 70%);
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        /* Animações */
+        @keyframes linePulse {
+            0% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 0.1; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .metrics-section::before {
+                background-size: 15px 15px;
+                opacity: 0.05;
+            }
+
+            .constellation-line {
+                height: 0.5px;
+            }
+
+            .constellation-lines {
+                transform: scale(0.7);
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .logo img {
+                max-width: 200px;
+            }
+
+            .metric-number {
+                font-size: 3.5rem;
+            }
+
+            .metric-label {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Fundo de Partículas -->
@@ -31,7 +276,7 @@
             <img src="https://raw.githubusercontent.com/dynamicsolutions-lab/Dynamiclab.github.io/2ffe8a66e27b4c4c0dc4d0832230bbd5e9fcbd3b/img/logo2.svg" 
                  alt="Dynamic Solutions Logo">
         </div>
-        <h1 data-aos="fade-up"><span class="innovation-text">Inovação</span> em Movimento</h1>
+        <h1 data-aos="fade-up">Inovação em Movimento</h1>
         <p class="tagline" data-aos="fade-up" data-aos-delay="200">
             Transformamos desafios em oportunidades através de soluções tecnológicas 
             inovadoras e personalizadas para impulsionar o sucesso do seu negócio.
@@ -41,118 +286,197 @@
         </a>
     </section>
 
-    <!-- Seção de Soluções -->
-    <section class="section solutions reveal-section" id="solucoes">
+    <!-- Seção de Métricas -->
+    <section class="metrics-section" id="resultados">
+        <div class="constellation-lines"></div>
         <div class="section-content">
-            <h2 class="section-title" data-aos="fade-up">Soluções Inovadoras</h2>
-            <div class="solutions-grid">
-                <!-- Card 1 -->
-                <div class="solution-card magnetic-card" data-aos="fade-up">
-                    <div class="magnetic-content">
-                        <div class="solution-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <h3>Avatares com IA</h3>
-                        <p>Revolucione sua presença digital com avatares hiper-realistas 
-                           potencializados por IA de última geração</p>
-                        <div class="card-hover-effect"></div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="solution-card magnetic-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="magnetic-content">
-                        <div class="solution-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Mentoria de Vendas</h3>
-                        <p>Multiplique seus resultados com estratégias exclusivas 
-                           de vendas pelo WhatsApp</p>
-                        <div class="card-hover-effect"></div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="solution-card magnetic-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="magnetic-content">
-                        <div class="solution-icon">
-                            <i class="fas fa-bullseye"></i>
-                        </div>
-                        <h3>Estratégia Digital</h3>
-                        <p>Conquiste o mundo digital com estratégias personalizadas 
-                           e dados orientados</p>
-                        <div class="card-hover-effect"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Seção de Métricas/Resultados -->
-    <section class="metrics-section reveal-section" id="resultados">
-        <canvas id="metricsCanvas"></canvas>
-        <div class="section-content">
-            <h2 class="section-title dark" data-aos="fade-up">Resultados Comprovados</h2>
-            <div class="results-grid">
-                <!-- Métrica 1 -->
+            <div class="metrics-grid">
                 <div class="metric-card" data-aos="fade-up">
                     <div class="pulse-effect"></div>
-                    <div class="metric-number" data-value="500">0</div>
-                    <div class="metric-label">Clientes Transformados</div>
-                </div>
-
-                <!-- Métrica 2 -->
-                <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="pulse-effect"></div>
-                    <div class="metric-number" data-value="95">0</div>
-                    <div class="metric-label">Taxa de Sucesso (%)</div>
-                </div>
-
-                <!-- Métrica 3 -->
-                <div class="metric-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="pulse-effect"></div>
-                    <div class="metric-number" data-value="1000">0</div>
+                    <div class="metric-number" data-value="1000">1.000</div>
                     <div class="metric-label">Avatares Criados</div>
                 </div>
-
-                <!-- Métrica 4 -->
-                <div class="metric-card" data-aos="fade-up" data-aos-delay="600">
+                
+                <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="pulse-effect"></div>
-                    <div class="metric-number" data-value="24">0</div>
+                    <div class="metric-number" data-value="24">24</div>
                     <div class="metric-label">Suporte 24/7</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Seção de Depoimentos -->
-    <section class="section testimonials reveal-section" id="depoimentos">
-        <div class="testimonial-particles"></div>
-        <div class="section-content">
-            <h2 class="section-title" data-aos="fade-up">Histórias de Sucesso</h2>
-            <div class="testimonials-slider">
-                <div class="testimonial-card" data-aos="fade-up">
-                    <div class="quote-mark">"</div>
-                    <p class="testimonial-text">A Dynamic Solutions revolucionou minha presença digital. 
-                        Meu faturamento triplicou em apenas 3 meses!</p>
-                    <div class="testimonial-author">
-                        <p class="author-name">Maria Silva</p>
-                        <p class="author-title">Influenciadora Digital</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- CTA Final -->
-            <div class="cta-section" data-aos="fade-up">
-                <h3>Pronto para Transformar seu Negócio?</h3>
-                <p>Junte-se aos cases de sucesso da Dynamic Solutions</p>
-                <a href="https://wa.me/seunumerodetelefone" class="cta-button premium-button">
-                    Iniciar Transformação Digital
-                </a>
-            </div>
-        </div>
-    </section>
-
     <!-- Scripts -->
-    <script src="script.js"></script>
-</body>
-</html>
+    <script>
+        // Inicialização do AOS
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+
+            // Inicializar o efeito de constelação
+            createResponsiveConstellationLines();
+        });
+
+        // Configuração do Particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#FFE55C"
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.6,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#FFE55C",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 3,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: true,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "grab"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 180,
+                        line_linked: {
+                            opacity: 0.8
+                        }
+                    },
+                    push: {
+                        particles_nb: 6
+                    }
+                }
+            },
+            retina_detect: true
+        });
+        // Função para criar linhas de constelação responsivas
+        function createResponsiveConstellationLines() {
+            const container = document.querySelector('.constellation-lines');
+            if (!container) return;
+            
+            const isMobile = window.innerWidth <= 768;
+            
+            // Limpa linhas existentes
+            container.innerHTML = '';
+            
+            // Ajusta número de linhas baseado no dispositivo
+            const numberOfLines = isMobile ? 8 : 15;
+            
+            for(let i = 0; i < numberOfLines; i++) {
+                const line = document.createElement('div');
+                line.className = 'constellation-line';
+                
+                // Ajustes responsivos
+                const width = isMobile ? 
+                    Math.random() * 100 + 30 : // Mobile
+                    Math.random() * 150 + 50;  // Desktop
+                    
+                line.style.width = width + 'px';
+                line.style.top = Math.random() * 100 + '%';
+                line.style.left = Math.random() * 100 + '%';
+                line.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                // Atraso na animação
+                line.style.animationDelay = `${Math.random() * 2}s`;
+                
+                container.appendChild(line);
+            }
+        }
+
+        // Função para animar métricas
+        function animateMetrics() {
+            const metrics = document.querySelectorAll('.metric-number');
+            
+            metrics.forEach(metric => {
+                const target = parseInt(metric.getAttribute('data-value'));
+                const duration = 2000; // 2 segundos
+                const start = performance.now();
+                const startValue = 0;
+
+                function update(currentTime) {
+                    const elapsed = currentTime - start;
+                    const progress = Math.min(elapsed / duration, 1);
+
+                    const current = Math.floor(startValue + (target - startValue) * progress);
+                    metric.textContent = current.toLocaleString();
+
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    }
+                }
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            requestAnimationFrame(update);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                observer.observe(metric);
+            });
+        }
+
+        // Event Listeners
+        window.addEventListener('resize', createResponsiveConstellationLines);
+        window.addEventListener('orientationchange', createResponsiveConstellationLines);
+
+        // Inicializar animação das métricas
+        document.addEventListener('DOM
