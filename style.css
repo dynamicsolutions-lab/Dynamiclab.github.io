@@ -125,6 +125,11 @@ h1 {
     transform: translateY(-10px);
     box-shadow: var(--neon-shadow);
 }
+.cta-solutions {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
 
 /* Seção de Métricas/Resultados */
 /* Seção de Métricas com Efeito Neural Responsivo */
@@ -133,8 +138,14 @@ h1 {
     background: #000;
     padding: 4rem 2rem;
     overflow: hidden;
-    min-height: 100vh;
+    min-height: 120vh;
     perspective: 1000px;
+    padding-bottom: 20rem;
+}
+.metrics-section .section-title {
+    font-size: 2.5rem; /* Reduzi o tamanho do texto */
+    margin-bottom: 1.5rem; /* Ajustei o espaçamento abaixo */
+    text-align: center;
 }
 
 .metrics-section::before {
@@ -180,11 +191,11 @@ h1 {
     }
 
     .constellation-line {
-        height: 0.5px;
+        height: 0.5px; /* Reduz a espessura das linhas */
     }
 
     .constellation-lines {
-        transform: scale(0.7);
+        transform: scale(0.7); /* Reduz o tamanho geral da constelação */
     }
 }
 
@@ -284,7 +295,48 @@ h1 {
     opacity: 0;
     transform: scale(0.8);
 }
+.testimonials {
+    min-height: 100vh;
+    padding: 15rem 2rem;
+}
+.testimonials-slider {
+  display: flex;
+  flex-wrap: wrap; /* Permite quebrar para a linha de baixo */
+  justify-content: center; /* Centraliza os blocos */
+  gap: 2rem; /* Espaçamento entre os blocos */
+}
+.testimonial-block {
+    position: relative;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    transform-style: preserve-3d;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 400px; /* Ajuste a largura máxima conforme necessário */
+    margin-bottom: 2rem;
+    margin-right: 1rem; /* Espaçamento entre os cards */
+    margin-left: 1rem;
+}
+.testimonial-block .testimonial-text{
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
 
+.testimonial-block:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--neon-shadow);
+}
+
+.cta-section .cta-button {
+  position: relative;
+  z-index: 1000;
+  margin-top: 3rem;
+}
+.clickable-overlay {
+  position: relative;
+  z-index: 1000;
+}
 /* Responsividade */
 @media (max-width: 768px) {
     .logo img {
@@ -328,6 +380,15 @@ h1 {
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-.testimonials {
-    min-height: 70vh;
+.footer {
+  background: #1a1a1a;
+  color: #fff;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.8rem;
+}
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
 }

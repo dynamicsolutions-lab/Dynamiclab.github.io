@@ -172,8 +172,8 @@ function initRevealAnimations() {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: section,
-                start: 'top 70%',
-                end: 'bottom 20%',
+                start: 'top 85%', // Aumentar o valor de start
+                end: 'bottom 15%', // Diminuir o valor de end
                 toggleActions: 'play none none reverse'
             }
         });
