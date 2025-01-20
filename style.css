@@ -1,0 +1,330 @@
+/* Reset e Configurações Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --premium-gold: linear-gradient(45deg, #FFD700, #FDB931, #B8860B);
+    --luxury-black: linear-gradient(45deg, #000000, #1a1a1a, #2c2c2c);
+    --glass-effect: rgba(255, 255, 255, 0.1);
+    --neon-gold: #FFD700;
+    --neon-shadow: 0 0 10px rgba(255, 215, 0, 0.5),
+                   0 0 20px rgba(255, 215, 0, 0.3),
+                   0 0 30px rgba(255, 215, 0, 0.1);
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    min-height: 100vh;
+    background: #000000;
+    color: #ffffff;
+    overflow-x: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Seção Hero/Inicial */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: all;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    pointer-events: none;
+}
+
+.logo {
+    margin-bottom: 4rem;
+}
+
+.logo img {
+    max-width: 500px;
+    height: auto;
+}
+
+h1 {
+    font-size: 6rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    margin-top: 4rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+}
+
+.tagline {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    line-height: 1.6;
+}
+
+/* Botões e CTAs */
+.cta-button {
+    font-family: 'Raleway', sans-serif;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #000000;
+    background: linear-gradient(45deg, #FFD700, #FDB931);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    pointer-events: all;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+}
+
+/* Seção de Soluções */
+.solutions {
+    position: relative;
+    padding: 6rem 2rem;
+    background: #1a1a1a;
+}
+
+.solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.solution-card {
+    position: relative;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 20px;
+    padding: 2.5rem;
+    transform-style: preserve-3d;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.solution-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--neon-shadow);
+}
+
+/* Seção de Métricas/Resultados */
+/* Seção de Métricas com Efeito Neural Responsivo */
+.metrics-section {
+    position: relative;
+    background: #000;
+    padding: 4rem 2rem;
+    overflow: hidden;
+    min-height: 100vh;
+    perspective: 1000px;
+}
+
+.metrics-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(to right, #FFD700 1px, transparent 1px),
+        linear-gradient(to bottom, #FFD700 1px, transparent 1px);
+    background-size: 25px 25px;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.constellation-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.constellation-line {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent,
+        rgba(255, 215, 0, 0.3),
+        transparent
+    );
+    animation: linePulse 3s infinite;
+}
+
+/* Media Queries para Mobile */
+@media (max-width: 768px) {
+    .metrics-section::before {
+        background-size: 15px 15px;
+        opacity: 0.05;
+    }
+
+    .constellation-line {
+        height: 0.5px;
+    }
+
+    .constellation-lines {
+        transform: scale(0.7);
+    }
+}
+
+/* Animações */
+@keyframes linePulse {
+    0% { opacity: 0.1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 0.1; }
+}
+
+.metric-card {
+    position: relative;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    transform-style: preserve-3d;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 2rem;
+}
+
+.metric-number {
+    font-size: 5rem;
+    font-weight: 800;
+    background: var(--premium-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    transform: translateZ(50px);
+}
+
+.metric-label {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateZ(30px);
+}
+
+/* Efeitos de Revelação */
+.reveal-section {
+    opacity: 0;
+    visibility: hidden;
+    position: relative;
+}
+
+.unveil-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--luxury-black);
+    transform-origin: left;
+    z-index: 10;
+}
+
+.spotlight {
+    position: relative;
+    overflow: hidden;
+}
+
+.spotlight::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center,
+        rgba(255, 215, 0, 0.2) 0%,
+        transparent 50%);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spotlight.active::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Efeitos de Energia */
+.energy-ring {
+    position: absolute;
+    border: 2px solid #FFD700;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.pulse-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center,
+        rgba(255, 215, 0, 0.2) 0%,
+        transparent 70%);
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .logo img {
+        max-width: 200px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+    }
+
+    .solutions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .metric-number {
+        font-size: 3.5rem;
+    }
+
+    .section {
+        padding: 4rem 1rem;
+    }
+}
+
+/* Animações */
+@keyframes shine {
+    100% { left: 125%; }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
