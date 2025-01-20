@@ -25,9 +25,7 @@ body {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-     pointer-events: none;
 }
-
 .clickable-area {
   pointer-events: all;
 }
@@ -340,7 +338,15 @@ h1 {
   z-index: 1000;
   margin-top: 3rem;
 }
-
+.cta-question{
+  text-align: center;
+}
+.cta-question hr {
+  border: none;
+  border-top: 2px solid #FFD700;
+  margin: 1rem auto;
+  width: 25%;
+}
 /* Responsividade */
 @media (max-width: 768px) {
     .logo img {
