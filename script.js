@@ -101,8 +101,10 @@ const sounds = {
 };
 
 // Inicialização das Animações
+// No seu script.js, procure o evento DOMContentLoaded existente e adicione a nova função dentro dele
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar AOS
+    // Código existente de inicialização
     AOS.init({
         duration: 1000,
         once: true,
@@ -120,7 +122,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Inicializar Efeitos de Hover
     initHoverEffects();
+
+    // ADICIONE AQUI a nova função de constelação
+    createResponsiveConstellationLines();
 });
+
+// ADICIONE ESTES eventos fora do DOMContentLoaded
+window.addEventListener('resize', createResponsiveConstellationLines);
+window.addEventListener('orientationchange', createResponsiveConstellationLines);
+
+// ADICIONE a função de criar linhas depois de todo o código existente
+function createResponsiveConstellationLines() {
+    const container = document.querySelector('.constellation-lines');
+    if (!container) return; // Verifica se o container existe
+    
+    const isMobile = window.innerWidth <= 768;
+    
+    // Limpa linhas existentes
+    container.innerHTML = '';
+    
+    // Ajusta número de linhas baseado no dispositivo
+    const numberOfLines = isMobile ? 8 : 15;
+    
+    for(let i = 0; i < numberOfLines; i++) {
+        const line = document.createElement('div');
+        line.className = 'constellation-line';
+        
+        // Ajustes responsivos
+        const width = isMobile ? 
+            Math.random() * 100 + 30 : // Mobile
+            Math.random() * 150 + 50;  // Desktop
+            
+        line.style.width = width + 'px';
+        line.style.top = Math.random() * 100 + '%';
+        line.style.left = Math.random() * 100 + '%';
+        line.style.transform = `rotate(${Math.random() * 360}deg)`;
+        
+        // Atraso na animação
+        line.style.animationDelay = `${Math.random() * 2}s`;
+        
+        container.appendChild(line);
+    }
+}
+
 
 // Função para Animações de Revelação
 function initRevealAnimations() {
