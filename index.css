@@ -25,8 +25,12 @@ body {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+     pointer-events: none;
 }
 
+.clickable-area {
+  pointer-events: all;
+}
 /* Seção Hero/Inicial */
 #particles-js {
     position: fixed;
@@ -336,10 +340,7 @@ h1 {
   z-index: 1000;
   margin-top: 3rem;
 }
-.clickable-overlay {
-  position: relative;
-  z-index: 1000;
-}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .logo img {
