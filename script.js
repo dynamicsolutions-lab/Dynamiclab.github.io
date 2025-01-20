@@ -351,3 +351,86 @@ if (isMobile()) {
       }
   });
 }
+// Ajustes para Mobile
+function initializeMobileOptimizations() {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // Ajustar partículas para melhor performance
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 20,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                size: {
+                    value: 2
+                },
+                move: {
+                    speed: 2
+                },
+                line_linked: {
+                    distance: 100,
+                    opacity: 0.2
+                }
+            }
+        });
+        
+        // Garantir que elementos clicáveis funcionem
+        const clickableElements = document.querySelectorAll('.cta-button, .solution-card, .testimonial-block');
+        clickableElements.forEach(element => {
+            element.classList.add('clickable');
+            element.style.transform = 'translateZ(0)'; // Force hardware acceleration
+        });
+        
+        // Otimizar animações para mobile
+        const animations = document.querySelectorAll('[data-aos]');
+        animations.forEach(element => {
+            element.setAttribute('data-aos-duration', '800');
+        });
+    }
+}
+
+// Inicializar otimizações mobile
+document.addEventListener('DOMContentLoaded', initializeMobileOptimizations);
+
+// Melhorar desempenho das linhas neurais em mobile
+function optimizeConstellationLines() {
+    const isMobile = window.innerWidth <= 768;
+    const container = document.querySelector('.constellation-lines');
+    
+    if (container) {
+        // Limitar número de linhas em dispositivos mobile
+        const numberOfLines = isMobile ? 6 : 15;
+        
+        container.innerHTML = '';
+        
+        for (let i = 0; i < numberOfLines; i++) {
+            const line = document.createElement('div');
+            line.className = 'constellation-line';
+            
+            // Ajustes específicos para mobile
+            if (isMobile) {
+                line.style.width = `${Math.random() * 50 + 20}px`;
+                line.style.opacity = '0.3';
+            } else {
+                line.style.width = `${Math.random() * 150 + 50}px`;
+                line.style.opacity = '0.5';
+            }
+            
+            line.style.top = `${Math.random() * 100}%`;
+            line.style.left = `${Math.random() * 100}%`;
+            line.style.transform = `rotate(${Math.random() * 360}deg)`;
+            line.style.animationDelay = `${Math.random() * 2}s`;
+            
+            container.appendChild(line);
+        }
+    }
+}
+
+// Atualizar linhas quando a tela é redimensionada
+window.addEventListener('resize', optimizeConstellationLines);
+window.addEventListener('orientationchange', optimizeConstellationLines);
