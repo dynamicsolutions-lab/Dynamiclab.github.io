@@ -191,11 +191,14 @@ h1 {
     }
 
     .constellation-line {
-        height: 0.5px; /* Reduz a espessura das linhas */
+        height: 0.5px;
     }
 
     .constellation-lines {
-        transform: scale(0.7); /* Reduz o tamanho geral da constelação */
+        transform: scale(0.7);
+    }
+    #particles-js {
+      pointer-events: none;
     }
 }
 

@@ -329,18 +329,25 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Função para Detectar Dispositivo Móvel
+  // Função para Detectar Dispositivo Móvel
 function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
 // Ajustar Efeitos para Mobile
 if (isMobile()) {
-    // Reduzir quantidade de partículas
-    particlesJS('particles-js', {
-        particles: {
-            number: {
-                value: 30
-            }
-        }
-    });
+  // Reduzir quantidade de partículas
+  particlesJS('particles-js', {
+      particles: {
+          number: {
+              value: 30
+          },
+          size: {
+              value: 1,
+          },
+          line_linked:{
+              distance: 80
+          }
+      }
+  });
 }
