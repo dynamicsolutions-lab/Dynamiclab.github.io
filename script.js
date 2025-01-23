@@ -283,4 +283,70 @@ function createEnergyEffect(element) {
 // Inicialização de Efeitos de Hover
 function initHoverEffects() {
     // Efeito nos Cards
-    document.querySelectorAll('.solution-card').forEach(card =>
+    document.querySelectorAll('.solution-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            sounds.hover.play();
+            gsap.to(card, {
+                scale: 1.05,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                scale: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+    });
+
+    // Efeito nos Botões
+    document.querySelectorAll('.cta-button').forEach(button => {
+        button.addEventListener('mouseenter', () => {
+            sounds.hover.play();
+        });
+
+        button.addEventListener('click', () => {
+            sounds.click.play();
+        });
+    });
+}
+
+// Smooth Scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Função para Detectar Dispositivo Móvel
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+// Ajustar Efeitos para Mobile
+if (isMobile()) {
+    // Reduzir quantidade de partículas
+    particlesJS('particles-js', {
+        particles: {
+            number: {
+                value: 30
+            },
+            size: {
+                value: 1,
+            },
+            line_linked:{
+                distance: 80
+            }
+        }
+    });
+}
