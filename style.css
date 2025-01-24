@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-align: center;
 }
 
 :root {
@@ -25,10 +26,13 @@ body {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    pointer-events: none;
 }
+
 .clickable-area {
-  pointer-events: all;
+    pointer-events: all;
 }
+
 /* Seção Hero/Inicial */
 #particles-js {
     position: fixed;
@@ -59,7 +63,7 @@ body {
     max-width: 500px;
     height: auto;
     display: block;
-    margin: 0 auto; /* Centraliza horizontalmente */
+    margin: 0 auto;
 }
 
 h1 {
@@ -105,15 +109,20 @@ h1 {
 .solutions {
     position: relative;
     padding: 6rem 2rem;
-    
+    pointer-events: none;
+}
+
+.solutions .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
 }
 
 .solutions-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     padding: 2rem;
-     max-width: 1200px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -125,52 +134,36 @@ h1 {
     padding: 2.5rem;
     transform-style: preserve-3d;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .solution-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--neon-shadow);
 }
-.cta-solutions {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-}
 
 /* Seção de Métricas/Resultados */
-/* Seção de Métricas com Efeito Neural Responsivo */
 .metrics-section {
     position: relative;
     background: transparent;
-     display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-     align-items: center;
-    padding: 4rem 2rem;
+    align-items: center;
+    padding: 4rem 2rem 6rem; /* Aumentado o padding inferior */
     overflow: hidden;
-    min-height: 100vh;
+    min-height: auto;
     perspective: 1000px;
-    padding-bottom: 20rem;
-}
-.metrics-section .section-title {
-    font-size: 2.5rem; /* Reduzi o tamanho do texto */
-    margin-bottom: 1.5rem; /* Ajustei o espaçamento abaixo */
-    text-align: center;
+    pointer-events: none;
 }
 
-.metrics-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        linear-gradient(to right, #FFD700 1px, transparent 1px),
-        linear-gradient(to bottom, #FFD700 1px, transparent 1px);
-    background-size: 25px 25px;
-    opacity: 0.1;
-    pointer-events: none;
+.metrics-section .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
 .constellation-lines {
@@ -180,6 +173,8 @@ h1 {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    pointer-events: all;
+    z-index: 1000; /* Garante que as linhas neurais fiquem atrás do CTA */
 }
 
 .constellation-line {
@@ -193,33 +188,16 @@ h1 {
     animation: linePulse 3s infinite;
 }
 
-/* Media Queries para Mobile */
-@media (max-width: 768px) {
-    .metrics-section::before {
-        background-size: 15px 15px;
-        opacity: 0.05;
-    }
-
-    .constellation-line {
-        height: 0.5px;
-    }
-
-    .constellation-lines {
-        transform: scale(0.7);
-    }
-    #particles-js {
-      pointer-events: none;
-    }
-}
-
-/* Animações */
-@keyframes linePulse {
-    0% { opacity: 0.1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 0.1; }
+.results-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
 }
 
 .metric-card {
+    flex: 1 1 200px;
+    max-width: 250px;
     position: relative;
     background: rgba(0, 0, 0, 0.7);
     border: 1px solid rgba(255, 215, 0, 0.3);
@@ -248,83 +226,34 @@ h1 {
     transform: translateZ(30px);
 }
 
-/* Efeitos de Revelação */
-.reveal-section {
-    opacity: 0;
-    visibility: hidden;
-    position: relative;
-}
-
-.unveil-mask {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: var(--luxury-black);
-    transform-origin: left;
-    z-index: 10;
-}
-
-.spotlight {
-    position: relative;
-    overflow: hidden;
-}
-
-.spotlight::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center,
-        rgba(255, 215, 0, 0.2) 0%,
-        transparent 50%);
-    opacity: 0;
-    transform: scale(0.5);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.spotlight.active::after {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* Efeitos de Energia */
-.energy-ring {
-    position: absolute;
-    border: 2px solid #FFD700;
-    border-radius: 50%;
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
-}
-
-.pulse-effect {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center,
-        rgba(255, 215, 0, 0.2) 0%,
-        transparent 70%);
-    opacity: 0;
-    transform: scale(0.8);
-}
+/* Seção de Depoimentos */
 .testimonials {
     min-height: 100vh;
-     display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 15rem 2rem;
-     background: transparent;
+    background: transparent;
+    pointer-events: none;
+    position: relative;
+    z-index: 1001;
 }
+
+.testimonials .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
 .testimonials-slider {
-  display: flex;
-  flex-wrap: wrap; /* Permite quebrar para a linha de baixo */
-  justify-content: center; /* Centraliza os blocos */
-  gap: 2rem; /* Espaçamento entre os blocos */
-     max-width: 1200px;
-      margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto 0;
 }
+
 .testimonial-block {
     position: relative;
     background: rgba(0, 0, 0, 0.7);
@@ -333,37 +262,49 @@ h1 {
     padding: 2rem;
     transform-style: preserve-3d;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    max-width: 400px; /* Ajuste a largura máxima conforme necessário */
+    max-width: 400px;
     margin-bottom: 2rem;
-    margin-right: 1rem; /* Espaçamento entre os cards */
+    margin-right: 1rem;
     margin-left: 1rem;
 }
-.testimonial-block .testimonial-text{
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+
+.testimonial-block .testimonial-text {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
 }
 
-.testimonial-block:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--neon-shadow);
+.cta-section {
+    position: relative;
+    z-index: 1002; /* Valor maior que o das linhas neurais */
+    margin-top: 4rem;
+    pointer-events: all;
 }
 
 .cta-section .cta-button {
-  position: relative;
-  z-index: 1000;
-  margin-top: 3rem;
+    margin-top: 2rem;
+    display: inline-block;
+    position: relative;
+    z-index: 1003; /* Valor ainda maior para garantir que fique na frente */
+    pointer-events: all;
 }
-.cta-question{
-  text-align: center;
-   max-width: 800px;
+
+/* Footer */
+.footer {
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+    position: relative;
+    z-index: 1004;
+}
+
+.footer-content {
+    max-width: 800px;
     margin: 0 auto;
+    text-align: center;
 }
-.cta-question hr {
-  border: none;
-  border-top: 2px solid #FFD700;
-  margin: 1rem auto;
-  width: 25%;
-}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .logo img {
@@ -389,9 +330,19 @@ h1 {
     .section {
         padding: 4rem 1rem;
     }
+
+    #particles-js {
+        pointer-events: all;
+    }
 }
 
 /* Animações */
+@keyframes linePulse {
+    0% { opacity: 0.1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 0.1; }
+}
+
 @keyframes shine {
     100% { left: 125%; }
 }
@@ -406,16 +357,4 @@ h1 {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
-}
-.footer {
-  background: #1a1a1a;
-  color: #fff;
-  text-align: center;
-  padding: 1.5rem;
-  font-size: 0.8rem;
-}
-.footer-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
 }
