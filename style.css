@@ -166,27 +166,24 @@ h1 {
     text-align: center;
 }
 
-.constellation-lines {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: all;
-    z-index: 1000; /* Garante que as linhas neurais fiquem atrás do CTA */
-}
-
 .constellation-line {
-    position: absolute;
-    height: 1px;
     background: linear-gradient(90deg, 
         transparent,
-        rgba(255, 215, 0, 0.3),
+        rgba(255, 215, 0, 0.3), /* Cor padrão amarela */
         transparent
     );
-    animation: linePulse 3s infinite;
 }
+
+@media (max-width: 768px) {
+    .constellation-line {
+        background: linear-gradient(90deg, 
+            transparent,
+            rgba(255, 215, 0, 0.3), /* Troque aqui para a cor desejada no mobile */
+            transparent
+        );
+    }
+}
+
 
 .results-grid {
     display: flex;
@@ -291,7 +288,7 @@ h1 {
 /* Footer */
 .footer {
     background: #1a1a1a;
-    color: #fff;
+    color: #f1be16;
     text-align: center;
     padding: 1.5rem;
     font-size: 0.8rem;
