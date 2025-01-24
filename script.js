@@ -176,7 +176,10 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
         particles: {
             number: { value: 30 },
             size: { value: 1 },
-            line_linked: { distance: 80 }
+            line_linked: { 
+                distance: 80,
+                color: "#FFE55C" // Certifique-se de que está definido como amarelo
+            }
         }
     });
 }
