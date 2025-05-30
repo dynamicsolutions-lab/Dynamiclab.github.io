@@ -26,25 +26,34 @@ body {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    pointer-events: none;
 }
 
-.clickable-area {
-    pointer-events: all;
+/* Clicabilidade dos elementos */
+.cta-button, 
+.nav-item, 
+.neural-btn,
+.solution-card,
+.differential-item,
+.experience-card,
+.skill-category,
+.footer {
+    pointer-events: all !important;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
 }
 
-/* Seção Hero/Inicial */
+/* Garantir que as partículas sejam clicáveis */
 #particles-js {
     position: fixed;
     width: 100%;
     height: 100%;
     z-index: 1;
-    pointer-events: all;
+    pointer-events: all !important;
 }
 
+/* Seção Hero (Principal) */
 .content {
-    position: relative;
-    z-index: 2;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -57,6 +66,7 @@ body {
 
 .logo {
     margin-bottom: 4rem;
+    pointer-events: all;
 }
 
 .logo img {
@@ -67,7 +77,7 @@ body {
 }
 
 h1 {
-    font-size: 6rem;
+    font-size: 6rem; /* Tamanho grande de título */
     font-weight: 800;
     margin-bottom: 1.5rem;
     margin-top: 4rem;
@@ -84,7 +94,7 @@ h1 {
     line-height: 1.6;
 }
 
-/* Botões e CTAs */
+/* Botões e interatividade */
 .cta-button {
     font-family: 'Raleway', sans-serif;
     padding: 1rem 2.5rem;
@@ -97,7 +107,7 @@ h1 {
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-decoration: none;
-    pointer-events: all;
+    display: inline-block;
 }
 
 .cta-button:hover {
@@ -105,10 +115,42 @@ h1 {
     box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
 }
 
+.neural-btn {
+    padding: 18px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.4s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.neural-btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+}
+
+.neural-btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.neural-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+}
+
 /* Seção de Soluções */
 .solutions {
-    position: relative;
     padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
     pointer-events: none;
 }
 
@@ -127,14 +169,13 @@ h1 {
 }
 
 .solution-card {
-    position: relative;
     background: rgba(0, 0, 0, 0.7);
     border: 1px solid rgba(255, 215, 0, 0.3);
     border-radius: 20px;
     padding: 2.5rem;
     transform-style: preserve-3d;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
+    pointer-events: all;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -145,7 +186,7 @@ h1 {
     box-shadow: var(--neon-shadow);
 }
 
-/* Seção de Métricas/Resultados */
+/* Seção de Métricas */
 .metrics-section {
     position: relative;
     background: transparent;
@@ -153,7 +194,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 4rem 2rem 6rem; /* Aumentado o padding inferior */
+    padding: 4rem 2rem 6rem; /* Ajustei o padding */
     overflow: hidden;
     min-height: auto;
     perspective: 1000px;
@@ -165,25 +206,6 @@ h1 {
     margin-bottom: 2rem;
     text-align: center;
 }
-
-.constellation-line {
-    background: linear-gradient(90deg, 
-        transparent,
-        rgba(255, 215, 0, 0.3), /* Cor padrão amarela */
-        transparent
-    );
-}
-
-@media (max-width: 768px) {
-    .constellation-line {
-        background: linear-gradient(90deg, 
-            transparent,
-            rgba(255, 215, 0, 0.3), /* Troque aqui para a cor desejada no mobile */
-            transparent
-        );
-    }
-}
-
 
 .results-grid {
     display: flex;
@@ -252,7 +274,6 @@ h1 {
 }
 
 .testimonial-block {
-    position: relative;
     background: rgba(0, 0, 0, 0.7);
     border: 1px solid rgba(255, 215, 0, 0.3);
     border-radius: 20px;
@@ -270,36 +291,16 @@ h1 {
     margin-bottom: 1rem;
 }
 
-.cta-section {
-    position: relative;
-    z-index: 1002; /* Valor maior que o das linhas neurais */
-    margin-top: 4rem;
-    pointer-events: all;
-}
-
-.cta-section .cta-button {
-    margin-top: 2rem;
-    display: inline-block;
-    position: relative;
-    z-index: 1003; /* Valor ainda maior para garantir que fique na frente */
-    pointer-events: all;
-}
-
 /* Footer */
 .footer {
     background: #1a1a1a;
     color: #f1be16;
     text-align: center;
     padding: 1.5rem;
-    font-size: 0.8rem;
+    font-size: 1rem;
     position: relative;
     z-index: 1004;
-}
-
-.footer-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
+    pointer-events: all;
 }
 
 /* Responsividade */
@@ -320,38 +321,7 @@ h1 {
         grid-template-columns: 1fr;
     }
 
-    .metric-number {
-        font-size: 3.5rem;
+    .cta-button {
+        font-size: 1rem;
     }
-
-    .section {
-        padding: 4rem 1rem;
-    }
-
-    #particles-js {
-        pointer-events: all;
-    }
-}
-
-/* Animações */
-@keyframes linePulse {
-    0% { opacity: 0.1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 0.1; }
-}
-
-@keyframes shine {
-    100% { left: 125%; }
-}
-
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
-
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
