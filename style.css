@@ -13,6 +13,7 @@
     padding: 0;
     box-sizing: border-box;
     text-align: center;
+    max-width: 100%;
 }
 
 /* Carregamento crítico - CSS inline prioritário */
@@ -76,12 +77,14 @@ body {
     min-height: 100vh;
     background: #000000;
     color: #ffffff;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     scroll-behavior: smooth;
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
 /* =====================================================
@@ -112,6 +115,8 @@ body {
     padding: 0 2rem;
     position: relative;
     z-index: 2;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 .clickable-area {
@@ -608,6 +613,10 @@ h1 {
     color: #ffffff;
     font-size: 1.2rem;
     overflow: hidden;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(255, 215, 0, 0.3);
+    min-width: 44px !important;
+    min-height: 44px !important;
 }
 
 /* Estados do botão neural com hover melhorado */
@@ -5784,132 +5793,178 @@ button, .neural-cta, .cta-button {
     }
 }
 
-/* TABLET PADRÃO (768px - 1023px) */
+/* TABLET PADRÃO (768px - 1023px) - CORRIGIDO */
 @media (min-width: 768px) and (max-width: 1023px) {
     .container {
-        max-width: 768px;
-        padding: 0 1.5rem;
+        max-width: 100%;
+        padding: 0 2rem;
     }
     
+    /* Grid responsivo funcional */
     .results-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+        gap: 2rem;
+        padding: 0 1rem;
     }
     
     .testimonials-slider {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
+        max-width: 700px;
+        margin: 0 auto;
     }
     
     .solutions-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+        gap: 2rem;
+        padding: 0 1rem;
     }
     
-    .skills-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    /* Depoimentos responsivos */
+    /* Depoimentos tablet otimizados */
     .testimonial-premium {
-        padding: 2rem 1.5rem !important;
+        padding: 2.5rem 2rem !important;
         transform: scale(1) !important;
+        margin: 0 auto 2rem auto;
+        max-width: 650px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
     }
     
     .testimonial-enhanced {
-        padding: 2rem 1.5rem !important;
+        padding: 2.5rem 2rem !important;
         transform: scale(1) !important;
+        margin: 0 auto 2rem auto;
+        max-width: 650px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3) !important;
     }
     
     .testimonial-profile,
     .testimonial-profile-enhanced {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
+        flex-direction: row;
+        text-align: left;
+        gap: 1.5rem;
+        align-items: center;
     }
     
     .testimonial-avatar,
     .testimonial-avatar-enhanced {
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
+        flex-shrink: 0;
     }
     
     .author-name-premium,
     .author-name-enhanced {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
     
     .testimonial-text-premium,
     .testimonial-text-enhanced {
-        font-size: 1rem;
+        font-size: 1.1rem;
         line-height: 1.6;
+        margin: 1.5rem 0;
     }
     
-    .testimonial-metrics,
+    .testimonial-metrics {
+        display: flex !important;
+        justify-content: space-around;
+        flex-wrap: nowrap;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: rgba(0, 0, 0, 0.3) !important;
+        border: 2px solid #FFD700 !important;
+        border-radius: 12px;
+    }
+    
     .testimonial-metrics-enhanced {
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        justify-content: space-around;
         gap: 1rem;
     }
     
-    /* Tipografia tablet */
+    /* Tipografia tablet corrigida */
     .section-title {
-        font-size: 2.2rem;
-        line-height: 1.3;
+        font-size: 2.5rem;
+        line-height: 1.2;
+        text-align: center;
+        margin-bottom: 3rem;
     }
     
     .hormozi-headline {
-        font-size: 2.4rem;
-        line-height: 1.2;
+        font-size: 2.8rem;
+        line-height: 1.1;
+        text-align: center;
     }
     
-    .tagline {
-        font-size: 1.1rem;
+    /* Métricas tablet */
+    .metric-card {
+        padding: 2rem 1.5rem;
+        min-height: 200px;
     }
     
-    /* Métricas responsivas */
     .metric-number {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
     }
     
     .metric-label {
-        font-size: 0.9rem;
+        font-size: 1rem;
+    }
+    
+    /* CTAs tablet */
+    .neural-cta-container {
+        flex-direction: row;
+        gap: 2rem;
+        justify-content: center;
+        margin-top: 3rem;
+    }
+    
+    .neural-cta {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        min-width: 200px;
     }
 }
 
-/* MOBILE GRANDE (480px - 767px) */
+/* MOBILE GRANDE (480px - 767px) - CORRIGIDO */
 @media (min-width: 480px) and (max-width: 767px) {
     .container {
         max-width: 100%;
         padding: 0 1rem;
     }
     
+    /* Grids mobile funcionais */
     .results-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        gap: 1.5rem;
+        padding: 0 0.5rem;
     }
     
     .testimonials-slider {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
+        padding: 0 0.5rem;
     }
     
     .solutions-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+        padding: 0 0.5rem;
     }
     
-    .skills-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    /* Depoimentos mobile */
-    .testimonial-premium,
-    .testimonial-enhanced {
-        padding: 1.5rem 1rem !important;
-        margin: 0 0.5rem;
+    /* Depoimentos mobile otimizados */
+    .testimonial-premium {
+        padding: 2rem 1.5rem !important;
+        margin: 0 0 2rem 0;
         transform: scale(1) !important;
+        max-width: 100%;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4) !important;
+    }
+    
+    .testimonial-enhanced {
+        padding: 2rem 1.5rem !important;
+        margin: 0 0 2rem 0;
+        transform: scale(1) !important;
+        max-width: 100%;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3) !important;
     }
     
     .testimonial-profile,
@@ -5917,197 +5972,353 @@ button, .neural-cta, .cta-button {
         flex-direction: column;
         text-align: center;
         gap: 1rem;
+        align-items: center;
     }
     
     .testimonial-avatar,
     .testimonial-avatar-enhanced {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         margin: 0 auto;
+        flex-shrink: 0;
+    }
+    
+    .author-name-premium,
+    .author-name-enhanced {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    
+    .author-company,
+    .author-company-enhanced {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    
+    .testimonial-text-premium,
+    .testimonial-text-enhanced {
+        font-size: 1rem;
+        line-height: 1.5;
+        text-align: center;
+        margin: 1.5rem 0;
+    }
+    
+    /* Métricas mobile funcionais */
+    .testimonial-metrics {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 0.5rem;
+        padding: 1.2rem 0.8rem;
+        background: rgba(0, 0, 0, 0.4) !important;
+        border: 2px solid #FFD700 !important;
+        border-radius: 10px;
+        margin-top: 1.5rem;
+    }
+    
+    .testimonial-metrics .metric {
+        text-align: center;
+        flex: 1;
+    }
+    
+    .testimonial-metrics .metric-number {
+        font-size: 1.4rem !important;
+        font-weight: bold !important;
+        color: #FFD700 !important;
+        display: block;
+    }
+    
+    .testimonial-metrics .metric-label {
+        font-size: 0.7rem !important;
+        color: rgba(255, 255, 255, 0.8) !important;
+        margin-top: 0.3rem;
+        display: block;
+    }
+    
+    .testimonial-metrics-enhanced {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+    }
+    
+    .metric-compact {
+        min-width: 60px;
+        text-align: center;
+    }
+    
+    /* Tipografia mobile */
+    .section-title {
+        font-size: 2rem;
+        line-height: 1.2;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .hormozi-headline {
+        font-size: 2.2rem;
+        line-height: 1.1;
+        text-align: center;
+        padding: 0 0.5rem;
+    }
+    
+    /* Métricas principais mobile */
+    .metric-card {
+        padding: 1.8rem 1.2rem;
+        min-height: 160px;
+        text-align: center;
+    }
+    
+    .metric-number {
+        font-size: 2rem;
+    }
+    
+    .metric-label {
+        font-size: 0.85rem;
+    }
+    
+    /* CTAs mobile funcionais */
+    .neural-cta-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+        margin-top: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .neural-cta {
+        padding: 1rem 2rem;
+        font-size: 0.95rem;
+        min-width: 250px;
+        text-align: center;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Navegação mobile */
+    .neural-navigation {
+        scale: 0.9;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* MOBILE PEQUENO (até 479px) - CORRIGIDO */
+@media (max-width: 479px) {
+    .container {
+        padding: 0 1rem;
+        max-width: 100%;
+    }
+    
+    /* Grids mobile pequeno */
+    .results-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 0.5rem;
+    }
+    
+    .testimonials-slider {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0;
+    }
+    
+    .solutions-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 0.5rem;
+    }
+    
+    /* Depoimentos mobile pequeno otimizados */
+    .testimonial-premium {
+        padding: 1.8rem 1.2rem !important;
+        margin: 0 0 2rem 0;
+        transform: scale(1) !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
+        border-radius: 15px;
+    }
+    
+    .testimonial-enhanced {
+        padding: 1.8rem 1.2rem !important;
+        margin: 0 0 2rem 0;
+        transform: scale(1) !important;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3) !important;
+        border-radius: 15px;
+    }
+    
+    .testimonial-profile,
+    .testimonial-profile-enhanced {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .testimonial-avatar,
+    .testimonial-avatar-enhanced {
+        width: 55px;
+        height: 55px;
+        margin: 0 auto;
+        flex-shrink: 0;
     }
     
     .author-name-premium,
     .author-name-enhanced {
         font-size: 1.2rem;
+        text-align: center;
+        line-height: 1.3;
     }
     
     .author-company,
     .author-company-enhanced {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+        text-align: center;
     }
     
     .testimonial-text-premium,
     .testimonial-text-enhanced {
         font-size: 0.95rem;
-        line-height: 1.5;
+        line-height: 1.4;
+        text-align: center;
+        margin: 1.2rem 0;
     }
     
+    /* Métricas mobile pequeno funcionais */
     .testimonial-metrics {
+        display: flex !important;
         flex-direction: column;
         gap: 0.8rem;
-        padding: 1rem;
+        padding: 1rem 0.8rem;
+        background: rgba(0, 0, 0, 0.5) !important;
+        border: 2px solid #FFD700 !important;
+        border-radius: 10px;
+        margin-top: 1.2rem;
+    }
+    
+    .testimonial-metrics .metric {
+        text-align: center;
+        padding: 0.5rem;
+        background: rgba(255, 215, 0, 0.1);
+        border-radius: 8px;
+    }
+    
+    .testimonial-metrics .metric-number {
+        font-size: 1.3rem !important;
+        font-weight: bold !important;
+        color: #FFD700 !important;
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+    
+    .testimonial-metrics .metric-label {
+        font-size: 0.7rem !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+        display: block;
     }
     
     .testimonial-metrics-enhanced {
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-direction: column;
         gap: 0.8rem;
+        align-items: center;
     }
     
     .metric-compact {
-        min-width: 80px;
-    }
-    
-    /* Tipografia mobile */
-    .section-title {
-        font-size: 1.8rem;
-        line-height: 1.3;
-        margin-bottom: 1.5rem;
-    }
-    
-    .hormozi-headline {
-        font-size: 2rem;
-        line-height: 1.2;
-    }
-    
-    .tagline {
-        font-size: 1rem;
-    }
-    
-    /* Métricas mobile */
-    .metric-card {
-        padding: 1.5rem 1rem;
-    }
-    
-    .metric-number {
-        font-size: 1.8rem;
-    }
-    
-    .metric-label {
-        font-size: 0.8rem;
-    }
-    
-    /* CTAs mobile */
-    .neural-cta {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    .neural-cta-container {
-        flex-direction: column;
-        gap: 1rem;
-    }
-}
-
-/* MOBILE PEQUENO (até 479px) */
-@media (max-width: 479px) {
-    .container {
-        padding: 0 0.75rem;
-    }
-    
-    .results-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .testimonials-slider {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .solutions-grid,
-    .skills-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    /* Depoimentos mobile pequeno */
-    .testimonial-premium,
-    .testimonial-enhanced {
-        padding: 1.5rem 0.75rem !important;
-        margin: 0 0.25rem;
-    }
-    
-    .testimonial-avatar,
-    .testimonial-avatar-enhanced {
-        width: 45px;
-        height: 45px;
-    }
-    
-    .author-name-premium,
-    .author-name-enhanced {
-        font-size: 1.1rem;
-    }
-    
-    .testimonial-text-premium,
-    .testimonial-text-enhanced {
-        font-size: 0.9rem;
-        line-height: 1.4;
-    }
-    
-    .testimonial-metrics {
-        flex-direction: column;
-        gap: 0.5rem;
-        padding: 0.8rem;
-    }
-    
-    .metric-number,
-    .metric-number-compact {
-        font-size: 1.2rem;
-    }
-    
-    .metric-label,
-    .metric-label-compact {
-        font-size: 0.7rem;
+        min-width: 100%;
+        text-align: center;
+        padding: 0.5rem;
+        background: rgba(46, 213, 115, 0.1);
+        border-radius: 8px;
     }
     
     /* Tipografia mobile pequeno */
     .section-title {
-        font-size: 1.5rem;
-        line-height: 1.3;
+        font-size: 1.7rem;
+        line-height: 1.2;
+        margin-bottom: 2rem;
+        text-align: center;
+        padding: 0 0.5rem;
     }
     
     .hormozi-headline {
-        font-size: 1.6rem;
-        line-height: 1.2;
+        font-size: 1.8rem;
+        line-height: 1.1;
+        text-align: center;
+        padding: 0 0.5rem;
+        margin-bottom: 1.5rem;
     }
     
-    .tagline {
-        font-size: 0.9rem;
-    }
-    
-    /* Métricas mobile pequeno */
+    /* Métricas principais mobile pequeno */
     .metric-card {
-        padding: 1.2rem 0.8rem;
+        padding: 1.5rem 1rem;
+        min-height: 140px;
+        text-align: center;
     }
     
     .metric-number {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
     }
     
     .metric-label {
-        font-size: 0.75rem;
+        font-size: 0.8rem;
+        line-height: 1.3;
     }
     
-    /* CTAs mobile pequeno */
+    /* CTAs mobile pequeno funcionais */
+    .neural-cta-container {
+        flex-direction: column;
+        gap: 1.2rem;
+        align-items: center;
+        margin-top: 2rem;
+        padding: 0 1rem;
+    }
+    
     .neural-cta {
-        padding: 0.7rem 1.2rem;
-        font-size: 0.85rem;
+        padding: 1rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+        border-radius: 10px;
     }
     
-    /* Navegação mobile */
+    /* Navegação mobile pequeno */
     .neural-navigation {
-        scale: 0.8;
+        scale: 0.75;
+        bottom: 15px;
+        right: 15px;
     }
     
     .neural-hub {
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
     }
     
     .neural-node {
-        width: 25px;
-        height: 25px;
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+        min-height: 30px;
+    }
+    
+    /* Soluções mobile pequeno */
+    .solution-card {
+        padding: 1.5rem 1.2rem;
+        text-align: center;
+    }
+    
+    .solution-icon i {
+        font-size: 2rem;
+    }
+    
+    .solution-card h3 {
+        font-size: 1.2rem;
+        margin: 1rem 0 0.8rem 0;
+    }
+    
+    .solution-card p {
+        font-size: 0.9rem;
+        line-height: 1.4;
     }
 }
 
@@ -6411,5 +6622,397 @@ button, .neural-cta, .cta-button {
     
     .section-title {
         color: #000000 !important;
+    }
+}
+
+/* CORREÇÕES ESPECÍFICAS PARA MOBILE E TABLET */
+
+/* Correção para scroll horizontal indesejado */
+html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Correção para elementos que podem vazar */
+* {
+    max-width: 100%;
+}
+
+/* Correção específica para containers */
+.container, .section-content {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* Correção para navegação em dispositivos touch */
+@media (max-width: 1023px) {
+    .neural-navigation {
+        position: fixed !important;
+        z-index: 9999 !important;
+        bottom: 20px !important;
+        right: 20px !important;
+    }
+    
+    .neural-node {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 215, 0, 0.3);
+    }
+    
+    /* Melhorar área de toque */
+    .neural-node, .neural-hub {
+        min-width: 44px !important;
+        min-height: 44px !important;
+    }
+}
+
+/* Correção para métricas do Ricardo em mobile */
+@media (max-width: 767px) {
+    .testimonial-premium .testimonial-metrics {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .testimonial-premium .testimonial-metrics .metric-item {
+        display: block !important;
+        visibility: visible !important;
+    }
+    
+    .testimonial-premium .testimonial-metrics .metric-number {
+        display: block !important;
+        visibility: visible !important;
+        color: #FFD700 !important;
+        font-weight: bold !important;
+    }
+    
+    .testimonial-premium .testimonial-metrics .metric-label {
+        display: block !important;
+        visibility: visible !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+}
+
+/* Correção para CTAs em mobile */
+@media (max-width: 767px) {
+    .neural-cta-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
+    .neural-cta {
+        width: 100% !important;
+        max-width: 300px !important;
+        margin: 0 auto !important;
+        display: block !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* Correção para títulos em mobile */
+@media (max-width: 767px) {
+    .hormozi-headline {
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+    }
+    
+    .section-title {
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+}
+
+/* Correção para imagens em mobile */
+@media (max-width: 767px) {
+    .testimonial-avatar,
+    .testimonial-avatar-enhanced,
+    .logo img {
+        max-width: 100% !important;
+        height: auto !important;
+        object-fit: cover !important;
+    }
+}
+
+/* Correção para animações em mobile - reduzir para performance */
+@media (max-width: 767px) {
+    .testimonial-premium,
+    .testimonial-enhanced,
+    .solution-card,
+    .metric-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    }
+    
+    .testimonial-premium:hover,
+    .testimonial-enhanced:hover {
+        transform: translateY(-3px) !important;
+    }
+}
+
+/* Correção para orientação landscape em mobile */
+@media (max-width: 767px) and (orientation: landscape) {
+    .hormozi-headline {
+        font-size: 1.6rem !important;
+        line-height: 1.1 !important;
+    }
+    
+    .section-title {
+        font-size: 1.5rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .testimonial-premium,
+    .testimonial-enhanced {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    .neural-navigation {
+        scale: 0.7 !important;
+    }
+}
+
+/* Correção específica para iPhone X/XS/11/12/13/14 - Safe Area */
+@supports (padding: max(0px)) {
+    @media (max-width: 767px) {
+        .container {
+            padding-left: max(1rem, env(safe-area-inset-left)) !important;
+            padding-right: max(1rem, env(safe-area-inset-right)) !important;
+        }
+        
+        .neural-navigation {
+            bottom: max(20px, env(safe-area-inset-bottom)) !important;
+            right: max(20px, env(safe-area-inset-right)) !important;
+        }
+    }
+}
+
+/* Correção para tablets em modo portrait */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .testimonials-slider {
+        grid-template-columns: 1fr !important;
+        max-width: 600px !important;
+        margin: 0 auto !important;
+    }
+    
+    .results-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 2rem !important;
+    }
+    
+    .solutions-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 2rem !important;
+    }
+}
+
+/* Correção para scroll suave */
+html {
+    scroll-behavior: smooth !important;
+}
+
+/* Correção para performance em dispositivos mais fracos */
+@media (max-width: 767px) {
+    .performance-mode {
+        transform: translateZ(0) !important;
+        backface-visibility: hidden !important;
+        perspective: 1000px !important;
+    }
+}
+
+/* CORREÇÕES ESPECÍFICAS PARA MOBILE E TABLET */
+
+/* Correção para scroll horizontal indesejado */
+html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Correção para elementos que podem vazar */
+* {
+    max-width: 100%;
+}
+
+/* Correção específica para containers */
+.container, .section-content {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* Correção para navegação em dispositivos touch */
+@media (max-width: 1023px) {
+    .neural-navigation {
+        position: fixed !important;
+        z-index: 9999 !important;
+        bottom: 20px !important;
+        right: 20px !important;
+    }
+    
+    .neural-node {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 215, 0, 0.3);
+    }
+    
+    /* Melhorar área de toque */
+    .neural-node, .neural-hub {
+        min-width: 44px !important;
+        min-height: 44px !important;
+    }
+}
+
+/* Correção para métricas do Ricardo em mobile */
+@media (max-width: 767px) {
+    .testimonial-premium .testimonial-metrics {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .testimonial-premium .testimonial-metrics .metric-item {
+        display: block !important;
+        visibility: visible !important;
+    }
+    
+    .testimonial-premium .testimonial-metrics .metric-number {
+        display: block !important;
+        visibility: visible !important;
+        color: #FFD700 !important;
+        font-weight: bold !important;
+    }
+    
+    .testimonial-premium .testimonial-metrics .metric-label {
+        display: block !important;
+        visibility: visible !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+}
+
+/* Correção para CTAs em mobile */
+@media (max-width: 767px) {
+    .neural-cta-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
+    .neural-cta {
+        width: 100% !important;
+        max-width: 300px !important;
+        margin: 0 auto !important;
+        display: block !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* Correção para títulos em mobile */
+@media (max-width: 767px) {
+    .hormozi-headline {
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+    }
+    
+    .section-title {
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+}
+
+/* Correção para imagens em mobile */
+@media (max-width: 767px) {
+    .testimonial-avatar,
+    .testimonial-avatar-enhanced,
+    .logo img {
+        max-width: 100% !important;
+        height: auto !important;
+        object-fit: cover !important;
+    }
+}
+
+/* Correção para animações em mobile - reduzir para performance */
+@media (max-width: 767px) {
+    .testimonial-premium,
+    .testimonial-enhanced,
+    .solution-card,
+    .metric-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    }
+    
+    .testimonial-premium:hover,
+    .testimonial-enhanced:hover {
+        transform: translateY(-3px) !important;
+    }
+}
+
+/* Correção para orientação landscape em mobile */
+@media (max-width: 767px) and (orientation: landscape) {
+    .hormozi-headline {
+        font-size: 1.6rem !important;
+        line-height: 1.1 !important;
+    }
+    
+    .section-title {
+        font-size: 1.5rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .testimonial-premium,
+    .testimonial-enhanced {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    .neural-navigation {
+        scale: 0.7 !important;
+    }
+}
+
+/* Correção específica para iPhone X/XS/11/12/13/14 - Safe Area */
+@supports (padding: max(0px)) {
+    @media (max-width: 767px) {
+        .container {
+            padding-left: max(1rem, env(safe-area-inset-left)) !important;
+            padding-right: max(1rem, env(safe-area-inset-right)) !important;
+        }
+        
+        .neural-navigation {
+            bottom: max(20px, env(safe-area-inset-bottom)) !important;
+            right: max(20px, env(safe-area-inset-right)) !important;
+        }
+    }
+}
+
+/* Correção para tablets em modo portrait */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .testimonials-slider {
+        grid-template-columns: 1fr !important;
+        max-width: 600px !important;
+        margin: 0 auto !important;
+    }
+    
+    .results-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 2rem !important;
+    }
+    
+    .solutions-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 2rem !important;
+    }
+}
+
+/* Correção para scroll suave */
+html {
+    scroll-behavior: smooth !important;
+}
+
+/* Correção para performance em dispositivos mais fracos */
+@media (max-width: 767px) {
+    .performance-mode {
+        transform: translateZ(0) !important;
+        backface-visibility: hidden !important;
+        perspective: 1000px !important;
     }
 }
