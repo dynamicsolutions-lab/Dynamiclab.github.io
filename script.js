@@ -9,7 +9,7 @@
    ===================================================== */
 
 /* =====================================================
-   1. CONFIGURAÇÕES GLOBAIS E INICIALIZAÇÃO
+   1. CONFIGURAÇÕES GLOBAIS E INICIALIZAÇÃO - OTIMIZADO
    ===================================================== */
 
 /**
@@ -22,14 +22,15 @@ const DynamicApp = {
         currentSection: 'home',
         isAnimating: false,
         isMobile: false,
-        particlesInitialized: false
+        particlesInitialized: false,
+        performanceMode: false
     },
     
-    // Configurações de animação
+    // Configurações de animação otimizadas
     config: {
-        animationDuration: 1000,
-        easeType: 'power3.out',
-        staggerDelay: 0.2,
+        animationDuration: 600,
+        easeType: 'power2.out',
+        staggerDelay: 0.1,
         mobileBreakpoint: 768
     },
     
@@ -39,11 +40,64 @@ const DynamicApp = {
         curriculumSection: null,
         navItems: null,
         particlesContainer: null
+    },
+    
+    // Utilitários de performance
+    utils: {
+        // Debounce para otimizar eventos
+        debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        },
+        
+        // Throttle para eventos de scroll
+        throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            }
+        },
+        
+        // Detecta dispositivos de baixa performance - OTIMIZADO
+        detectLowPerformance() {
+            const hardwareConcurrency = navigator.hardwareConcurrency || 2;
+            const memory = navigator.deviceMemory || 4;
+            const isLowEnd = hardwareConcurrency < 4 || memory < 4;
+            
+            // Aplica modo performance automaticamente se necessário
+            if (isLowEnd) {
+                document.body.classList.add('performance-mode');
+                console.log('Modo performance ativado automaticamente');
+            }
+            
+            return isLowEnd;
+        }
     }
 };
 
 /* =====================================================
-   2. SISTEMA DE PARTÍCULAS PREMIUM
+   2. SISTEMA IMERSIVO E PARTÍCULAS PREMIUM
+   ===================================================== */
+
+
+
+
+
+/* =====================================================
+   3. SISTEMA DE PARTÍCULAS PREMIUM
    ===================================================== */
 
 /**
@@ -81,11 +135,11 @@ class ParticleSystem {
     }
     
     /**
-     * Cria as partículas com propriedades aleatórias
-     * Cada partícula tem posição, velocidade e aparência únicos
+ * Cria as partículas com propriedades aleatórias - OTIMIZADO
+ * Reduzido número de partículas para melhor performance
      */
     createParticles() {
-        const particleCount = DynamicApp.state.isMobile ? 30 : 50;
+    const particleCount = DynamicApp.state.isMobile ? 15 : 25;
         
         for (let i = 0; i < particleCount; i++) {
             this.particles.push({
@@ -836,22 +890,12 @@ const NavigationSystem = {
      * @param {string} section - Nome da seção ('home' ou 'curriculum')
      */
     showSection(section) {
-        if (DynamicApp.state.isAnimating) return;
-        
-        // Previne scroll automático durante transição
-        document.body.style.overflow = 'hidden';
-        
-        DynamicApp.state.isAnimating = true;
+        // Sistema simplificado sem bloqueios
         DynamicApp.state.currentSection = section;
-        
-        // Força scroll para topo antes da transição
-        window.scrollTo({ top: 0, behavior: 'auto' });
         
         // Esconder todas as seções
         this.hideAllSections();
         
-        // Pequeno delay para garantir que o scroll foi processado
-        setTimeout(() => {
             // Mostrar seção específica
             if (section === 'home') {
                 this.showHomeSection();
@@ -862,13 +906,10 @@ const NavigationSystem = {
             // Atualizar navegação
             this.updateActiveNavigation(section);
             
-            // Restaura scroll após transição
-            setTimeout(() => {
-                document.body.style.overflow = '';
-                DynamicApp.state.isAnimating = false;
-            }, 300);
-            
-        }, 100);
+        // Scroll suave para topo apenas se necessário
+        if (window.scrollY > 100) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     },
     
     /**
@@ -912,6 +953,9 @@ const NavigationSystem = {
                     AOS.refresh();
                 }
                 PremiumAnimations.init();
+                
+                // Sempre inicializar o Arsenal Cyberpunk quando entrar no currículo
+                MainInitializer.initializeCyberpunkArsenal();
             }, 100);
         }
     },
@@ -1219,13 +1263,13 @@ const PremiumAnimations = {
         const label = metric.querySelector('.metric-label');
         const target = parseInt(number.getAttribute('data-value'));
         
-        // Efeito confetti para celebrar o número
-        if (typeof confetti !== 'undefined') {
+        // Efeito confetti otimizado
+        if (typeof confetti !== 'undefined' && !DynamicApp.state.isMobile) {
             confetti({ 
-                particleCount: 100, 
-                spread: 70, 
+                particleCount: 30, 
+                spread: 50, 
                 origin: { y: 0.6 }, 
-                colors: ['#FFD700', '#FDB931', '#ffffff'] 
+                colors: ['#FFD700'] 
             });
         }
         
@@ -1545,38 +1589,60 @@ const MainInitializer = {
      */
     startInitialization() {
         try {
+            console.log('🚀 Modo Foguete Ativado - Inicialização Ultra-Rápida');
+            
+            // Detecta performance do dispositivo
+            DynamicApp.state.performanceMode = DynamicApp.utils.detectLowPerformance();
+            
+            if (DynamicApp.state.performanceMode) {
+                console.log('⚡ Modo Performance Ativado');
+                document.body.classList.add('performance-mode');
+            }
+            
             // 1. Sistemas básicos primeiro
             ResponsiveSystem.init();
             
-            // 2. Força inicialização das partículas logo no início para evitar atrasos
-            setTimeout(() => {
-                NavigationSystem.initializeParticlesJS();
-            }, 100);
-            
-            // 3. Inicializa AOS se disponível
-            this.initializeAOS();
-            
-            // 4. Sistema de navegação com navegação neural
+            // 2. Sistema de navegação (crítico)
             NavigationSystem.init();
             NeuralNavigation.init();
             
-            // 5. Animações premium
+
+            
+            // 3. Partículas apenas se não for modo performance
+            if (!DynamicApp.state.performanceMode) {
+            setTimeout(() => {
+                NavigationSystem.initializeParticlesJS();
+                }, 50);
+            }
+            
+            // 4. AOS otimizado
+            this.initializeAOS();
+            
+            // 5. Animações apenas se necessário
+            if (!DynamicApp.state.performanceMode) {
             setTimeout(() => {
                 PremiumAnimations.init();
-            }, 200);
+                    addParticleInteractivity(); // Adiciona interatividade com partículas
+                }, 100);
+            }
             
-            // 6. Sistemas específicos da seção curriculum
-            this.initializeCurriculumSystems();
-            
-            // 7. Event listeners globais
+            // 6. Event listeners globais
             this.setupGlobalEventListeners();
+            
+            // 7. Sistemas específicos apenas quando necessário
+            setTimeout(() => {
+                this.initializeCurriculumSystems();
+                if (!DynamicApp.state.performanceMode) {
+                this.initializeCyberpunkArsenal();
+                }
+            }, 150);
             
             // 8. Configurações finais
             setTimeout(() => {
                 this.finalizeInitialization();
-            }, 500);
+            }, 200);
             
-            console.log('✅ Dynamic Solutions inicializado com sucesso!');
+            console.log('✅ Dynamic Solutions - Modo Foguete Ativo! 🚀');
             
         } catch (error) {
             console.error('❌ Erro na inicialização:', error);
@@ -1585,14 +1651,16 @@ const MainInitializer = {
     },
     
     /**
-     * Inicializa AOS (Animate On Scroll)
+     * Inicializa AOS (Animate On Scroll) - OTIMIZADO
      */
     initializeAOS() {
-        if (typeof AOS !== 'undefined') {
+        if (typeof AOS !== 'undefined' && !DynamicApp.state.performanceMode) {
             AOS.init({ 
                 duration: DynamicApp.config.animationDuration, 
                 once: true, 
-                offset: 100 
+                offset: 50,
+                delay: 0,
+                easing: 'ease-out'
             });
         }
     },
@@ -1605,6 +1673,148 @@ const MainInitializer = {
         if (DynamicApp.state.currentSection === 'curriculum') {
             new NeuralNetwork();
             new ParticleSystem();
+            this.initializeCyberpunkArsenal();
+        }
+    },
+    
+    /**
+     * Sistema Arsenal Cyberpunk - Inicializa efeitos especiais das armas digitais
+     */
+    initializeCyberpunkArsenal() {
+        const arsenalCards = document.querySelectorAll('.skill-card');
+        
+        arsenalCards.forEach((card, index) => {
+            // Adiciona efeitos de hover cyberpunk
+            card.addEventListener('mouseenter', () => {
+                this.activateArsenalWeapon(card, index);
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                this.deactivateArsenalWeapon(card);
+            });
+            
+            // Efeito de scanner automático
+            this.startArsenalScanner(card, index);
+        });
+    },
+    
+    /**
+     * Ativa uma arma do arsenal cyberpunk
+     * @param {Element} card - Card da arma
+     * @param {number} index - Índice da arma
+     */
+    activateArsenalWeapon(card, index) {
+        // Cria partículas de energia
+        for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+                this.createEnergyParticle(card);
+            }, i * 100);
+        }
+        
+        // Efeito de pulso na métrica
+        const metrics = card.querySelectorAll('.metric-value');
+        metrics.forEach(metric => {
+            metric.style.animation = 'cyberpunkMetricPulse 0.5s ease-in-out';
+        });
+        
+        // Som de ativação (se houver)
+        this.playArsenalSound('activate');
+    },
+    
+    /**
+     * Desativa uma arma do arsenal
+     * @param {Element} card - Card da arma
+     */
+    deactivateArsenalWeapon(card) {
+        const metrics = card.querySelectorAll('.metric-value');
+        metrics.forEach(metric => {
+            metric.style.animation = '';
+        });
+    },
+    
+    /**
+     * Cria partícula de energia cyberpunk
+     * @param {Element} container - Container onde criar a partícula
+     */
+    createEnergyParticle(container) {
+        const particle = document.createElement('div');
+        particle.style.cssText = `
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #FF0080, #00D4FF);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 100;
+            top: ${Math.random() * 100}%;
+            left: ${Math.random() * 100}%;
+            animation: cyberpunkParticleFloat 2s ease-out forwards;
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.8);
+        `;
+        
+        container.appendChild(particle);
+        
+        // Remove partícula após animação
+        setTimeout(() => {
+            if (particle.parentNode) {
+                particle.parentNode.removeChild(particle);
+            }
+        }, 2000);
+    },
+    
+    /**
+     * Inicia scanner automático do arsenal
+     * @param {Element} card - Card da arma
+     * @param {number} index - Índice para delay
+     */
+    startArsenalScanner(card, index) {
+        const scannerInterval = 8000 + (index * 1000); // Cada arma tem timing diferente
+        
+        setInterval(() => {
+            if (!card.matches(':hover')) {
+                // Só executa se não estiver em hover
+                this.executeArsenalScan(card);
+            }
+        }, scannerInterval);
+    },
+    
+    /**
+     * Executa scan cyberpunk automático
+     * @param {Element} card - Card da arma
+     */
+    executeArsenalScan(card) {
+        const scanner = document.createElement('div');
+        scanner.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 0, 128, 0.8) 50%, 
+                transparent 100%);
+            z-index: 50;
+            animation: arsenalScanLine 1.5s ease-in-out;
+        `;
+        
+        card.appendChild(scanner);
+        
+        setTimeout(() => {
+            if (scanner.parentNode) {
+                scanner.parentNode.removeChild(scanner);
+            }
+        }, 1500);
+    },
+    
+    /**
+     * Reproduz som do arsenal (se disponível)
+     * @param {string} type - Tipo de som
+     */
+    playArsenalSound(type) {
+        // Implementar se houver biblioteca de som
+        if (typeof Howl !== 'undefined') {
+            // Configurar sons cyberpunk aqui
         }
     },
     
@@ -1774,6 +1984,90 @@ window.enableFinalCTA = function() {
 
 // Inicia automaticamente quando script é carregado
 MainInitializer.init();
+
+// Inicia sistema de partículas SIMPLIFICADO após carregamento
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        addParticleInteractivity();
+        console.log('🎯 Sistema de cliques simples ativado');
+    }, 800);
+});
+
+// Sistema de Interação com Partículas - ULTRA SIMPLIFICADO
+function addParticleInteractivity() {
+    const particlesCanvas = document.querySelector('#particles-js');
+    if (!particlesCanvas) {
+        console.log('⚠️ Particles.js não encontrado');
+        return;
+    }
+    
+    // Verifica se já foi inicializado
+    if (particlesCanvas.hasAttribute('data-particle-interactive')) return;
+    particlesCanvas.setAttribute('data-particle-interactive', 'true');
+    
+    // Listener SIMPLES com throttle básico
+    let lastClick = 0;
+    
+    particlesCanvas.addEventListener('click', function(e) {
+        const now = Date.now();
+        if (now - lastClick < 300) return; // Throttle simples
+        lastClick = now;
+        
+        // Verifica se está na zona hero
+        const heroZone = document.querySelector('.clickable-hero-zone');
+        if (!heroZone) return;
+        
+        const heroRect = heroZone.getBoundingClientRect();
+        if (e.clientY > heroRect.bottom) return;
+        
+        // Efeito visual simples sem modificar o array de partículas
+        createClickEffect(e.clientX, e.clientY);
+        
+        console.log('✨ Clique simples detectado');
+    });
+}
+
+// Efeito visual simples que não interfere com particles.js
+function createClickEffect(x, y) {
+    const effect = document.createElement('div');
+    effect.style.cssText = `
+        position: fixed;
+        left: ${x}px;
+        top: ${y}px;
+        width: 20px;
+        height: 20px;
+        background: radial-gradient(circle, #FFD700, transparent);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        animation: clickBurst 0.6s ease-out forwards;
+        transform: translate(-50%, -50%);
+    `;
+    
+    document.body.appendChild(effect);
+    
+    setTimeout(() => {
+        if (effect.parentNode) {
+            effect.parentNode.removeChild(effect);
+        }
+    }, 600);
+}
+
+// CSS para animação do efeito
+if (!document.querySelector('#click-effect-styles')) {
+    const style = document.createElement('style');
+    style.id = 'click-effect-styles';
+    style.textContent = `
+        @keyframes clickBurst {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Função removida - substituída por efeito visual simples
 
 /* =====================================================
    FINAL DO ARQUIVO JAVASCRIPT
