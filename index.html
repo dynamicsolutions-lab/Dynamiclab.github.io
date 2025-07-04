@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Solutions | Transformando Negócios com Tecnologia</title>
     
     <!-- Bibliotecas e CDNs Externos -->
@@ -16,13 +16,11 @@
     <!-- Fontes Google -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Fontes Premium para Headline -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- CSS Local -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Sistema de Navegação Neural Premium -->
@@ -53,294 +51,195 @@
 
     <!-- Seção Principal (Home) -->
     <div id="home-section" class="main-section">
-        
-        <!-- ZONA CLICÁVEL LIMITADA - Logo até Headline -->
-        <div class="clickable-hero-zone">
-            <!-- Fundo de Partículas APENAS na zona hero -->
-            <div id="particles-js"></div>
-            
-            <!-- Seção Hero -->
-            <section class="content">
-                <div class="logo">
-                    <img src="https://github.com/dynamicsolutions-lab/Dynamiclab.github.io/blob/main/img/freepik__a-luxurious-logo-for-dynamic-solutions-featuring-a__98836.png?raw=true" 
-                         alt="Dynamic Solutions Logo">
+        <!-- Fundo de Partículas -->
+        <div id="particles-js" class="clickable-area"></div>
+
+        <!-- Seção Hero -->
+        <section class="content">
+            <div class="logo">
+                <img src="https://github.com/dynamicsolutions-lab/Dynamiclab.github.io/blob/main/img/freepik__a-luxurious-logo-for-dynamic-solutions-featuring-a__98836.png?raw=true" 
+                     alt="Dynamic Solutions Logo">
+            </div>
+            <h1 data-aos="fade-up"><span class="innovation-text">Inovação</span> em Movimento</h1>
+            <p class="tagline" data-aos="fade-up" data-aos-delay="200">
+                Transformamos desafios em oportunidades através de soluções tecnológicas 
+                inovadoras e personalizadas para impulsionar o sucesso do seu negócio.
+            </p>
+            <div class="neural-cta-container">
+                <a href="#depoimentos" class="neural-cta neural-cta-primary clickable-area" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-comments neural-cta-icon"></i>
+                    <span class="neural-cta-text">Fale Conosco</span>
+                </a>
+                <a href="#curriculum" class="neural-cta neural-cta-secondary clickable-area" onclick="showSection('curriculum')" data-aos="fade-up" data-aos-delay="600">
+                    <i class="fas fa-brain neural-cta-icon"></i>
+                    <span class="neural-cta-text">Conheça o Fundador</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Seção de Soluções -->
+        <section class="section solutions reveal-section" id="solucoes">
+            <div class="section-content">
+                <h2 class="section-title" data-aos="fade-up">Soluções Inovadoras</h2> 
+                <div class="solutions-grid">
+                    <!-- Card 1 -->
+                    <div class="solution-card" data-aos="fade-up">
+                        <div class="magnetic-content">
+                            <div class="solution-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3>Avatares com IA</h3>
+                            <p>Revolucione sua presença digital com avatares hiper-realistas 
+                               potencializados por IA de última geração</p>
+                            <div class="card-hover-effect"></div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="solution-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="magnetic-content">
+                            <div class="solution-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Mentoria de Vendas</h3>
+                            <p>Multiplique seus resultados com estratégias exclusivas 
+                               de vendas pelo WhatsApp</p>
+                            <div class="card-hover-effect"></div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="solution-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="magnetic-content">
+                            <div class="solution-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3>Estratégia Digital</h3>
+                            <p>Conquiste o mundo digital com estratégias personalizadas 
+                               e dados orientados</p>
+                            <div class="card-hover-effect"></div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="solution-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="magnetic-content">
+                            <div class="solution-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3>Desenvolvimento Web</h3>
+                            <p>Crie sites e sistemas personalizados que impulsione o seu negócio online</p>
+                            <div class="card-hover-effect"></div>
+                        </div>
+                    </div>
+               
+                    <!-- Card 5 -->
+                    <div class="solution-card" data-aos="fade-up" data-aos-delay="800">
+                        <div class="magnetic-content">
+                            <div class="solution-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3>Aplicativos Mobile</h3>
+                            <p>Transforme sua ideia em um aplicativo incrível para iOS e Android</p>
+                            <div class="card-hover-effect"></div>
+                        </div>
+                    </div>
+               
+                    <!-- Card 6 -->
+                    <div class="solution-card" data-aos="fade-up" data-aos-delay="1000">
+                        <div class="magnetic-content">
+                            <div class="solution-icon">
+                              <i class="fas fa-cloud"></i>
+                            </div>
+                            <h3>Servidores e Cloud</h3>
+                            <p>Infraestrutura robusta e segura para seus projetos digitais</p>
+                            <div class="card-hover-effect"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Métricas/Resultados -->
+        <section class="metrics-section reveal-section" id="resultados">
+            <div class="constellation-lines clickable-area"></div>
+            <canvas id="metricsCanvas"></canvas>
+            <div class="section-content">
+                <h2 class="section-title dark" data-aos="fade-up">Resultados Comprovados</h2>
+                <div class="results-grid">
+                    <!-- Métrica 1 -->
+                    <div class="metric-card" data-aos="fade-up">
+                        <div class="pulse-effect"></div>
+                        <div class="metric-number" data-value="350">0</div>
+                        <div class="metric-label">Clientes Transformados</div>
+                    </div>
+                    <!-- Métrica 2 -->
+                    <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="pulse-effect"></div>
+                        <div class="metric-number" data-value="95">0</div>
+                        <div class="metric-label">Taxa de Sucesso (%)</div>
+                    </div>
+                    <!-- Métrica 3 -->
+                    <div class="metric-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="pulse-effect"></div>
+                        <div class="metric-number" data-value="820">0</div>
+                        <div class="metric-label">Avatares Criados</div>
+                    </div>
+                    <!-- Métrica 4 -->
+                    <div class="metric-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="pulse-effect"></div>
+                        <div class="metric-number" data-value="24">0</div>
+                        <div class="metric-label">Suporte 24/7</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Depoimentos -->
+        <section class="section testimonials reveal-section" id="depoimentos">
+            <div class="testimonial-particles"></div>
+            <div class="section-content">
+                <h2 class="section-title" data-aos="fade-up">Histórias de Sucesso</h2>
+                <div class="testimonials-slider">
+                    <div class="testimonial-block" data-aos="fade-up">
+                        <div class="quote-mark">"</div>
+                        <p class="testimonial-text">A Dynamic Solutions revolucionou minha presença digital. Meu faturamento triplicou em apenas 3 meses!</p>
+                        <div class="testimonial-author">
+                            <p class="author-name">Maria Silva</p>
+                            <p class="author-title">Influenciadora Digital</p>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-block" data-aos="fade-up" data-aos-delay="200">
+                        <div class="quote-mark">"</div>
+                        <p class="testimonial-text">A mentoria de vendas foi um divisor de águas para meu negócio! Consegui resultados incríveis com as estratégias de whatsapp!</p>
+                        <div class="testimonial-author">
+                            <p class="author-name">João Paulo</p>
+                            <p class="author-title">Empreendedor</p>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-block" data-aos="fade-up" data-aos-delay="400">
+                        <div class="quote-mark">"</div>
+                        <p class="testimonial-text">Com a estratégia digital da Dynamic Solutions, alcancei meus objetivos de marca e faturamento muito rápido! Super recomendo.</p>
+                        <div class="testimonial-author">
+                            <p class="author-name">Fernanda Lima</p>
+                            <p class="author-title">Gerente de Marketing</p>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- HEADLINE ESTILO HERISON ARAÚJO / ALEX HORMOZI -->
-                <div class="hormozi-headline-container" data-aos="fade-up">
-                    <h1 class="hormozi-headline">
-                        TRANSFORMAMOS SUA EMPRESA EM UMA 
-                        <span class="hormozi-highlight">MÁQUINA DE DINHEIRO</span> 
-            
-                    </h1>
-                    
-                </div>
-                <!-- CTAs ESTILO ALEX HORMOZI -->
-                <div class="neural-cta-container">
-                    <a href="#cta-final" class="neural-cta neural-cta-primary clickable-area" data-aos="fade-up" data-aos-delay="400">
+                <!-- CTA Final -->
+                <div class="cta-section" data-aos="fade-up">
+                    <h3>Pronto para Transformar seu Negócio?</h3>
+                    <p>Junte-se aos cases de sucesso da Dynamic Solutions</p>
+                    <a href="https://wa.me/5532999735469?text=Ol%C3%A1!%20Acabei%20de%20ver%20seu%20portf%C3%B3lio%20e%20fiquei%20muito%20interessado%20no%20seu%20trabalho.%20Podemos%20conversar%20sobre%20uma%20poss%C3%ADvel%20colabora%C3%A7%C3%A3o%3F" class="neural-cta neural-cta-primary clickable-area">
                         <i class="fas fa-rocket neural-cta-icon"></i>
-                        <span class="neural-cta-text">QUERO FATURAR MAIS AGORA</span>
-                        <div class="cta-pulse-effect"></div>
-                    </a>
-                    <a href="#curriculum" class="neural-cta neural-cta-secondary clickable-area" onclick="showSection('curriculum')" data-aos="fade-up" data-aos-delay="600">
-                        <i class="fas fa-brain neural-cta-icon"></i>
-                        <span class="neural-cta-text">CONHEÇA O FUNDADOR</span>
-                        <div class="cta-pulse-effect"></div>
+                        <span class="neural-cta-text">Iniciar Transformação Digital</span>
                     </a>
                 </div>
-            </section>
-        </div>
-
-        <!-- LINHA DIVISÓRIA INVISÍVEL -->
-        <div class="hero-divider"></div>
-
-        <!-- SEÇÕES RESTANTES - SEM FUNDO CLICÁVEL -->
-        <div class="non-clickable-sections">
-            <!-- Seção de Soluções -->
-            <section class="section solutions reveal-section" id="solucoes">
-                <div class="section-content">
-                    <h2 class="section-title" data-aos="fade-up">Soluções Inovadoras</h2> 
-                    <div class="solutions-grid">
-                        <!-- Card 1 -->
-                        <div class="solution-card" data-aos="fade-up">
-                            <div class="magnetic-content">
-                                <div class="solution-icon">
-                                    <i class="fas fa-robot"></i>
-                                </div>
-                                <h3>Avatares com IA</h3>
-                                <p>Revolucione sua presença digital com avatares hiper-realistas 
-                                   potencializados por IA de última geração</p>
-                                <div class="card-hover-effect"></div>
-                            </div>
-                        </div>
-
-                        <!-- Card 2 -->
-                        <div class="solution-card" data-aos="fade-up" data-aos-delay="200">
-                            <div class="magnetic-content">
-                                <div class="solution-icon">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
-                                <h3>Mentoria de Vendas</h3>
-                                <p>Multiplique seus resultados com estratégias exclusivas 
-                                   de vendas pelo WhatsApp</p>
-                                <div class="card-hover-effect"></div>
-                            </div>
-                        </div>
-
-                        <!-- Card 3 -->
-                        <div class="solution-card" data-aos="fade-up" data-aos-delay="400">
-                            <div class="magnetic-content">
-                                <div class="solution-icon">
-                                    <i class="fas fa-bullseye"></i>
-                                </div>
-                                <h3>Estratégia Digital</h3>
-                                <p>Conquiste o mundo digital com estratégias personalizadas 
-                                   e dados orientados</p>
-                                <div class="card-hover-effect"></div>
-                            </div>
-                        </div>
-
-                        <!-- Card 4 -->
-                        <div class="solution-card" data-aos="fade-up" data-aos-delay="600">
-                            <div class="magnetic-content">
-                                <div class="solution-icon">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                <h3>Desenvolvimento Web</h3>
-                                <p>Crie sites e sistemas personalizados que impulsione o seu negócio online</p>
-                                <div class="card-hover-effect"></div>
-                            </div>
-                        </div>
-                   
-                        <!-- Card 5 -->
-                        <div class="solution-card" data-aos="fade-up" data-aos-delay="800">
-                            <div class="magnetic-content">
-                                <div class="solution-icon">
-                                    <i class="fas fa-mobile-alt"></i>
-                                </div>
-                                <h3>Aplicativos Mobile</h3>
-                                <p>Transforme sua ideia em um aplicativo incrível para iOS e Android</p>
-                                <div class="card-hover-effect"></div>
-                            </div>
-                        </div>
-                   
-                        <!-- Card 6 -->
-                        <div class="solution-card" data-aos="fade-up" data-aos-delay="1000">
-                            <div class="magnetic-content">
-                                <div class="solution-icon">
-                                  <i class="fas fa-cloud"></i>
-                                </div>
-                                <h3>Servidores e Cloud</h3>
-                                <p>Infraestrutura robusta e segura para seus projetos digitais</p>
-                                <div class="card-hover-effect"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Seção de Métricas/Resultados -->
-            <section class="metrics-section reveal-section" id="resultados">
-                <div class="constellation-lines clickable-area"></div>
-                <canvas id="metricsCanvas"></canvas>
-                <div class="section-content">
-                    <h2 class="section-title dark" data-aos="fade-up">Resultados Comprovados</h2>
-                    <div class="results-grid">
-                        <!-- Métrica 1 -->
-                        <div class="metric-card" data-aos="fade-up">
-                            <div class="pulse-effect"></div>
-                            <div class="metric-number" data-value="350">0</div>
-                            <div class="metric-label">Clientes Transformados</div>
-                        </div>
-                        <!-- Métrica 2 -->
-                        <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
-                            <div class="pulse-effect"></div>
-                            <div class="metric-number" data-value="95">0</div>
-                            <div class="metric-label">Taxa de Sucesso (%)</div>
-                        </div>
-                        <!-- Métrica 3 -->
-                        <div class="metric-card" data-aos="fade-up" data-aos-delay="400">
-                            <div class="pulse-effect"></div>
-                            <div class="metric-number" data-value="820">0</div>
-                            <div class="metric-label">Avatares Criados</div>
-                        </div>
-                        <!-- Métrica 4 -->
-                        <div class="metric-card" data-aos="fade-up" data-aos-delay="600">
-                            <div class="pulse-effect"></div>
-                            <div class="metric-number" data-value="24">0</div>
-                            <div class="metric-label">Suporte 24/7</div>
-                        </div>
-                        <!-- Métrica 5 - NOVA: Prova Social Financeira -->
-                        <div class="metric-card" data-aos="fade-up" data-aos-delay="800">
-                            <div class="pulse-effect"></div>
-                            <div class="metric-number" data-value="50">0</div>
-                            <div class="metric-label">Milhões Gerados (R$)</div>
-                        </div>
-                        <!-- Métrica 6 - NOVA: Tempo de Entrega -->
-                        <div class="metric-card" data-aos="fade-up" data-aos-delay="1000">
-                            <div class="pulse-effect"></div>
-                            <div class="metric-number" data-value="7">0</div>
-                            <div class="metric-label">Dias Entrega Média</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Seção de Depoimentos -->
-            <section class="section testimonials reveal-section" id="depoimentos">
-                <div class="testimonial-particles"></div>
-                <div class="section-content">
-                    <h2 class="section-title" data-aos="fade-up">Histórias de Sucesso</h2>
-                    <div class="testimonials-slider">
-                        <div class="testimonial-block" data-aos="fade-up">
-                            <div class="quote-mark">"</div>
-                            <p class="testimonial-text">A Dynamic Solutions revolucionou minha presença digital. Meu faturamento triplicou em apenas 3 meses!</p>
-                            <div class="testimonial-author">
-                                <p class="author-name">Maria Silva</p>
-                                <p class="author-title">Influenciadora Digital</p>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-block" data-aos="fade-up" data-aos-delay="200">
-                            <div class="quote-mark">"</div>
-                            <p class="testimonial-text">A mentoria de vendas foi um divisor de águas para meu negócio! Consegui resultados incríveis com as estratégias de whatsapp!</p>
-                            <div class="testimonial-author">
-                                <p class="author-name">João Paulo</p>
-                                <p class="author-title">Empreendedor</p>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-block testimonial-enhanced" data-aos="fade-up" data-aos-delay="400">
-                            <div class="testimonial-badge-secondary">CRESCIMENTO ACELERADO</div>
-                            <div class="testimonial-profile-enhanced">
-                                <div class="profile-image-container-enhanced">
-                                    <img src="https://s3.wasabisys.com/instax/74/instax/2023/03/fotos-fofas-para-perfil-1678633942-scaled.jpeg" alt="Fernanda Lima" class="testimonial-avatar-enhanced" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'avatar-fallback-enhanced\'>FL</div>';">
-                                    <div class="growth-indicator">📈</div>
-                                </div>
-                                <div class="profile-info-enhanced">
-                                    <p class="author-name-enhanced">Fernanda Lima</p>
-                                    <p class="author-company-enhanced">Gerente de Marketing • Beauty+</p>
-                                    <div class="achievement-badge">💎 Top Performer 2024</div>
-                                </div>
-                            </div>
-                            <div class="quote-mark-enhanced">"</div>
-                            <p class="testimonial-text-enhanced">
-                                A Dynamic Solutions não apenas <strong>superou minhas expectativas</strong> - eles revolucionaram nossa abordagem digital. 
-                                <span class="highlight-result">Aumentamos o engajamento em 340%</span> e nossa marca se tornou referência no segmento. 
-                                <em>A metodologia deles é simplesmente transformadora!</em>
-                            </p>
-                            <div class="testimonial-metrics-enhanced">
-                                <div class="metric-compact">
-                                    <span class="metric-number-compact">340%</span>
-                                    <span class="metric-label-compact">Engajamento</span>
-                                </div>
-                                <div class="metric-compact">
-                                    <span class="metric-number-compact">6</span>
-                                    <span class="metric-label-compact">Meses</span>
-                                </div>
-                            </div>
-                            <div class="testimonial-footer-enhanced">
-                                <span class="date-stamp-enhanced">✨ Novembro 2024</span>
-                                <div class="rating-stars">⭐⭐⭐⭐⭐</div>
-                            </div>
-                        </div>
-
-                        <!-- NOVO DEPOIMENTO DISRUPTIVO E AUTÊNTICO -->
-                        <div class="testimonial-block testimonial-premium" data-aos="fade-up" data-aos-delay="600">
-                            <div class="testimonial-badge">CASE DESTAQUE</div>
-                            <div class="testimonial-profile">
-                                <div class="profile-image-container">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwr_zZjgvmu4BccwDNIHic8K5dyehw7cSYA&s" alt="Ricardo Mendes" class="testimonial-avatar" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'avatar-fallback\'>RM</div>';">
-                                    <div class="verification-badge">✓</div>
-                                </div>
-                                <div class="profile-info">
-                                    <p class="author-name-premium">Ricardo Mendes</p>
-                                    <p class="author-company">CEO • TechFlow</p>
-                                    <div class="social-proof">
-                                        <span class="linkedin-badge">🔗 LinkedIn Verificado</span>
-                                        <span class="result-metric">+847% ROI</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="quote-mark-premium">"</div>
-                            <p class="testimonial-text-premium">
-                                <strong>Estava cético sobre consultorias digitais</strong> até conhecer a Dynamic Solutions. Em 4 meses, 
-                                <span class="highlight-metric">saímos de R$ 45K para R$ 380K mensais</span>. 
-                                O diferencial foi a <em>implementação prática</em> - não só teoria. 
-                                <strong>Minha empresa hoje é referência no setor</strong> graças às estratégias neurais de vendas.
-                            </p>
-                            <div class="testimonial-metrics">
-                                <div class="metric-item">
-                                    <span class="metric-number">847%</span>
-                                    <span class="metric-label">ROI</span>
-                                </div>
-                                <div class="metric-item">
-                                    <span class="metric-number">4</span>
-                                    <span class="metric-label">Meses</span>
-                                </div>
-                                <div class="metric-item">
-                                    <span class="metric-number">380K</span>
-                                    <span class="metric-label">Faturamento</span>
-                                </div>
-                            </div>
-                            <div class="testimonial-footer-single">
-                                <span class="date-stamp">Depoimento verificado • Dezembro 2024</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- CTA Final -->
-                    <div class="cta-section" id="cta-final" data-aos="fade-up">
-                        <h3>Pronto para Transformar seu Negócio?</h3>
-                        <p>Junte-se aos cases de sucesso da Dynamic Solutions</p>
-                        <a href="https://wa.me/5532999735469?text=Ol%C3%A1!%20Acabei%20de%20ver%20seu%20portf%C3%B3lio%20e%20fiquei%20muito%20interessado%20no%20seu%20trabalho.%20Podemos%20conversar%20sobre%20uma%20poss%C3%ADvel%20colabora%C3%A7%C3%A3o%3F" class="neural-cta neural-cta-primary clickable-area">
-                            <i class="fas fa-rocket neural-cta-icon"></i>
-                            <span class="neural-cta-text">Iniciar Transformação Digital</span>
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </div>
 
     <!-- ========== SEÇÃO PREMIUM DO CURRÍCULO ========== -->
@@ -432,170 +331,41 @@
                 </div>
             </section>
 
-            <!-- Arsenal de Dominação Digital - Sistema Cyberpunk Elite -->
+            <!-- Skills Section Premium -->
             <section class="section skills" id="skills">
                 <div class="container">
-                    <h2 class="section-title">Arsenal de Dominação Digital</h2>
-                    
-                    <!-- Arsenal Central de Comando -->
+                    <h2 class="section-title">Especialidades Core</h2>
                     <div class="skills-grid">
-                        
-                        <!-- Arma 1 - Disruptor de Mercado -->
                         <div class="skill-card">
-                            <div class="console-header">
-                                <div class="skill-icon">⚔️</div>
-                                <h3 class="skill-title">Disruptor de Mercado</h3>
-                                <p class="skill-desc">Arma letal que despedaça paradigmas estabelecidos e reconfigura ecossistemas competitivos através de estratégias de guerra digital.</p>
-                            </div>
-                            <div class="power-metrics">
-                                <div class="metric-item">
-                                    <span>Destruição</span>
-                                    <span class="metric-value">98%</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                                <div class="metric-item">
-                                    <span>Reconfiguração</span>
-                                    <span class="metric-value">500%+</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                                <div class="metric-item">
-                                    <span>Dominância</span>
-                                    <span class="metric-value">TOTAL</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                            </div>
+                            <div class="skill-icon">🎯</div>
+                            <h3 class="skill-title">Gestão de Crise</h3>
+                            <p class="skill-desc">Transformação de cenários críticos em oportunidades de crescimento sustentável através de estratégias inovadoras.</p>
                         </div>
-
-                        <!-- Arma 2 - IA Estratégica -->
                         <div class="skill-card">
-                            <div class="console-header">
-                                <div class="skill-icon">🧠</div>
-                                <h3 class="skill-title">IA Estratégica</h3>
-                                <p class="skill-desc">Superinteligência sintética que processa trilhões de variáveis para gerar decisões de precisão cirúrgica e dominação total.</p>
-                            </div>
-                            <div class="power-metrics">
-                                <div class="metric-item">
-                                    <span>Precisão</span>
-                                    <span class="metric-value">94%</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                                <div class="metric-item">
-                                    <span>Velocidade</span>
-                                    <span class="metric-value">LIGHT</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                                <div class="metric-item">
-                                    <span>Inteligência</span>
-                                    <span class="metric-value">∞</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                            </div>
+                            <div class="skill-icon">🚀</div>
+                            <h3 class="skill-title">Inovação Operacional</h3>
+                            <p class="skill-desc">Redesign de processos que geram impacto exponencial nos resultados organizacionais.</p>
                         </div>
-
-                        <!-- Arma 3 - Hackeador de Psicologia -->
                         <div class="skill-card">
-                            <div class="console-header">
-                                <div class="skill-icon">🔮</div>
-                                <h3 class="skill-title">Hackeador de Psicologia</h3>
-                                <p class="skill-desc">Penetra nas camadas mais profundas da psique humana para hackear motivações e reconfigurar comportamentos em massa.</p>
-                            </div>
-                            <div class="power-metrics">
-                                <div class="metric-item">
-                                    <span>Penetração</span>
-                                    <span class="metric-value">96%</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                                <div class="metric-item">
-                                    <span>Controle Mental</span>
-                                    <span class="metric-value">DEEP</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                                <div class="metric-item">
-                                    <span>Influência</span>
-                                    <span class="metric-value">MASS</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                            </div>
+                            <div class="skill-icon">🤖</div>
+                            <h3 class="skill-title">IA & Automação</h3>
+                            <p class="skill-desc">Implementação estratégica de tecnologias emergentes para otimização de negócios.</p>
                         </div>
-
-                        <!-- Arma 4 - Manipulador de Dados -->
                         <div class="skill-card">
-                            <div class="console-header">
-                                <div class="skill-icon">🔮</div>
-                                <h3 class="skill-title">Manipulador de Dados</h3>
-                                <p class="skill-desc">Esculpe realidades através da alquimia digital, transformando dados brutos em ouro líquido que flui como poder absoluto.</p>
-                            </div>
-                            <div class="power-metrics">
-                                <div class="metric-item">
-                                    <span>Transmutação</span>
-                                    <span class="metric-value">92%</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                                <div class="metric-item">
-                                    <span>Alquimia Digital</span>
-                                    <span class="metric-value">GOLD</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                                <div class="metric-item">
-                                    <span>Refinamento</span>
-                                    <span class="metric-value">PURE</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                            </div>
+                            <div class="skill-icon">👥</div>
+                            <h3 class="skill-title">Liderança Transformacional</h3>
+                            <p class="skill-desc">Desenvolvimento de equipes de alta performance em ambientes complexos e desafiadores.</p>
                         </div>
-
-                        <!-- Arma 5 - Controlador de Automatização -->
                         <div class="skill-card">
-                            <div class="console-header">
-                                <div class="skill-icon">🤖</div>
-                                <h3 class="skill-title">Controlador de Automatização</h3>
-                                <p class="skill-desc">Comanda legions de autômatos digitais que executam tarefas com precisão inumana enquanto você domina territórios superiores.</p>
-                            </div>
-                            <div class="power-metrics">
-                                <div class="metric-item">
-                                    <span>Comando</span>
-                                    <span class="metric-value">90%</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                                <div class="metric-item">
-                                    <span>Legions</span>
-                                    <span class="metric-value">1000+</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                                <div class="metric-item">
-                                    <span>Autonomia</span>
-                                    <span class="metric-value">MAX</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                            </div>
+                            <div class="skill-icon">📊</div>
+                            <h3 class="skill-title">Grandes Contas</h3>
+                            <p class="skill-desc">Interface estratégica com corporações e projetos de alto valor agregado.</p>
                         </div>
-
-                        <!-- Arma 6 - Orquestrador de Transformação -->
                         <div class="skill-card">
-                            <div class="console-header">
-                                <div class="skill-icon">🌌</div>
-                                <h3 class="skill-title">Orquestrador de Transformação</h3>
-                                <p class="skill-desc">A arma definitiva que reconstrói realidades empresariais do zero, criando novos universos onde apenas os fortes sobrevivem.</p>
-                            </div>
-                            <div class="power-metrics">
-                                <div class="metric-item">
-                                    <span>Reconstrução</span>
-                                    <span class="metric-value">99%</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                                <div class="metric-item">
-                                    <span>Criação Universal</span>
-                                    <span class="metric-value">GOD</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                                <div class="metric-item">
-                                    <span>Evolução</span>
-                                    <span class="metric-value">∞</span>
-                                    <div class="metric-bar"></div>
-                                </div>
-                            </div>
+                            <div class="skill-icon">⚡</div>
+                            <h3 class="skill-title">Implementação Ágil</h3>
+                            <p class="skill-desc">Execução rápida e eficaz de mudanças organizacionais complexas.</p>
                         </div>
-
                     </div>
                 </div>
             </section>
