@@ -705,11 +705,11 @@
             <div class="flex items-center justify-between">
                 <!-- Logo à esquerda -->
                 <div class="flex items-center space-x-6">
-                    <img src="https://github.com/dynamicsolutions-lab/Dynamiclab.github.io/blob/main/img/freepik__a-luxurious-logo-for-dynamic-solutions-featuring-a__98836.png?raw=true" 
-                         alt="DYN Clients" 
+                    <img src="https://lh3.googleusercontent.com/d/1gDxf9LBiRNpSXbLG9IcPIp4H5lei1bNC?authuser=0" 
+                         alt="Malbs Clients" 
                          class="logo-container object-contain animate-float">
                     <div class="text-left">
-                        <h1 class="text-3xl font-luxury font-bold luxury-text">DASHBOARD</h1>
+                        <h1 class="text-3xl font-luxury font-bold luxury-text">Malbs Clients</h1>
                         <p class="text-sm text-gray-400 font-medium uppercase tracking-wider">Gerenciamento de Relatórios Automatizados</p>
                     </div>
                 </div>
@@ -1334,6 +1334,32 @@
         let frequencyChart = null;
         let daysChart = null;
 
+        // =================== PROXY WEBHOOK FUNCTION ===================
+        async function loadDashboardData() {
+            try {
+                console.log('Chamando webhook original...');
+                const response = await fetch('https://webhook.autodynamic.tech/webhook/relatorios-meta-GA');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const htmlContent = await response.text();
+                console.log('Webhook respondeu com sucesso');
+                
+                // Você pode processar o HTML aqui se necessário
+                // Por exemplo, extrair dados específicos
+                return htmlContent;
+                
+            } catch (error) {
+                console.error('Erro ao chamar webhook original:', error);
+                console.log('Fallback: usando dados do Supabase direto');
+                
+                // Fallback para carregar dados diretamente do Supabase
+                return await loadClients();
+            }
+        }
+
         // Templates de mensagens
         const templates = {
             meta: `💰 *Investimento Total:* {total_investido}
@@ -1389,6 +1415,11 @@
         // =================== LOAD CLIENTS ===================
         async function loadClients() {
             try {
+                // PRIMEIRO: Tenta chamar o webhook original
+                console.log('Tentando carregar via webhook...');
+                await loadDashboardData();
+                
+                // DEPOIS: Carrega dados do Supabase para a interface
                 if (!supabase) {
                     console.warn('Supabase não configurado. Usando dados de exemplo.');
                     clients = [
@@ -2185,6 +2216,10 @@
 
         async function refreshData() {
             try {
+                // Chama o webhook primeiro para ativar automações se necessário
+                await loadDashboardData();
+                
+                // Depois atualiza a interface
                 await loadClients();
                 updateKPIs();
                 updateCharts();
