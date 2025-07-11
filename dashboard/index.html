@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malbs Clients - Dashboard Executivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#00ff88',
+                        'primary-dark': '#00cc6a',
+                        'secondary': '#0a0a0a',
+                        'dark': '#111111',
+                        'darker': '#000000',
+                        'gray-custom': '#1a1a1a',
+                        'gray-light': '#2a2a2a',
+                        'neon-green': '#00ff88',
+                        'neon-blue': '#00d4ff',
+                        'neon-purple': '#b847ff',
+                    },
+                    backgroundImage: {
+                        'luxury-gradient': 'linear-gradient(135deg, #000000 0%, #111111 50%, #1a1a1a 100%)',
+                        'neon-gradient': 'linear-gradient(135deg, #00ff88 0%, #00d4ff 100%)',
+                        'card-gradient': 'linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(17, 17, 17, 0.95) 100%)',
+                        'hero-pattern': 'radial-gradient(circle at 25% 25%, rgba(0, 255, 136, 0.05) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(0, 212, 255, 0.05) 0%, transparent 50%)',
+                    },
+                    animation: {
+                        'neon-pulse': 'neonPulse 2s ease-in-out infinite alternate',
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        neonPulse: {
+                            '0%': { boxShadow: '0 0 5px rgba(0, 255, 136, 0.5), 0 0 20px rgba(0, 255, 136, 0.2)' },
+                            '100%': { boxShadow: '0 0 20px rgba(0, 255, 136, 0.8), 0 0 40px rgba(0, 255, 136, 0.4)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 10px rgba(0, 255, 136, 0.3)' },
+                            '100%': { boxShadow: '0 0 30px rgba(0, 255, 136, 0.6)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                    },
+                    fontFamily: {
+                        'luxury': ['Playfair Display', 'serif'],
+                        'modern': ['Inter', 'system-ui', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(0, 255, 136, 0.5)',
+                        'neon-strong': '0 0 40px rgba(0, 255, 136, 0.8)',
+                        'luxury': '0 8px 32px rgba(0, 0, 0, 0.4)',
+                        'luxury-hover': '0 12px 48px rgba(0, 0, 0, 0.6)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #00ff88 #1a1a1a;
+        }
+        
+        *::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        *::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 4px;
+        }
+        
+        *::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            border-radius: 4px;
+        }
+        
+        *::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000000;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(184, 71, 255, 0.05) 0%, transparent 50%);
+            min-height: 100vh;
+            color: #ffffff;
+        }
+        
+        .luxury-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(17, 17, 17, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .luxury-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, transparent 50%, rgba(0, 212, 255, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .luxury-card:hover::before {
+            opacity: 1;
+        }
+        
+        .luxury-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            border-color: rgba(0, 255, 136, 0.4);
+        }
+        
+        .metric-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--neon-gradient);
+            animation: neonPulse 2s ease-in-out infinite alternate;
+        }
+        
+        .metric-primary::after {
+            --neon-gradient: linear-gradient(90deg, #00ff88, #00d4ff);
+        }
+        
+        .metric-success::after {
+            --neon-gradient: linear-gradient(90deg, #00ff88, #00cc6a);
+        }
+        
+        .metric-warning::after {
+            --neon-gradient: linear-gradient(90deg, #00d4ff, #b847ff);
+        }
+        
+        .metric-info::after {
+            --neon-gradient: linear-gradient(90deg, #b847ff, #00ff88);
+        }
+        
+        .loading-spinner {
+            border: 3px solid rgba(0, 255, 136, 0.2);
+            border-top: 3px solid #00ff88;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 32px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            transition: .4s;
+            border-radius: 32px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 24px;
+            width: 24px;
+            left: 4px;
+            bottom: 3px;
+            background: linear-gradient(135deg, #ffffff, #e0e0e0);
+            transition: .4s;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        input:checked + .slider {
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            border-color: #00ff88;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(28px);
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+        }
+        
+        input:disabled + .slider {
+            background: #333333;
+            cursor: not-allowed;
+            border-color: #555555;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            color: #000000;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 255, 136, 0.5);
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: rgba(42, 42, 42, 0.8);
+            color: #ffffff;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: #00ff88;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.2);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #000000;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 255, 136, 0.5);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #ff4757, #ff3838);
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 71, 87, 0.3);
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 71, 87, 0.5);
+        }
+        
+        .dropdown {
+            display: none;
+            background: rgba(26, 26, 26, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+        
+        .dropdown.show {
+            display: block;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            min-width: 320px;
+            padding: 20px;
+            border-radius: 16px;
+            color: white;
+            font-weight: 600;
+            transform: translateX(400px);
+            transition: transform 0.4s ease-in-out;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.9), rgba(0, 204, 106, 0.9));
+            box-shadow: 0 8px 32px rgba(0, 255, 136, 0.3);
+        }
+
+        .toast.error {
+            background: linear-gradient(135deg, rgba(255, 71, 87, 0.9), rgba(255, 56, 56, 0.9));
+            box-shadow: 0 8px 32px rgba(255, 71, 87, 0.3);
+        }
+
+        .toast .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+            border-radius: 0 0 16px 16px;
+            animation: progress 4s linear;
+        }
+
+        @keyframes progress {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+
+        .modal {
+            display: none;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.show {
+            display: flex;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(17, 17, 17, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            border: 2px solid rgba(0, 255, 136, 0.2);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(26, 26, 26, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .checkbox-item:hover {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .checkbox-item.selected {
+            border-color: #00ff88;
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            color: #000000;
+            box-shadow: 0 8px 24px rgba(0, 255, 136, 0.3);
+            font-weight: 700;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        
+        .luxury-text {
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .number-display {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, #ffffff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Inter', sans-serif;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        .header-bg {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(17, 17, 17, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        
+        .table-header {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(17, 17, 17, 0.95));
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        
+        .table-row {
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .table-row:hover {
+            background: rgba(0, 255, 136, 0.05);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.1);
+            border-bottom-color: rgba(0, 255, 136, 0.3);
+        }
+        
+        .icon-wrapper {
+            background: linear-gradient(135deg, var(--bg-from), var(--bg-to));
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .icon-primary {
+            --bg-from: rgba(0, 255, 136, 0.2);
+            --bg-to: rgba(0, 212, 255, 0.2);
+        }
+        
+        .icon-success {
+            --bg-from: rgba(0, 255, 136, 0.2);
+            --bg-to: rgba(0, 204, 106, 0.2);
+        }
+        
+        .icon-warning {
+            --bg-from: rgba(0, 212, 255, 0.2);
+            --bg-to: rgba(184, 71, 255, 0.2);
+        }
+        
+        .icon-info {
+            --bg-from: rgba(184, 71, 255, 0.2);
+            --bg-to: rgba(0, 255, 136, 0.2);
+        }
+        
+        .search-input {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 16px;
+            padding: 16px 20px;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            background: rgba(26, 26, 26, 0.95);
+            border-color: #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+            outline: none;
+        }
+        
+        .search-input::placeholder {
+            color: #888888;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 212, 255, 0.2));
+            color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .animate-in {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        .luxury-input {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 16px;
+            padding: 16px 20px;
+            color: #ffffff;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .luxury-input:focus {
+            background: rgba(26, 26, 26, 0.95);
+            border-color: #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+            outline: none;
+        }
+        
+        .luxury-input::placeholder {
+            color: #888888;
+        }
+        
+        .luxury-select {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 16px;
+            padding: 16px 20px;
+            color: #ffffff;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .luxury-select:focus {
+            background: rgba(26, 26, 26, 0.95);
+            border-color: #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+            outline: none;
+        }
+        
+        .luxury-select option {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+        
+        .luxury-textarea {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            color: #ffffff;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            resize: none;
+        }
+        
+        .luxury-textarea:focus {
+            background: rgba(26, 26, 26, 0.95);
+            border-color: #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+            outline: none;
+        }
+        
+        .luxury-textarea::placeholder {
+            color: #888888;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(17, 17, 17, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+            padding: 32px 0;
+            margin-top: 64px;
+        }
+        
+        .main-container {
+            min-height: calc(100vh - 200px);
+            padding-bottom: 32px;
+        }
+        
+        .logo-container {
+            max-width: 120px;
+            height: auto;
+        }
+        
+        .platform-tab {
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        
+        .platform-tab.active {
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            color: #000000;
+            border-color: #00ff88;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        .platform-tab:not(.active) {
+            background: rgba(26, 26, 26, 0.6);
+            color: #ffffff;
+        }
+        
+        .platform-tab:not(.active):hover {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: #00ff88;
+        }
+        
+        .tag-button {
+            text-align: left;
+            padding: 16px;
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-button:hover {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .tag-code {
+            color: #00ff88;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+        
+        .tag-description {
+            color: #888888;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header -->
+    <header class="header-bg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-8 py-6">
+            <div class="flex items-center justify-between">
+                <!-- Logo à esquerda -->
+                <div class="flex items-center space-x-6">
+                    <img src="https://github.com/dynamicsolutions-lab/Dynamiclab.github.io/blob/main/img/freepik__a-luxurious-logo-for-dynamic-solutions-featuring-a__98836.png?raw=true" 
+                         alt="DYN Clients" 
+                         class="logo-container object-contain animate-float">
+                    <div class="text-left">
+                        <h1 class="text-3xl font-luxury font-bold luxury-text">DASHBOARD</h1>
+                        <p class="text-sm text-gray-400 font-medium uppercase tracking-wider">Gerenciamento de Relatórios Automatizados</p>
+                    </div>
+                </div>
+                
+                <!-- Navigation Actions à direita -->
+                <div class="flex items-center space-x-4">
+                    <div class="text-right luxury-card px-6 py-4">
+                        <p class="text-sm font-semibold text-white" id="current-date"></p>
+                        <p class="text-xs text-gray-400">Última atualização: <span id="last-update">--:--</span></p>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3">
+                        <button onclick="refreshData()" class="btn-secondary flex items-center px-6 py-3">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                            </svg>
+                            Sincronizar
+                        </button>
+                        
+                        <button onclick="openModal('add')" class="btn-primary flex items-center px-6 py-3">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            Novo Cliente
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="max-w-7xl mx-auto px-8 py-12">
+            
+            <!-- KPI Section -->
+            <section class="mb-16">
+                <div class="mb-12 text-center">
+                    <h2 class="text-4xl font-luxury font-bold luxury-text mb-4">Visão Geral</h2>
+                    <p class="text-xl text-gray-400 font-medium">Métricas consolidadas em tempo real</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Total Clientes -->
+                    <div class="luxury-card metric-card metric-primary p-8 animate-in">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wider">Total de Clientes</p>
+                                <p class="number-display" id="total-clients">0</p>
+                                <div class="flex items-center mt-4">
+                                    <span class="text-xs text-gray-500 font-medium">Ativos no sistema</span>
+                                </div>
+                            </div>
+                            <div class="icon-wrapper icon-primary">
+                                <svg class="w-8 h-8 text-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campanhas Meta -->
+                    <div class="luxury-card metric-card metric-success p-8 animate-in" style="animation-delay: 0.1s;">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wider">Campanhas Meta</p>
+                                <p class="number-display" id="meta-campaigns">0</p>
+                                <div class="flex items-center mt-4">
+                                    <span class="text-xs text-neon-green font-semibold" id="meta-active">0 ativas</span>
+                                </div>
+                            </div>
+                            <div class="icon-wrapper icon-success">
+                                <svg class="w-8 h-8 text-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campanhas Google -->
+                    <div class="luxury-card metric-card metric-warning p-8 animate-in" style="animation-delay: 0.2s;">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wider">Campanhas Google</p>
+                                <p class="number-display" id="google-campaigns">0</p>
+                                <div class="flex items-center mt-4">
+                                    <span class="text-xs text-neon-blue font-semibold" id="google-active">0 ativas</span>
+                                </div>
+                            </div>
+                            <div class="icon-wrapper icon-warning">
+                                <svg class="w-8 h-8 text-neon-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Saldo Meta -->
+                    <div class="luxury-card metric-card metric-info p-8 animate-in" style="animation-delay: 0.3s;">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wider">Saldo Meta</p>
+                                <p class="number-display" id="saldo-meta">0</p>
+                                <div class="flex items-center mt-4">
+                                    <span class="text-xs text-neon-purple font-semibold" id="saldo-active">0 ativas</span>
+                                </div>
+                            </div>
+                            <div class="icon-wrapper icon-info">
+                                <svg class="w-8 h-8 text-neon-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="mb-16">
+                <div class="mb-12 text-center">
+                    <h2 class="text-4xl font-luxury font-bold luxury-text mb-4">Analytics</h2>
+                    <p class="text-xl text-gray-400 font-medium">Distribuição e análise de configurações</p>
+                </div>
+                
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                    <!-- Frequency Chart -->
+                    <div class="luxury-card p-10 animate-in">
+                        <div class="mb-8">
+                            <h3 class="text-2xl font-luxury font-bold text-white mb-2">Período de Relatórios</h3>
+                            <p class="text-gray-400 font-medium">Distribuição por periodicidade configurada</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="frequencyChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Days Chart -->
+                    <div class="luxury-card p-10 animate-in" style="animation-delay: 0.1s;">
+                        <div class="mb-8">
+                            <h3 class="text-2xl font-luxury font-bold text-white mb-2">Frequência de Envio</h3>
+                            <p class="text-gray-400 font-medium">Distribuição por dia da semana</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="daysChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Clients Management Section -->
+            <section>
+                <div class="mb-12 text-center">
+                    <h2 class="text-4xl font-luxury font-bold luxury-text mb-4">Gerenciamento de Clientes</h2>
+                    <p class="text-xl text-gray-400 font-medium">Controle completo das configurações e relatórios</p>
+                </div>
+                
+                <div class="luxury-card overflow-hidden">
+                    <!-- Search and Add Button -->
+                    <div class="px-6 py-6 table-header">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-6 sm:space-y-0">
+                            <div class="relative flex-1 max-w-md">
+                                <input 
+                                    type="text" 
+                                    id="search-input"
+                                    placeholder="Pesquisar cliente pelo nome..." 
+                                    class="search-input w-full"
+                                >
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="status-badge" id="clients-count">0 clientes</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Clients Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full min-w-[1200px]">
+                            <thead>
+                                <tr class="table-header">
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Cliente</th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Contato</th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Telefone</th>
+                                    <th class="px-6 py-4 text-center text-xs font-bold text-gray-300 uppercase tracking-wider">Campanhas Meta</th>
+                                    <th class="px-6 py-4 text-center text-xs font-bold text-gray-300 uppercase tracking-wider">Saldo Meta</th>
+                                    <th class="px-6 py-4 text-center text-xs font-bold text-gray-300 uppercase tracking-wider">Campanhas Google</th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Frequência</th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Período</th>
+                                    <th class="px-6 py-4 text-center text-xs font-bold text-gray-300 uppercase tracking-wider">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clients-table" class="divide-y divide-gray-800">
+                                <tr class="table-row">
+                                    <td colspan="9" class="px-6 py-16 text-center text-gray-400">
+                                        <div class="flex flex-col items-center">
+                                            <div class="loading-spinner mb-6"></div>
+                                            <p class="text-xl font-medium">Carregando clientes...</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center">
+                <p class="text-gray-400 font-medium">
+                    © 2025 
+                    <span class="luxury-text font-bold">Malbs Clients</span> 
+                    - Sistema de Automação de Relatórios
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Add/Edit Client -->
+    <div id="client-modal" class="modal fixed inset-0 items-center justify-center z-50">
+        <div class="modal-content p-10 w-full max-w-3xl max-h-[90vh] overflow-y-auto m-4">
+            <div class="flex justify-between items-center mb-10">
+                <h2 id="modal-title" class="text-3xl font-luxury font-bold luxury-text">Adicionar Cliente</h2>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <form id="client-form" class="space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-300 mb-3 uppercase tracking-wider">Nome *</label>
+                        <input type="text" id="nome" required class="luxury-input w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-300 mb-3 uppercase tracking-wider">E-mail *</label>
+                        <input type="email" id="email" required class="luxury-input w-full">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-300 mb-3 uppercase tracking-wider">Telefone *</label>
+                    <input type="tel" id="telefone" required class="luxury-input w-full">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-300 mb-3 uppercase tracking-wider">Conta Anúncio Meta</label>
+                        <input type="text" id="conta_anuncio_meta" class="luxury-input w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-300 mb-3 uppercase tracking-wider">Conta Anúncio Google</label>
+                        <input type="text" id="conta_anuncio_google" class="luxury-input w-full">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-300 mb-4 uppercase tracking-wider">Frequência * (selecione os dias da semana)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item" data-day="1">
+                            <span class="text-sm font-bold">SEG</span>
+                        </div>
+                        <div class="checkbox-item" data-day="2">
+                            <span class="text-sm font-bold">TER</span>
+                        </div>
+                        <div class="checkbox-item" data-day="3">
+                            <span class="text-sm font-bold">QUA</span>
+                        </div>
+                        <div class="checkbox-item" data-day="4">
+                            <span class="text-sm font-bold">QUI</span>
+                        </div>
+                        <div class="checkbox-item" data-day="5">
+                            <span class="text-sm font-bold">SEX</span>
+                        </div>
+                        <div class="checkbox-item" data-day="6">
+                            <span class="text-sm font-bold">SÁB</span>
+                        </div>
+                        <div class="checkbox-item" data-day="0">
+                            <span class="text-sm font-bold">DOM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-300 mb-3 uppercase tracking-wider">Período do Relatório *</label>
+                    <select id="quantidade_dias_relatorio" required class="luxury-select w-full">
+                        <option value="">Selecione...</option>
+                        <option value="1">1 dia</option>
+                        <option value="7">7 dias</option>
+                        <option value="15">15 dias</option>
+                        <option value="30">30 dias</option>
+                    </select>
+                </div>
+
+                <div class="border-t border-gray-700 pt-8">
+                    <h3 class="text-2xl font-luxury font-bold text-white mb-8">Configurações de Relatórios</h3>
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-300 mb-6 uppercase tracking-wider">Relatórios Meta</h4>
+                            <div class="space-y-6">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-base font-medium text-gray-300">Campanhas Meta</span>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="campanha_meta" disabled>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-base font-medium text-gray-300">Saldo Meta</span>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="saldo_meta" disabled>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-300 mb-6 uppercase tracking-wider">Relatórios Google</h4>
+                            <div class="flex items-center justify-between">
+                                <span class="text-base font-medium text-gray-300">Campanhas Google</span>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="campanha_google" disabled>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-4 pt-8">
+                    <button type="button" onclick="closeModal()" class="btn-secondary">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        <span id="submit-text">Salvar Cliente</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Configuration Modal -->
+    <div id="config-modal" class="modal fixed inset-0 items-center justify-center z-50">
+        <div class="modal-content p-10 w-full max-w-7xl max-h-[90vh] overflow-y-auto m-4">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-3xl font-luxury font-bold luxury-text">Configuração de Mensagens</h2>
+                <button onclick="closeConfigModal()" class="text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Platform Selector -->
+            <div class="mb-10">
+                <div class="flex space-x-4 bg-gray-900 bg-opacity-50 p-3 rounded-2xl">
+                    <button id="meta-tab" onclick="switchPlatform('meta')" class="platform-tab active">
+                        Meta (Facebook/Instagram)
+                    </button>
+                    <button id="google-tab" onclick="switchPlatform('google')" class="platform-tab">
+                        Google Ads
+                    </button>
+                </div>
+            </div>
+
+            <!-- Meta Configuration -->
+            <div id="meta-config" class="platform-config">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <!-- Tags Panel -->
+                    <div class="luxury-card p-8">
+                        <h3 class="text-2xl font-luxury font-bold text-white mb-8">Tags Disponíveis - Meta</h3>
+                        <div class="space-y-4 max-h-80 overflow-y-auto">
+                            <div class="grid grid-cols-1 gap-4">
+                                <button onclick="insertTag('meta', '{total_investido}')" class="tag-button">
+                                    <span class="tag-code text-base">{total_investido}</span>
+                                    <span class="tag-description block mt-2">Total investido</span>
+                                </button>
+                                <button onclick="insertTag('meta', '{impressoes}')" class="tag-button">
+                                    <span class="tag-code text-base">{impressoes}</span>
+                                    <span class="tag-description block mt-2">Impressões</span>
+                                </button>
+                                <button onclick="insertTag('meta', '{alcance}')" class="tag-button">
+                                    <span class="tag-code text-base">{alcance}</span>
+                                    <span class="tag-description block mt-2">Alcance</span>
+                                </button>
+                                <button onclick="insertTag('meta', '{ctr}')" class="tag-button">
+                                    <span class="tag-code text-base">{ctr}</span>
+                                    <span class="tag-description block mt-2">CTR</span>
+                                </button>
+                                <button onclick="insertTag('meta', '{cpm}')" class="tag-button">
+                                    <span class="tag-code text-base">{cpm}</span>
+                                    <span class="tag-description block mt-2">CPM</span>
+                                </button>
+                                <button onclick="insertTag('meta', '{clique_link}')" class="tag-button">
+                                    <span class="tag-code text-base">{clique_link}</span>
+                                    <span class="tag-description block mt-2">Cliques no link</span>
+                                </button>
+                                <button onclick="insertTag('meta', '{cpc}')" class="tag-button">
+                                    <span class="tag-code text-base">{cpc}</span>
+                                    <span class="tag-description block mt-2">CPC</span>
+                                </button>
+                                <button onclick="insertTag('meta', '{conversa_whatsapp}')" class="tag-button">
+                                    <span class="tag-code text-base">{conversa_whatsapp}</span>
+                                    <span class="tag-description block mt-2">Conversas no WhatsApp</span>
+                                </button>
+                                <button onclick="insertTag('meta', '{custo_conversa}')" class="tag-button">
+                                    <span class="tag-code text-base">{custo_conversa}</span>
+                                    <span class="tag-description block mt-2">Custo por Conversa no WhatsApp</span>
+                                </button>
+                                <button onclick="insertTag('meta', '{leads}')" class="tag-button">
+                                    <span class="tag-code text-base">{leads}</span>
+                                    <span class="tag-description block mt-2">Leads</span>
+                                </button>
+                                <button onclick="insertTag('meta', '{custo_leads}')" class="tag-button">
+                                    <span class="tag-code text-base">{custo_leads}</span>
+                                    <span class="tag-description block mt-2">Custo por Leads</span>
+                                </button>
+                                <button onclick="insertTag('meta', '{conversoes}')" class="tag-button">
+                                    <span class="tag-code text-base">{conversoes}</span>
+                                    <span class="tag-description block mt-2">Conversões</span>
+                                </button>
+                                <button onclick="insertTag('meta', '{cpa}')" class="tag-button">
+                                    <span class="tag-code text-base">{cpa}</span>
+                                    <span class="tag-description block mt-2">CPA</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message Editor -->
+                    <div>
+                        <div class="flex items-center justify-between mb-8">
+                            <h3 class="text-2xl font-luxury font-bold text-white">Mensagem para Meta</h3>
+                            <button 
+                                onclick="copyTemplate('meta')" 
+                                class="btn-secondary"
+                            >
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                </svg>
+                                Template
+                            </button>
+                        </div>
+                        <textarea 
+                            id="meta-message"
+                            rows="20"
+                            placeholder="Digite sua mensagem aqui... Use as tags da esquerda para personalizar."
+                            class="luxury-textarea w-full"
+                        ></textarea>
+                        <p class="text-gray-500 mt-4 text-sm">Clique nas tags à esquerda para inseri-las na mensagem</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Configuration -->
+            <div id="google-config" class="platform-config hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <!-- Tags Panel -->
+                    <div class="luxury-card p-8">
+                        <h3 class="text-2xl font-luxury font-bold text-white mb-8">Tags Disponíveis - Google</h3>
+                        <div class="space-y-4 max-h-80 overflow-y-auto">
+                            <div class="grid grid-cols-1 gap-4">
+                                <button onclick="insertTag('google', '{total_investido}')" class="tag-button">
+                                    <span class="tag-code text-base">{total_investido}</span>
+                                    <span class="tag-description block mt-2">Total investido</span>
+                                </button>
+                                <button onclick="insertTag('google', '{impressoes}')" class="tag-button">
+                                    <span class="tag-code text-base">{impressoes}</span>
+                                    <span class="tag-description block mt-2">Impressões</span>
+                                </button>
+                                <button onclick="insertTag('google', '{cliques}')" class="tag-button">
+                                    <span class="tag-code text-base">{cliques}</span>
+                                    <span class="tag-description block mt-2">Cliques</span>
+                                </button>
+                                <button onclick="insertTag('google', '{ctr}')" class="tag-button">
+                                    <span class="tag-code text-base">{ctr}</span>
+                                    <span class="tag-description block mt-2">CTR</span>
+                                </button>
+                                <button onclick="insertTag('google', '{cpc}')" class="tag-button">
+                                    <span class="tag-code text-base">{cpc}</span>
+                                    <span class="tag-description block mt-2">CPC</span>
+                                </button>
+                                <button onclick="insertTag('google', '{conversoes}')" class="tag-button">
+                                    <span class="tag-code text-base">{conversoes}</span>
+                                    <span class="tag-description block mt-2">Conversões</span>
+                                </button>
+                                <button onclick="insertTag('google', '{cpa}')" class="tag-button">
+                                    <span class="tag-code text-base">{cpa}</span>
+                                    <span class="tag-description block mt-2">CPA</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message Editor -->
+                    <div>
+                        <div class="flex items-center justify-between mb-8">
+                            <h3 class="text-2xl font-luxury font-bold text-white">Mensagem para Google</h3>
+                            <button 
+                                onclick="copyTemplate('google')" 
+                                class="btn-secondary"
+                            >
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                </svg>
+                                Template
+                            </button>
+                        </div>
+                        <textarea 
+                            id="google-message"
+                            rows="20"
+                            placeholder="Digite sua mensagem aqui... Use as tags da esquerda para personalizar."
+                            class="luxury-textarea w-full"
+                        ></textarea>
+                        <p class="text-gray-500 mt-4 text-sm">Clique nas tags à esquerda para inseri-las na mensagem</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Save Button -->
+            <div class="flex justify-end mt-10 pt-8 border-t border-gray-700">
+                <button onclick="saveMessages()" class="btn-primary">
+                    Salvar Mensagens
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirm-modal" class="modal fixed inset-0 items-center justify-center z-50">
+        <div class="modal-content p-10 w-full max-w-md m-4">
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-red-900 bg-opacity-20 mb-8">
+                    <svg class="h-10 w-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-luxury font-bold text-white mb-4">Confirmar Exclusão</h3>
+                <p class="text-gray-400 mb-10">Tem certeza que deseja excluir este cliente? Esta ação não pode ser desfeita.</p>
+                <div class="flex justify-center space-x-4">
+                    <button onclick="closeConfirmModal()" class="btn-secondary">
+                        Cancelar
+                    </button>
+                    <button onclick="confirmDelete()" class="btn-danger">
+                        Excluir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unsaved Changes Modal -->
+    <div id="unsaved-modal" class="modal fixed inset-0 items-center justify-center z-50">
+        <div class="modal-content p-10 w-full max-w-md m-4">
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-yellow-900 bg-opacity-20 mb-8">
+                    <svg class="h-10 w-10 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-luxury font-bold text-white mb-4">Alterações não salvas</h3>
+                <p class="text-gray-400 mb-10">Você tem alterações não salvas. Deseja sair sem salvar?</p>
+                <div class="flex justify-center space-x-4">
+                    <button onclick="closeUnsavedModal()" class="btn-secondary">
+                        Cancelar
+                    </button>
+                    <button onclick="discardChanges()" class="btn-danger">
+                        Sair sem Salvar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dropdown Menu -->
+    <div id="dropdown-menu" class="fixed z-50 dropdown py-3">
+        <button onclick="editClient()" class="w-full text-left px-6 py-4 text-sm text-gray-300 hover:bg-gray-800 hover:text-white flex items-center transition-colors">
+            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+            </svg>
+            <span class="font-medium">Editar</span>
+        </button>
+        <button onclick="configureClient()" class="w-full text-left px-6 py-4 text-sm text-gray-300 hover:bg-gray-800 hover:text-white flex items-center transition-colors">
+            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span class="font-medium">Configuração</span>
+        </button>
+        <button onclick="deleteClient()" class="w-full text-left px-6 py-4 text-sm text-red-400 hover:bg-red-900 hover:bg-opacity-20 hover:text-red-300 flex items-center transition-colors">
+            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+            </svg>
+            <span class="font-medium">Excluir</span>
+        </button>
+    </div>
+
+    <script>
+        // =================== CONFIGURAÇÕES DO SUPABASE ===================
+        const SUPABASE_URL = 'https://kvcsoagevszbpvgtwkwy.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2Y3NvYWdldnN6YnB2Z3R3a3d5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIxMTczNzUsImV4cCI6MjA2NzY5MzM3NX0.gfb4baPtzEqG9ibYnYMfvCfoWglboLbvmHfRPnf8iFU';
+        
+        let supabase = null;
+        if (typeof window.supabase !== 'undefined') {
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+
+        // =================== VARIÁVEIS GLOBAIS ===================
+        let clients = [];
+        let currentClient = null;
+        let currentDropdownClient = null;
+        let currentConfigClient = null;
+        let selectedDays = [];
+        let originalMessages = { meta: '', google: '' };
+        let hasUnsavedChanges = false;
+        let frequencyChart = null;
+        let daysChart = null;
+
+        // Templates de mensagens
+        const templates = {
+            meta: `💰 *Investimento Total:* {total_investido}
+👥 *Alcance:* {alcance}
+👁️ *Impressões:* {impressoes}
+🖱️ *Cliques:* {clique_link}
+🎯 *CPC médio:* {cpc}
+📈 *CTR médio:* {ctr}
+💸 *CPM médio:* {cpm}
+📞 *Conversas no WhatsApp:* {conversa_whatsapp}
+💬 *Custo por Conversa:* {custo_conversa}
+📋 *Leads:* {leads}
+💰 *Custo por Lead:* {custo_leads}
+✅ *Conversões:* {conversoes}
+🎯 *CPA:* {cpa}`,
+
+            google: `💰 *Investimento Total:* {total_investido}
+👁️ *Impressões:* {impressoes}
+🖱️ *Cliques:* {cliques}
+📈 *CTR médio:* {ctr}
+🎯 *CPC médio:* {cpc}
+✅ *Conversões:* {conversoes}
+💸 *CPA:* {cpa}`
+        };
+
+        // =================== TOAST NOTIFICATIONS ===================
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        ${type === 'success' 
+                            ? '<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>'
+                            : '<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>'
+                        }
+                    </svg>
+                    <span class="font-medium">${message}</span>
+                </div>
+                <div class="progress-bar"></div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 100);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => document.body.removeChild(toast), 400);
+            }, 4000);
+        }
+
+        // =================== LOAD CLIENTS ===================
+        async function loadClients() {
+            try {
+                if (!supabase) {
+                    console.warn('Supabase não configurado. Usando dados de exemplo.');
+                    clients = [
+                        {
+                            id: 1,
+                            nome: "Adriana Reis",
+                            email: "adriana@gmail.com",
+                            telefone: "(35) 9 9733-3909",
+                            conta_anuncio_meta: "123456789",
+                            conta_anuncio_google: "987654321",
+                            dias_envio: [1, 5],
+                            quantidade_dias_relatorio: 7,
+                            campanha_meta: true,
+                            saldo_meta: true,
+                            campanha_google: false,
+                            mensagem_meta: "",
+                            mensagem_google: ""
+                        },
+                        {
+                            id: 2,
+                            nome: "Carlos Silva",
+                            email: "carlos.silva@email.com",
+                            telefone: "(11) 9 8765-4321",
+                            conta_anuncio_meta: "111222333",
+                            conta_anuncio_google: null,
+                            dias_envio: [1, 3, 5],
+                            quantidade_dias_relatorio: 30,
+                            campanha_meta: true,
+                            saldo_meta: false,
+                            campanha_google: false,
+                            mensagem_meta: "",
+                            mensagem_google: ""
+                        },
+                        {
+                            id: 3,
+                            nome: "Marina Santos",
+                            email: "marina.santos@email.com",
+                            telefone: "(21) 9 7654-3210",
+                            conta_anuncio_meta: "222333444",
+                            conta_anuncio_google: "444555666",
+                            dias_envio: [2, 4, 6],
+                            quantidade_dias_relatorio: 15,
+                            campanha_meta: false,
+                            saldo_meta: true,
+                            campanha_google: true,
+                            mensagem_meta: "",
+                            mensagem_google: ""
+                        },
+                        {
+                            id: 4,
+                            nome: "Roberto Lima",
+                            email: "roberto.lima@email.com",
+                            telefone: "(31) 9 6543-2109",
+                            conta_anuncio_meta: "333444555",
+                            conta_anuncio_google: "555666777",
+                            dias_envio: [0, 3, 6],
+                            quantidade_dias_relatorio: 1,
+                            campanha_meta: true,
+                            saldo_meta: false,
+                            campanha_google: true,
+                            mensagem_meta: "",
+                            mensagem_google: ""
+                        },
+                        {
+                            id: 5,
+                            nome: "Ana Carolina",
+                            email: "ana.carolina@email.com",
+                            telefone: "(47) 9 8765-1234",
+                            conta_anuncio_meta: "444555666",
+                            conta_anuncio_google: null,
+                            dias_envio: [1, 2, 3, 4, 5],
+                            quantidade_dias_relatorio: 7,
+                            campanha_meta: true,
+                            saldo_meta: true,
+                            campanha_google: false,
+                            mensagem_meta: "",
+                            mensagem_google: ""
+                        }
+                    ];
+                    renderClients();
+                    updateKPIs();
+                    updateCharts();
+                    return;
+                }
+
+                const { data, error } = await supabase
+                    .from('clientes')
+                    .select('*')
+                    .order('nome');
+
+                if (error) throw error;
+                
+                clients = data || [];
+                renderClients();
+                updateKPIs();
+                updateCharts();
+            } catch (error) {
+                console.error('Erro ao carregar clientes:', error);
+                showToast('Erro ao carregar clientes', 'error');
+                clients = [];
+                renderClients();
+            }
+        }
+
+        // =================== RENDER CLIENTS ===================
+        function renderClients(clientsToRender = clients) {
+            const tbody = document.getElementById('clients-table');
+            
+            if (clientsToRender.length === 0) {
+                tbody.innerHTML = `
+                    <tr class="table-row">
+                        <td colspan="9" class="px-6 py-16 text-center text-gray-400">
+                            <div class="flex flex-col items-center">
+                                <svg class="w-12 h-12 text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                </svg>
+                                <p class="text-lg font-luxury font-bold">Nenhum cliente encontrado</p>
+                                <p class="text-gray-500 mt-2">Adicione um novo cliente para começar</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = '';
+
+            clientsToRender.forEach((client) => {
+                const diasEnvio = Array.isArray(client.dias_envio) ? client.dias_envio : [];
+                const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+                const diasTexto = diasEnvio.map(dia => diasSemana[dia]).join(', ');
+
+                const row = document.createElement('tr');
+                row.className = 'table-row';
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 h-10 w-10">
+                                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-neon-green to-neon-blue flex items-center justify-center">
+                                    <span class="text-black font-bold text-sm">${client.nome.charAt(0)}</span>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <div class="text-sm font-bold text-white">${client.nome}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">${client.email}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">${client.telefone}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                        <label class="toggle-switch">
+                            <input type="checkbox" ${client.campanha_meta ? 'checked' : ''} 
+                                   ${!client.conta_anuncio_meta ? 'disabled' : ''} 
+                                   onchange="toggleField(${client.id}, 'campanha_meta', this.checked)">
+                            <span class="slider"></span>
+                        </label>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                        <label class="toggle-switch">
+                            <input type="checkbox" ${client.saldo_meta ? 'checked' : ''} 
+                                   ${!client.conta_anuncio_meta ? 'disabled' : ''} 
+                                   onchange="toggleField(${client.id}, 'saldo_meta', this.checked)">
+                            <span class="slider"></span>
+                        </label>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                        <label class="toggle-switch">
+                            <input type="checkbox" ${client.campanha_google ? 'checked' : ''} 
+                                   ${!client.conta_anuncio_google ? 'disabled' : ''} 
+                                   onchange="toggleField(${client.id}, 'campanha_google', this.checked)">
+                            <span class="slider"></span>
+                        </label>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">${diasTexto}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">${client.quantidade_dias_relatorio} dia${client.quantidade_dias_relatorio > 1 ? 's' : ''}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                        <button class="text-gray-400 hover:text-neon-green transition-colors p-2 rounded-lg hover:bg-gray-800" onclick="showDropdown(event, ${client.id})">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"/>
+                            </svg>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // =================== TOGGLE FIELD ===================
+        async function toggleField(clientId, field, value) {
+            try {
+                if (!supabase) {
+                    const clientIndex = clients.findIndex(c => c.id === clientId);
+                    if (clientIndex !== -1) {
+                        clients[clientIndex][field] = value;
+                    }
+                    showToast(`${field.replace('_', ' ')} ${value ? 'ativado' : 'desativado'} com sucesso`);
+                    updateKPIs();
+                    updateCharts();
+                    return;
+                }
+
+                const { error } = await supabase
+                    .from('clientes')
+                    .update({ [field]: value })
+                    .eq('id', clientId);
+
+                if (error) throw error;
+
+                const clientIndex = clients.findIndex(c => c.id === clientId);
+                if (clientIndex !== -1) {
+                    clients[clientIndex][field] = value;
+                }
+
+                showToast(`${field.replace('_', ' ')} ${value ? 'ativado' : 'desativado'} com sucesso`);
+                updateKPIs();
+                updateCharts();
+            } catch (error) {
+                console.error('Erro ao atualizar campo:', error);
+                showToast('Erro ao atualizar configuração', 'error');
+                event.target.checked = !value;
+            }
+        }
+
+        // =================== UPDATE KPIS ===================
+        function updateKPIs() {
+            document.getElementById('total-clients').textContent = clients.length;
+            
+            const metaCampaigns = clients.filter(c => c.campanha_meta).length;
+            document.getElementById('meta-campaigns').textContent = metaCampaigns;
+            document.getElementById('meta-active').textContent = `${metaCampaigns} ativa${metaCampaigns !== 1 ? 's' : ''}`;
+            
+            const googleCampaigns = clients.filter(c => c.campanha_google).length;
+            document.getElementById('google-campaigns').textContent = googleCampaigns;
+            document.getElementById('google-active').textContent = `${googleCampaigns} ativa${googleCampaigns !== 1 ? 's' : ''}`;
+            
+            const saldoMeta = clients.filter(c => c.saldo_meta).length;
+            document.getElementById('saldo-meta').textContent = saldoMeta;
+            document.getElementById('saldo-active').textContent = `${saldoMeta} ativa${saldoMeta !== 1 ? 's' : ''}`;
+            
+            document.getElementById('clients-count').textContent = `${clients.length} cliente${clients.length !== 1 ? 's' : ''}`;
+        }
+
+        // =================== MODAL FUNCTIONS ===================
+        function openModal(mode, client = null) {
+            currentClient = client;
+            const modal = document.getElementById('client-modal');
+            const title = document.getElementById('modal-title');
+            const submitText = document.getElementById('submit-text');
+
+            if (mode === 'add') {
+                title.textContent = 'Adicionar Cliente';
+                submitText.textContent = 'Salvar Cliente';
+                resetForm();
+            } else {
+                title.textContent = 'Editar Cliente';
+                submitText.textContent = 'Atualizar Cliente';
+                fillForm(client);
+            }
+
+            modal.classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('client-modal').classList.remove('show');
+            resetForm();
+        }
+
+        function resetForm() {
+            document.getElementById('client-form').reset();
+            selectedDays = [];
+            updateDaysDisplay();
+            updateToggleStates();
+        }
+
+        function fillForm(client) {
+            document.getElementById('nome').value = client.nome;
+            document.getElementById('email').value = client.email;
+            document.getElementById('telefone').value = client.telefone;
+            document.getElementById('conta_anuncio_meta').value = client.conta_anuncio_meta || '';
+            document.getElementById('conta_anuncio_google').value = client.conta_anuncio_google || '';
+            document.getElementById('quantidade_dias_relatorio').value = client.quantidade_dias_relatorio;
+            
+            selectedDays = Array.isArray(client.dias_envio) ? [...client.dias_envio] : [];
+            updateDaysDisplay();
+            
+            document.getElementById('campanha_meta').checked = client.campanha_meta;
+            document.getElementById('saldo_meta').checked = client.saldo_meta;
+            document.getElementById('campanha_google').checked = client.campanha_google;
+            
+            updateToggleStates();
+        }
+
+        // =================== DAYS SELECTION ===================
+        function updateDaysDisplay() {
+            const dayItems = document.querySelectorAll('.checkbox-item');
+            dayItems.forEach(item => {
+                const day = parseInt(item.dataset.day);
+                if (selectedDays.includes(day)) {
+                    item.classList.add('selected');
+                } else {
+                    item.classList.remove('selected');
+                }
+            });
+        }
+
+        function updateToggleStates() {
+            const metaAccount = document.getElementById('conta_anuncio_meta').value;
+            const googleAccount = document.getElementById('conta_anuncio_google').value;
+            
+            const campanhaMeta = document.getElementById('campanha_meta');
+            const saldoMeta = document.getElementById('saldo_meta');
+            const campanhaGoogle = document.getElementById('campanha_google');
+            
+            campanhaMeta.disabled = !metaAccount;
+            saldoMeta.disabled = !metaAccount;
+            campanhaGoogle.disabled = !googleAccount;
+            
+            if (!metaAccount) {
+                campanhaMeta.checked = false;
+                saldoMeta.checked = false;
+            }
+            
+            if (!googleAccount) {
+                campanhaGoogle.checked = false;
+            }
+        }
+
+        // =================== FORM SUBMISSION ===================
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            if (selectedDays.length === 0) {
+                showToast('Selecione pelo menos um dia de envio', 'error');
+                return;
+            }
+            
+            const formData = {
+                nome: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                telefone: document.getElementById('telefone').value,
+                conta_anuncio_meta: document.getElementById('conta_anuncio_meta').value || null,
+                conta_anuncio_google: document.getElementById('conta_anuncio_google').value || null,
+                dias_envio: selectedDays,
+                quantidade_dias_relatorio: parseInt(document.getElementById('quantidade_dias_relatorio').value),
+                campanha_meta: document.getElementById('campanha_meta').checked,
+                saldo_meta: document.getElementById('saldo_meta').checked,
+                campanha_google: document.getElementById('campanha_google').checked,
+                mensagem_meta: '',
+                mensagem_google: ''
+            };
+
+            try {
+                if (!supabase) {
+                    if (currentClient) {
+                        const clientIndex = clients.findIndex(c => c.id === currentClient.id);
+                        if (clientIndex !== -1) {
+                            clients[clientIndex] = { ...clients[clientIndex], ...formData };
+                        }
+                        showToast('Cliente atualizado com sucesso');
+                    } else {
+                        const newClient = { 
+                            id: Math.max(...clients.map(c => c.id), 0) + 1, 
+                            ...formData 
+                        };
+                        clients.push(newClient);
+                        showToast('Cliente criado com sucesso');
+                    }
+                    
+                    closeModal();
+                    renderClients();
+                    updateKPIs();
+                    updateCharts();
+                    return;
+                }
+
+                if (currentClient) {
+                    const { error } = await supabase
+                        .from('clientes')
+                        .update(formData)
+                        .eq('id', currentClient.id);
+                    
+                    if (error) throw error;
+                    
+                    showToast('Cliente atualizado com sucesso');
+                } else {
+                    const { error } = await supabase
+                        .from('clientes')
+                        .insert([formData]);
+                    
+                    if (error) throw error;
+                    
+                    showToast('Cliente criado com sucesso');
+                }
+                
+                closeModal();
+                loadClients();
+                updateKPIs();
+                updateCharts();
+            } catch (error) {
+                console.error('Erro ao salvar cliente:', error);
+                showToast('Erro ao salvar cliente', 'error');
+            }
+        }
+
+        // =================== DROPDOWN FUNCTIONS ===================
+        function showDropdown(event, clientId) {
+            const dropdown = document.getElementById('dropdown-menu');
+            const rect = event.target.getBoundingClientRect();
+            
+            dropdown.style.left = (rect.left - 100) + 'px';
+            dropdown.style.top = (rect.bottom + 5) + 'px';
+            dropdown.classList.add('show');
+            
+            currentDropdownClient = clientId;
+            
+            setTimeout(() => {
+                document.addEventListener('click', closeDropdown);
+            }, 100);
+        }
+
+        function closeDropdown() {
+            const dropdown = document.getElementById('dropdown-menu');
+            dropdown.classList.remove('show');
+            document.removeEventListener('click', closeDropdown);
+        }
+
+        function editClient() {
+            const client = clients.find(c => c.id === currentDropdownClient);
+            if (client) {
+                openModal('edit', client);
+            }
+            closeDropdown();
+        }
+
+        function deleteClient() {
+            closeDropdown();
+            document.getElementById('confirm-modal').classList.add('show');
+        }
+
+        function configureClient() {
+            const client = clients.find(c => c.id === currentDropdownClient);
+            if (client) {
+                openConfigModal(client);
+            }
+            closeDropdown();
+        }
+
+        // =================== CONFIGURATION MODAL ===================
+        function openConfigModal(client) {
+            currentConfigClient = client;
+            const modal = document.getElementById('config-modal');
+            
+            document.getElementById('meta-message').value = client.mensagem_meta || '';
+            document.getElementById('google-message').value = client.mensagem_google || '';
+            
+            originalMessages.meta = client.mensagem_meta || '';
+            originalMessages.google = client.mensagem_google || '';
+            
+            hasUnsavedChanges = false;
+            
+            switchPlatform('meta');
+            
+            modal.classList.add('show');
+            
+            addMessageChangeListeners();
+        }
+
+        function closeConfigModal() {
+            if (hasUnsavedChanges) {
+                document.getElementById('unsaved-modal').classList.add('show');
+                return;
+            }
+            
+            document.getElementById('config-modal').classList.remove('show');
+            currentConfigClient = null;
+            hasUnsavedChanges = false;
+        }
+
+        function switchPlatform(platform) {
+            const metaTab = document.getElementById('meta-tab');
+            const googleTab = document.getElementById('google-tab');
+            const metaConfig = document.getElementById('meta-config');
+            const googleConfig = document.getElementById('google-config');
+            
+            if (platform === 'meta') {
+                metaTab.classList.add('active');
+                googleTab.classList.remove('active');
+                metaConfig.classList.remove('hidden');
+                googleConfig.classList.add('hidden');
+            } else {
+                googleTab.classList.add('active');
+                metaTab.classList.remove('active');
+                googleConfig.classList.remove('hidden');
+                metaConfig.classList.add('hidden');
+            }
+        }
+
+        function insertTag(platform, tag) {
+            const textareaId = platform === 'meta' ? 'meta-message' : 'google-message';
+            const textarea = document.getElementById(textareaId);
+            
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const currentValue = textarea.value;
+            
+            const newValue = currentValue.substring(0, start) + tag + currentValue.substring(end);
+            textarea.value = newValue;
+            
+            const newCursorPosition = start + tag.length;
+            textarea.setSelectionRange(newCursorPosition, newCursorPosition);
+            textarea.focus();
+            
+            checkForChanges();
+        }
+
+        function addMessageChangeListeners() {
+            const metaTextarea = document.getElementById('meta-message');
+            const googleTextarea = document.getElementById('google-message');
+            
+            metaTextarea.addEventListener('input', checkForChanges);
+            googleTextarea.addEventListener('input', checkForChanges);
+        }
+
+        function checkForChanges() {
+            const currentMetaMessage = document.getElementById('meta-message').value;
+            const currentGoogleMessage = document.getElementById('google-message').value;
+            
+            hasUnsavedChanges = (
+                currentMetaMessage !== originalMessages.meta ||
+                currentGoogleMessage !== originalMessages.google
+            );
+        }
+
+        async function saveMessages() {
+            if (!currentConfigClient) return;
+            
+            const metaMessage = document.getElementById('meta-message').value;
+            const googleMessage = document.getElementById('google-message').value;
+            
+            try {
+                if (!supabase) {
+                    const clientIndex = clients.findIndex(c => c.id === currentConfigClient.id);
+                    if (clientIndex !== -1) {
+                        clients[clientIndex].mensagem_meta = metaMessage;
+                        clients[clientIndex].mensagem_google = googleMessage;
+                    }
+                    showToast('Mensagens salvas com sucesso');
+                    closeConfigModal();
+                    return;
+                }
+
+                const { error } = await supabase
+                    .from('clientes')
+                    .update({
+                        mensagem_meta: metaMessage,
+                        mensagem_google: googleMessage
+                    })
+                    .eq('id', currentConfigClient.id);
+                
+                if (error) throw error;
+                
+                const clientIndex = clients.findIndex(c => c.id === currentConfigClient.id);
+                if (clientIndex !== -1) {
+                    clients[clientIndex].mensagem_meta = metaMessage;
+                    clients[clientIndex].mensagem_google = googleMessage;
+                }
+                
+                originalMessages.meta = metaMessage;
+                originalMessages.google = googleMessage;
+                hasUnsavedChanges = false;
+                
+                showToast('Mensagens salvas com sucesso');
+                closeConfigModal();
+            } catch (error) {
+                console.error('Erro ao salvar mensagens:', error);
+                showToast('Erro ao salvar mensagens', 'error');
+            }
+        }
+
+        function copyTemplate(platform) {
+            const textareaId = platform === 'meta' ? 'meta-message' : 'google-message';
+            const textarea = document.getElementById(textareaId);
+            const template = templates[platform];
+            
+            textarea.value = template;
+            
+            checkForChanges();
+            textarea.focus();
+            
+            showToast('Template copiado com sucesso');
+        }
+
+        // =================== UNSAVED CHANGES MODAL ===================
+        function closeUnsavedModal() {
+            document.getElementById('unsaved-modal').classList.remove('show');
+        }
+
+        function discardChanges() {
+            hasUnsavedChanges = false;
+            document.getElementById('unsaved-modal').classList.remove('show');
+            document.getElementById('config-modal').classList.remove('show');
+            currentConfigClient = null;
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirm-modal').classList.remove('show');
+        }
+
+        async function confirmDelete() {
+            try {
+                if (!supabase) {
+                    clients = clients.filter(c => c.id !== currentDropdownClient);
+                    showToast('Cliente excluído com sucesso');
+                    closeConfirmModal();
+                    renderClients();
+                    updateKPIs();
+                    updateCharts();
+                    return;
+                }
+
+                const { error } = await supabase
+                    .from('clientes')
+                    .delete()
+                    .eq('id', currentDropdownClient);
+                
+                if (error) throw error;
+                
+                showToast('Cliente excluído com sucesso');
+                closeConfirmModal();
+                loadClients();
+                updateKPIs();
+                updateCharts();
+            } catch (error) {
+                console.error('Erro ao excluir cliente:', error);
+                showToast('Erro ao excluir cliente', 'error');
+            }
+        }
+
+        // =================== CHARTS ===================
+        function initCharts() {
+            initFrequencyChart();
+            initDaysChart();
+        }
+
+        function initFrequencyChart() {
+            const ctx = document.getElementById('frequencyChart').getContext('2d');
+            
+            const frequencyData = {};
+            clients.forEach(client => {
+                const period = client.quantidade_dias_relatorio;
+                frequencyData[period] = (frequencyData[period] || 0) + 1;
+            });
+            
+            const labels = Object.keys(frequencyData).map(key => `${key} dia${key > 1 ? 's' : ''}`);
+            const data = Object.values(frequencyData);
+            
+            if (frequencyChart) frequencyChart.destroy();
+            
+            frequencyChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            '#00ff88',
+                            '#00d4ff', 
+                            '#b847ff',
+                            '#ff6b6b',
+                            '#4ecdc4'
+                        ],
+                        borderWidth: 3,
+                        borderColor: '#000000',
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 25,
+                                usePointStyle: true,
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                color: '#ffffff'
+                            }
+                        }
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
+                }
+            });
+        }
+
+        function initDaysChart() {
+            const ctx = document.getElementById('daysChart').getContext('2d');
+            
+            const dayNames = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+            const dayData = new Array(7).fill(0);
+            
+            clients.forEach(client => {
+                if (Array.isArray(client.dias_envio)) {
+                    client.dias_envio.forEach(day => {
+                        dayData[day]++;
+                    });
+                }
+            });
+            
+            if (daysChart) daysChart.destroy();
+            
+            daysChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dayNames,
+                    datasets: [{
+                        label: 'Clientes',
+                        data: dayData,
+                        backgroundColor: 'rgba(0, 255, 136, 0.8)',
+                        borderColor: '#00ff88',
+                        borderWidth: 2,
+                        borderRadius: 10,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1,
+                                font: {
+                                    weight: 'bold'
+                                },
+                                color: '#ffffff'
+                            },
+                            grid: {
+                                color: 'rgba(0, 255, 136, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    weight: 'bold'
+                                },
+                                color: '#ffffff'
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    animation: {
+                        delay: (context) => {
+                            return context.dataIndex * 150;
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateCharts() {
+            initFrequencyChart();
+            initDaysChart();
+        }
+
+        // =================== UTILITY FUNCTIONS ===================
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('current-date').textContent = now.toLocaleDateString('pt-BR', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            document.getElementById('last-update').textContent = now.toLocaleTimeString('pt-BR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        async function refreshData() {
+            try {
+                await loadClients();
+                updateKPIs();
+                updateCharts();
+                updateDateTime();
+                
+                showToast('Dados sincronizados com sucesso');
+            } catch (error) {
+                console.error('Erro ao atualizar dados:', error);
+                showToast('Erro ao sincronizar dados', 'error');
+            }
+        }
+
+        // =================== EVENT LISTENERS ===================
+        document.getElementById('client-form').addEventListener('submit', handleFormSubmit);
+
+        document.querySelectorAll('.checkbox-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const day = parseInt(this.dataset.day);
+                const index = selectedDays.indexOf(day);
+                
+                if (index > -1) {
+                    selectedDays.splice(index, 1);
+                } else {
+                    selectedDays.push(day);
+                }
+                
+                updateDaysDisplay();
+            });
+        });
+
+        document.getElementById('conta_anuncio_meta').addEventListener('input', updateToggleStates);
+        document.getElementById('conta_anuncio_google').addEventListener('input', updateToggleStates);
+
+        document.getElementById('search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredClients = clients.filter(client => 
+                client.nome.toLowerCase().includes(searchTerm) ||
+                client.email.toLowerCase().includes(searchTerm)
+            );
+            renderClients(filteredClients);
+        });
+
+        // Close modals when clicking outside
+        document.addEventListener('click', function(e) {
+            const clientModal = document.getElementById('client-modal');
+            const confirmModal = document.getElementById('confirm-modal');
+            const configModal = document.getElementById('config-modal');
+            const unsavedModal = document.getElementById('unsaved-modal');
+            
+            if (e.target === clientModal) {
+                closeModal();
+            }
+            
+            if (e.target === confirmModal) {
+                closeConfirmModal();
+            }
+            
+            if (e.target === configModal) {
+                closeConfigModal();
+            }
+            
+            if (e.target === unsavedModal) {
+                closeUnsavedModal();
+            }
+        });
+
+        // =================== INITIALIZATION ===================
+        document.addEventListener('DOMContentLoaded', function() {
+            loadClients();
+            updateKPIs();
+            initCharts();
+            updateDateTime();
+            updateToggleStates();
+        });
+
+    </script>
+</body>
+</html>
