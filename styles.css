@@ -99,12 +99,17 @@ body {
     z-index: var(--z-background);
     pointer-events: all;
     will-change: transform;
+    webkit-tap-highlight-color: transparent;
+    webkit-touch-callout: none;
 }
 
 #particles-js canvas {
     display: block;
     width: 100% !important;
     height: 100% !important;
+    webkit-tap-highlight-color: transparent;
+    webkit-touch-callout: none;
+    outline: none;
 }
 
 /* =====================================================
