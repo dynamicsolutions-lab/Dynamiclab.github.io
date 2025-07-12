@@ -1,597 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- ===== META TAGS ===== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Solutions | Transformando Negócios com Tecnologia</title>
+    <meta name="description" content="Dynamic Solutions - Excelência em serviços tecnológicos. Desenvolvemos sistemas de IA e automação sob medida para elevar sua operação a níveis de excelência e crescimento exponencial.">
+    <meta name="keywords" content="Dynamic Solutions, IA, automação, tecnologia, desenvolvimento, sistemas inteligentes">
+    <meta name="author" content="Dynamic Solutions">
     
-    <!-- Bibliotecas e CDNs Externos -->
+    <!-- ===== TITLE ===== -->
+    <title>Dynamic Solutions | Excelência em Serviços Tecnológicos</title>
+    
+    <!-- ===== EXTERNAL LIBRARIES ===== -->
+    <!-- Particles.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    
+    <!-- GSAP Animation Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
-    <!-- Fontes Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    <!-- CSS Local -->
+    <!-- Sound Library (Optional) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    
+    <!-- Confetti Library (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- ===== LOCAL STYLES ===== -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- ===== FAVICON ===== -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+
 <body>
-    <!-- Sistema de Navegação Neural Premium -->
-    <nav class="neural-navigation" id="neuralNav">
-        <div class="neural-hub">
-            <div class="neural-connections" id="neuralConnections"></div>
-            <div class="neural-nodes">
-                <!-- Nó Neural: Home -->
-                <a href="#home" class="neural-node active" data-section="home" onclick="showSection('home')">
-                    <i class="fas fa-home"></i>
-                    <div class="neural-tooltip">Início Neural</div>
-                </a>
-                
-                <!-- Nó Neural: Curriculum -->
-                <a href="#curriculum" class="neural-node" data-section="curriculum" onclick="showSection('curriculum')">
-                    <i class="fas fa-brain"></i>
-                    <div class="neural-tooltip">Mente Estratégica</div>
-                </a>
-                
-                <!-- Nó Neural: Conexão Final (corrigido para fale conosco) -->
-                <a href="#" class="neural-node" data-section="cta-final" onclick="scrollToFinalCTA()">
-                    <i class="fas fa-rocket"></i>
-                    <div class="neural-tooltip">Fale Conosco Agora</div>
-                </a>
-            </div>
-        </div>
-    </nav>
+    <!-- ===== PARTICLES BACKGROUND ===== -->
+    <div id="particles-js" class="clickable-area" aria-hidden="true"></div>
 
-    <!-- Seção Principal (Home) -->
-    <div id="home-section" class="main-section">
-        <!-- Fundo de Partículas -->
-        <div id="particles-js" class="clickable-area"></div>
-
-        <!-- Seção Hero -->
-        <section class="content">
-            <div class="logo">
-                <img src="https://github.com/dynamicsolutions-lab/Dynamiclab.github.io/blob/main/img/freepik__a-luxurious-logo-for-dynamic-solutions-featuring-a__98836.png?raw=true" 
-                     alt="Dynamic Solutions Logo">
-            </div>
-            <h1 data-aos="fade-up"><span class="innovation-text">Inovação</span> em Movimento</h1>
-            <p class="tagline" data-aos="fade-up" data-aos-delay="200">
-                Transformamos desafios em oportunidades através de soluções tecnológicas 
-                inovadoras e personalizadas para impulsionar o sucesso do seu negócio.
-            </p>
-            <div class="neural-cta-container">
-                <a href="#depoimentos" class="neural-cta neural-cta-primary clickable-area" data-aos="fade-up" data-aos-delay="400">
-                    <i class="fas fa-comments neural-cta-icon"></i>
-                    <span class="neural-cta-text">Fale Conosco</span>
-                </a>
-                <a href="#curriculum" class="neural-cta neural-cta-secondary clickable-area" onclick="showSection('curriculum')" data-aos="fade-up" data-aos-delay="600">
-                    <i class="fas fa-brain neural-cta-icon"></i>
-                    <span class="neural-cta-text">Conheça o Fundador</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- Seção de Soluções -->
-        <section class="section solutions reveal-section" id="solucoes">
-            <div class="section-content">
-                <h2 class="section-title" data-aos="fade-up">Soluções Inovadoras</h2> 
-                <div class="solutions-grid">
-                    <!-- Card 1 -->
-                    <div class="solution-card" data-aos="fade-up">
-                        <div class="magnetic-content">
-                            <div class="solution-icon">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <h3>Avatares com IA</h3>
-                            <p>Revolucione sua presença digital com avatares hiper-realistas 
-                               potencializados por IA de última geração</p>
-                            <div class="card-hover-effect"></div>
-                        </div>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="solution-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="magnetic-content">
-                            <div class="solution-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h3>Mentoria de Vendas</h3>
-                            <p>Multiplique seus resultados com estratégias exclusivas 
-                               de vendas pelo WhatsApp</p>
-                            <div class="card-hover-effect"></div>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="solution-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="magnetic-content">
-                            <div class="solution-icon">
-                                <i class="fas fa-bullseye"></i>
-                            </div>
-                            <h3>Estratégia Digital</h3>
-                            <p>Conquiste o mundo digital com estratégias personalizadas 
-                               e dados orientados</p>
-                            <div class="card-hover-effect"></div>
-                        </div>
-                    </div>
-
-                    <!-- Card 4 -->
-                    <div class="solution-card" data-aos="fade-up" data-aos-delay="600">
-                        <div class="magnetic-content">
-                            <div class="solution-icon">
-                                <i class="fas fa-code"></i>
-                            </div>
-                            <h3>Desenvolvimento Web</h3>
-                            <p>Crie sites e sistemas personalizados que impulsione o seu negócio online</p>
-                            <div class="card-hover-effect"></div>
-                        </div>
-                    </div>
-               
-                    <!-- Card 5 -->
-                    <div class="solution-card" data-aos="fade-up" data-aos-delay="800">
-                        <div class="magnetic-content">
-                            <div class="solution-icon">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <h3>Aplicativos Mobile</h3>
-                            <p>Transforme sua ideia em um aplicativo incrível para iOS e Android</p>
-                            <div class="card-hover-effect"></div>
-                        </div>
-                    </div>
-               
-                    <!-- Card 6 -->
-                    <div class="solution-card" data-aos="fade-up" data-aos-delay="1000">
-                        <div class="magnetic-content">
-                            <div class="solution-icon">
-                              <i class="fas fa-cloud"></i>
-                            </div>
-                            <h3>Servidores e Cloud</h3>
-                            <p>Infraestrutura robusta e segura para seus projetos digitais</p>
-                            <div class="card-hover-effect"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção de Métricas/Resultados -->
-        <section class="metrics-section reveal-section" id="resultados">
-            <div class="constellation-lines clickable-area"></div>
-            <canvas id="metricsCanvas"></canvas>
-            <div class="section-content">
-                <h2 class="section-title dark" data-aos="fade-up">Resultados Comprovados</h2>
-                <div class="results-grid">
-                    <!-- Métrica 1 -->
-                    <div class="metric-card" data-aos="fade-up">
-                        <div class="pulse-effect"></div>
-                        <div class="metric-number" data-value="350">0</div>
-                        <div class="metric-label">Clientes Transformados</div>
-                    </div>
-                    <!-- Métrica 2 -->
-                    <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="pulse-effect"></div>
-                        <div class="metric-number" data-value="95">0</div>
-                        <div class="metric-label">Taxa de Sucesso (%)</div>
-                    </div>
-                    <!-- Métrica 3 -->
-                    <div class="metric-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="pulse-effect"></div>
-                        <div class="metric-number" data-value="820">0</div>
-                        <div class="metric-label">Avatares Criados</div>
-                    </div>
-                    <!-- Métrica 4 -->
-                    <div class="metric-card" data-aos="fade-up" data-aos-delay="600">
-                        <div class="pulse-effect"></div>
-                        <div class="metric-number" data-value="24">0</div>
-                        <div class="metric-label">Suporte 24/7</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção de Depoimentos -->
-        <section class="section testimonials reveal-section" id="depoimentos">
-            <div class="testimonial-particles"></div>
-            <div class="section-content">
-                <h2 class="section-title" data-aos="fade-up">Histórias de Sucesso</h2>
-                <div class="testimonials-slider">
-                    <div class="testimonial-block" data-aos="fade-up">
-                        <div class="quote-mark">"</div>
-                        <p class="testimonial-text">A Dynamic Solutions revolucionou minha presença digital. Meu faturamento triplicou em apenas 3 meses!</p>
-                        <div class="testimonial-author">
-                            <p class="author-name">Maria Silva</p>
-                            <p class="author-title">Influenciadora Digital</p>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-block" data-aos="fade-up" data-aos-delay="200">
-                        <div class="quote-mark">"</div>
-                        <p class="testimonial-text">A mentoria de vendas foi um divisor de águas para meu negócio! Consegui resultados incríveis com as estratégias de whatsapp!</p>
-                        <div class="testimonial-author">
-                            <p class="author-name">João Paulo</p>
-                            <p class="author-title">Empreendedor</p>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-block" data-aos="fade-up" data-aos-delay="400">
-                        <div class="quote-mark">"</div>
-                        <p class="testimonial-text">Com a estratégia digital da Dynamic Solutions, alcancei meus objetivos de marca e faturamento muito rápido! Super recomendo.</p>
-                        <div class="testimonial-author">
-                            <p class="author-name">Fernanda Lima</p>
-                            <p class="author-title">Gerente de Marketing</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- CTA Final -->
-                <div class="cta-section" data-aos="fade-up">
-                    <h3>Pronto para Transformar seu Negócio?</h3>
-                    <p>Junte-se aos cases de sucesso da Dynamic Solutions</p>
-                    <a href="https://wa.me/5532999735469?text=Ol%C3%A1!%20Acabei%20de%20ver%20seu%20portf%C3%B3lio%20e%20fiquei%20muito%20interessado%20no%20seu%20trabalho.%20Podemos%20conversar%20sobre%20uma%20poss%C3%ADvel%20colabora%C3%A7%C3%A3o%3F" class="neural-cta neural-cta-primary clickable-area">
-                        <i class="fas fa-rocket neural-cta-icon"></i>
-                        <span class="neural-cta-text">Iniciar Transformação Digital</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- ========== SEÇÃO PREMIUM DO CURRÍCULO ========== -->
-    <div id="curriculum-section" class="main-section" style="display: none;">
-        <section class="curriculum-section">
-            <!-- Particles Background Premium -->
-            <canvas id="particles-canvas"></canvas>
+    <!-- ===== MAIN CONTENT CONTAINER ===== -->
+    <main class="content" role="main">
+        
+        <!-- ===== LOGO SECTION ===== -->
+        <header class="logo">
+            <img src="https://github.com/dynamicsolutions-lab/Dynamiclab.github.io/blob/main/img/freepik__a-luxurious-logo-for-dynamic-solutions-featuring-a__98836.png?raw=true" 
+                 alt="Dynamic Solutions - Logo da empresa"
+                 loading="eager">
+        </header>
+        
+        <!-- ===== TEXT CONTENT ===== -->
+        <section class="content-text">
+            <!-- Main Heading -->
+            <h1 data-aos="fade-up">
+                <span class="innovation-text">Excelência</span> em Serviços Tecnológicos
+            </h1>
             
-            <!-- Hero Section Premium -->
-            <section class="section hero" id="hero">
-                <div class="floating-orbs">
-                    <div class="orb"></div>
-                    <div class="orb"></div>
-                    <div class="orb"></div>
-                </div>
-                
-                <div class="container">
-                    <div class="hero-content">
-                        <div class="hero-text">
-                            <h1 class="hero-title">Herison Araújo</h1>
-                            <p class="hero-subtitle">Transformando Desafios em Oportunidades</p>
-                            <p class="hero-description">
-                                Especialista em liderar transformações organizacionais complexas e implementar soluções inovadoras que geram resultados exponenciais. Com uma visão sistêmica única, transformo crises em oportunidades de crescimento sustentável.
-                            </p>
-                            <a href="#contact" class="cta-button-premium">
-                                <span>Vamos Conversar</span>
-                                <span>→</span>
-                            </a>
-                        </div>
-                        
-                        <div class="profile-card">
-                            <div class="profile-image">
-                                <img src="https://raw.githubusercontent.com/dynamicsolutions-lab/Dynamiclab.github.io/main/img/freepik__produce-a-luxurious-rooftop-portrait-with-skyline-__38627.png" alt="Herison Araújo" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-size: 4rem; color: #FFD700; font-weight: bold;\'>H</span>';">
-                            </div>
-                            <h3 style="font-size: 1.5rem; margin-bottom: 10px; font-weight: 600;">Líder Transformacional</h3>
-                            <p style="opacity: 0.8; font-size: 1rem; margin-bottom: 20px;">
-                                29 anos dedicados à excelência em gestão estratégica e inovação operacional.
-                            </p>
-                            
-                            <div class="profile-stats">
-                                <div class="stat">
-                                    <span class="stat-number">15+</span>
-                                    <span class="stat-label">Anos de Experiência</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">500%</span>
-                                    <span class="stat-label">Crescimento Médio</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Achievements Section Premium -->
-            <section class="section achievements" id="achievements">
-                <div class="container">
-                    <h2 class="section-title">Resultados que Falam por Si</h2>
-                    <div class="achievements-grid">
-                        <div class="achievement-card">
-                            <span class="achievement-number">500%</span>
-                            <h3 class="achievement-title">Crescimento em Vendas</h3>
-                            <p class="achievement-desc">
-                                Redesenhei processos comerciais complexos, multiplicando resultados através de inovação estratégica e pensamento lateral.
-                            </p>
-                        </div>
-                        <div class="achievement-card">
-                            <span class="achievement-number">16</span>
-                            <h3 class="achievement-title">Meses de Turnaround</h3>
-                            <p class="achievement-desc">
-                                Transformei uma operação endividada em negócio financeiramente equilibrado, liderando reestruturação completa.
-                            </p>
-                        </div>
-                        <div class="achievement-card">
-                            <span class="achievement-number">90</span>
-                            <h3 class="achievement-title">Dias para Gerência</h3>
-                            <p class="achievement-desc">
-                                Histórico de progressão acelerada em organizações distintas, demonstrando capacidade de adaptação e liderança natural.
-                            </p>
-                        </div>
-                        <div class="achievement-card">
-                            <span class="achievement-number">20+</span>
-                            <h3 class="achievement-title">Pessoas Lideradas</h3>
-                            <p class="achievement-desc">
-                                Gestão eficaz de equipes multidisciplinares, mantendo engajamento e produtividade mesmo em cenários de crise.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Skills Section Premium -->
-            <section class="section skills" id="skills">
-                <div class="container">
-                    <h2 class="section-title">Especialidades Core</h2>
-                    <div class="skills-grid">
-                        <div class="skill-card">
-                            <div class="skill-icon">🎯</div>
-                            <h3 class="skill-title">Gestão de Crise</h3>
-                            <p class="skill-desc">Transformação de cenários críticos em oportunidades de crescimento sustentável através de estratégias inovadoras.</p>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-icon">🚀</div>
-                            <h3 class="skill-title">Inovação Operacional</h3>
-                            <p class="skill-desc">Redesign de processos que geram impacto exponencial nos resultados organizacionais.</p>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-icon">🤖</div>
-                            <h3 class="skill-title">IA & Automação</h3>
-                            <p class="skill-desc">Implementação estratégica de tecnologias emergentes para otimização de negócios.</p>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-icon">👥</div>
-                            <h3 class="skill-title">Liderança Transformacional</h3>
-                            <p class="skill-desc">Desenvolvimento de equipes de alta performance em ambientes complexos e desafiadores.</p>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-icon">📊</div>
-                            <h3 class="skill-title">Grandes Contas</h3>
-                            <p class="skill-desc">Interface estratégica com corporações e projetos de alto valor agregado.</p>
-                        </div>
-                        <div class="skill-card">
-                            <div class="skill-icon">⚡</div>
-                            <h3 class="skill-title">Implementação Ágil</h3>
-                            <p class="skill-desc">Execução rápida e eficaz de mudanças organizacionais complexas.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- About Me Section Premium -->
-            <section class="section about-me" id="about-me">
-                <div class="container">
-                    <h2 class="section-title">Minha Jornada</h2>
-                    
-                    <!-- Neural Network Background -->
-                    <div class="neural-network">
-                        <svg class="neural-svg" viewBox="0 0 800 600">
-                            <defs>
-                                <radialGradient id="nodeGradient" cx="50%" cy="50%" r="50%">
-                                    <stop offset="0%" stop-color="#FFD700" stop-opacity="0.8"/>
-                                    <stop offset="100%" stop-color="#FF6B35" stop-opacity="0.3"/>
-                                </radialGradient>
-                                <linearGradient id="linkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stop-color="#FFD700" stop-opacity="0.6"/>
-                                    <stop offset="100%" stop-color="#FF6B35" stop-opacity="0.2"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-
-                    <div class="story-container">
-                        <!-- Personal Intro -->
-                        <div class="story-intro">
-                            <div class="intro-card">
-                                <div class="hologram-border"></div>
-                                <div class="intro-content">
-                                    <h3>🧠 O Pensador Sistêmico</h3>
-                                    <p>Desde criança, sempre fui fascinado por padrões - como pequenas mudanças podem gerar impactos exponenciais. Essa curiosidade me levou a uma jornada única de descobertas transformacionais.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Interactive Story Timeline -->
-                        <div class="story-timeline">
-                            <div class="story-line">
-                                <div class="data-flow"></div>
-                            </div>
-                            
-                            <div class="story-chapter" data-chapter="1">
-                                <div class="chapter-node">
-                                    <div class="node-core"></div>
-                                    <div class="node-rings"></div>
-                                    <div class="chapter-year">2024</div>
-                                </div>
-                                <div class="chapter-content">
-                                    <div class="chapter-card">
-                                        <div class="matrix-bg"></div>
-                                        <h4>🤖 A Era da Inteligência Sintética</h4>
-                                        <p>Descobri que a verdadeira revolução não está na tecnologia em si, mas em como ela amplifica nossa capacidade de visão estratégica. Hoje, orquestro symphonias de dados que transformam incertezas em oportunidades cristalinas.</p>
-                                        <div class="tech-stats">
-                                            <span class="stat-chip">IA Estratégica</span>
-                                            <span class="stat-chip">Automação Cognitiva</span>
-                                            <span class="stat-chip">Analytics Preditiva</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="story-chapter" data-chapter="2">
-                                <div class="chapter-node">
-                                    <div class="node-core"></div>
-                                    <div class="node-rings"></div>
-                                    <div class="chapter-year">2020-2023</div>
-                                </div>
-                                <div class="chapter-content">
-                                    <div class="chapter-card">
-                                        <div class="matrix-bg"></div>
-                                        <h4>⚡ O Alquimista Digital</h4>
-                                        <p>A pandemia me ensinou que crises são laboratórios de inovação. Enquanto o mundo pausava, eu mergulhei na transformação digital radical - convertendo processos analógicos em experiências digitais que superaram todas as expectativas.</p>
-                                        <div class="tech-stats">
-                                            <span class="stat-chip">Cloud Architecture</span>
-                                            <span class="stat-chip">Process Mining</span>
-                                            <span class="stat-chip">Digital Twins</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="story-chapter" data-chapter="3">
-                                <div class="chapter-node">
-                                    <div class="node-core"></div>
-                                    <div class="node-rings"></div>
-                                    <div class="chapter-year">2018-2019</div>
-                                </div>
-                                <div class="chapter-content">
-                                    <div class="chapter-card">
-                                        <div class="matrix-bg"></div>
-                                        <h4>🎯 O Arquiteto de Renascimentos</h4>
-                                        <p>Enfrentei meu maior desafio: uma empresa à beira do colapso. Em 16 meses intensos, redesenhei completamente a arquitetura organizacional. Não foi apenas um turnaround - foi uma metamorfose completa.</p>
-                                        <div class="tech-stats">
-                                            <span class="stat-chip">Lean Six Sigma</span>
-                                            <span class="stat-chip">Change Management</span>
-                                            <span class="stat-chip">Agile Transformation</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="story-chapter" data-chapter="4">
-                                <div class="chapter-node">
-                                    <div class="node-core"></div>
-                                    <div class="node-rings"></div>
-                                    <div class="chapter-year">2015-2017</div>
-                                </div>
-                                <div class="chapter-content">
-                                    <div class="chapter-card">
-                                        <div class="matrix-bg"></div>
-                                        <h4>🚀 O Catalisador Exponencial</h4>
-                                        <p>Descobri meu superpoder: acelerar o crescimento de pessoas e organizações. Em cada projeto, via padrões que outros não conseguiam enxergar. Era como ter raio-X organizacional - identificava gargalos invisíveis e destravava potenciais latentes.</p>
-                                        <div class="tech-stats">
-                                            <span class="stat-chip">Growth Hacking</span>
-                                            <span class="stat-chip">Data Analytics</span>
-                                            <span class="stat-chip">Innovation Labs</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Values Section -->
-                        <div class="values-grid">
-                            <h3 class="values-title">💎 Meus Valores Fundamentais</h3>
-                            <div class="values-container">
-                                <div class="value-card">
-                                    <div class="value-icon">🔮</div>
-                                    <h4>Visão Sistêmica</h4>
-                                    <p>Vejo conexões onde outros veem apenas partes isoladas. É essa perspectiva holística que me permite orquestrar transformações verdadeiramente integradas.</p>
-                                </div>
-                                <div class="value-card">
-                                    <div class="value-icon">⚡</div>
-                                    <h4>Execução Implacável</h4>
-                                    <p>Estratégia sem execução é apenas um sonho. Transformo ideias em realidade através de implementação precisa e monitoramento contínuo.</p>
-                                </div>
-                                <div class="value-card">
-                                    <div class="value-icon">🧬</div>
-                                    <h4>Inovação Contínua</h4>
-                                    <p>A única constante é a mudança. Mantenho-me sempre na vanguarda, antecipando tendências e preparando organizações para o futuro.</p>
-                                </div>
-                                <div class="value-card">
-                                    <div class="value-icon">👥</div>
-                                    <h4>Impacto Humano</h4>
-                                    <p>Por trás de toda transformação tecnológica estão pessoas. Meu foco é empoderar indivíduos para que alcancem seu máximo potencial.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Personal Mission -->
-                        <div class="mission-statement">
-                            <div class="mission-card">
-                                <div class="holographic-overlay"></div>
-                                <h3>🎯 Minha Missão</h3>
-                                <p>Acredito profundamente que cada organização possui um DNA único de excelência esperando para ser desbloqueado. Minha missão é ser o catalisador dessa transformação - combinando intuição humana com precisão tecnológica para criar resultados que transcendem o imaginável.</p>
-                                <div class="mission-stats">
-                                    <div class="mission-stat">
-                                        <span class="stat-number">∞</span>
-                                        <span class="stat-label">Potencial Humano</span>
-                                    </div>
-                                    <div class="mission-stat">
-                                        <span class="stat-number">100%</span>
-                                        <span class="stat-label">Dedicação</span>
-                                    </div>
-                                    <div class="mission-stat">
-                                        <span class="stat-number">0</span>
-                                        <span class="stat-label">Limites</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Philosophy Section Premium -->
-            <section class="section philosophy" id="philosophy">
-                <div class="container">
-                    <h2 class="section-title">Filosofia de Trabalho</h2>
-                    <blockquote class="philosophy-quote">
-                        Acredito que toda crise carrega o DNA de uma oportunidade extraordinária. Minha missão é descodificar esse potencial e transformá-lo em resultados que transcendem expectativas, criando valor real para pessoas, organizações e sociedade.
-                    </blockquote>
-                </div>
-            </section>
-
-            <!-- Contact Section Premium -->
-            <section class="section contact" id="contact">
-                <div class="container">
-                    <h2 class="section-title">Vamos Transformar Juntos</h2>
-                    <div class="contact-content">
-                        <p class="contact-text">
-                            Pronto para revolucionar seus resultados? Vamos conversar sobre como posso ajudar sua organização a alcançar o próximo nível de excelência.
-                        </p>
-                        <div class="contact-buttons">
-                            <a href="mailto:herison@email.com" class="contact-btn">
-                                <span>📧</span>
-                                <span>Email</span>
-                            </a>
-                            <a href="https://linkedin.com/in/herison" class="contact-btn" target="_blank">
-                                <span>💼</span>
-                                <span>LinkedIn</span>
-                            </a>
-                            <a href="https://wa.me/5532999735469" class="contact-btn" target="_blank">
-                                <span>📱</span>
-                                <span>WhatsApp</span>
-                            </a>
-                            <a href="#home" onclick="showSection('home')" class="neural-btn neural-btn-secondary">
-                                <i class="fas fa-home"></i> Voltar ao Início
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <!-- Subtitle/Description -->
+            <p class="tagline" data-aos="fade-up" data-aos-delay="200">
+                Implementamos processos inteligentes com IA, personalizados exclusivamente para seu negócio. 
+                Gerando resultados Exponenciais através da automação perfeita.
+            </p>
         </section>
-    </div>
+        
+        <!-- ===== CALL TO ACTION ===== -->
+        <section class="neural-cta-container">
+            <a href="segunda-pagina.html" 
+               class="neural-cta neural-cta-primary clickable-area" 
+               data-aos="fade-up" 
+               data-aos-delay="400"
+               aria-label="Conhecer nossos serviços">
+                <i class="fas fa-key neural-cta-icon" aria-hidden="true"></i>
+                <span class="neural-cta-text">Venha Conhecer</span>
+            </a>
+        </section>
+        
+    </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>© 2024 Dynamic Solutions. Todos os direitos reservados.</p>
-            <p>Desenvolvido com paixão e Tecnologia.</p>
-        </div>
-    </footer>
-
-    <!-- Script Local -->
+    <!-- ===== SCRIPTS ===== -->
     <script src="script.js"></script>
+    
+    <!-- ===== STRUCTURED DATA ===== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Dynamic Solutions",
+        "description": "Excelência em serviços tecnológicos com IA e automação",
+        "url": "https://dynamicsolutions.com",
+        "logo": "https://github.com/dynamicsolutions-lab/Dynamiclab.github.io/blob/main/img/freepik__a-luxurious-logo-for-dynamic-solutions-featuring-a__98836.png?raw=true"
+    }
+    </script>
 </body>
 </html>
