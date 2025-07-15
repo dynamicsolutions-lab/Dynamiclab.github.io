@@ -4,31 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exclusive Intelligence Architecture</title>
-    
-    <!-- Performance Optimization -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    
-    <!-- Critical CSS Inline for fastest load -->
     <style>
-        /* Critical Above-Fold Styles */
-        *{margin:0;padding:0;box-sizing:border-box}
-        :root{--platinum:#E5E4E2;--gold-accent:#D4AF37;--deep-black:#0A0A0A;--charcoal:#1C1C1C;--silver-mist:#F8F8FF;--luxury-blue:#1E3A5F;--whisper:rgba(255,255,255,0.03);--breath:rgba(255,255,255,0.08)}
-        body{font-family:'Inter',sans-serif;background:var(--deep-black);color:var(--platinum);overflow-x:hidden;line-height:1.6;font-weight:300}
-        .luxury-canvas{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 30%,rgba(212,175,55,0.03) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(30,58,95,0.04) 0%,transparent 50%),linear-gradient(135deg,rgba(28,28,28,0.8) 0%,rgba(10,10,10,0.95) 100%);z-index:-3}
-        .heritage{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:2rem}
-        .heritage-frame{max-width:1600px;width:100%;display:grid;grid-template-columns:1fr 400px;gap:6rem;align-items:center;padding:4rem 0}
-        .heritage-title{font-family:'Playfair Display',serif;font-size:4.2rem;font-weight:300;line-height:1.1;margin-bottom:2.5rem;color:var(--silver-mist);letter-spacing:-0.02em}
-        .heritage-title .accent{color:var(--gold-accent);font-weight:400}
-    </style>
-    
-    <!-- Load fonts asynchronously -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
-    
-    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --platinum: #E5E4E2;
+            --gold-accent: #D4AF37;
+            --deep-black: #0A0A0A;
+            --charcoal: #1C1C1C;
+            --silver-mist: #F8F8FF;
+            --luxury-blue: #1E3A5F;
+            --whisper: rgba(255, 255, 255, 0.03);
+            --breath: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--deep-black);
+            color: var(--platinum);
+            overflow-x: hidden;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
         /* Luxury Background Elements */
+        .luxury-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(30, 58, 95, 0.04) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(28, 28, 28, 0.8) 0%, rgba(10, 10, 10, 0.95) 100%);
+            z-index: -3;
+        }
+
         .prestige-grid {
             position: fixed;
             top: 0;
@@ -78,6 +96,25 @@
         }
 
         /* Heritage Section */
+        .heritage {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .heritage-frame {
+            max-width: 1600px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 6rem;
+            align-items: center;
+            padding: 4rem 0;
+        }
+
         .heritage-content {
             position: relative;
         }
@@ -117,6 +154,21 @@
         .provenance-mark::after {
             bottom: -4px;
             right: -4px;
+        }
+
+        .heritage-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.2rem;
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 2.5rem;
+            color: var(--silver-mist);
+            letter-spacing: -0.02em;
+        }
+
+        .heritage-title .accent {
+            color: var(--gold-accent);
+            font-weight: 400;
         }
 
         .heritage-subtitle {
@@ -975,290 +1027,6 @@
             margin: 0 auto;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .intelligence-matrix {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .matrix-divider {
-                width: 80px;
-                height: 1px;
-                margin: 0 auto;
-            }
-
-            .matrix-divider::before {
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-
-            .core-statement {
-                font-size: 2.2rem;
-            }
-
-            .gateway-access {
-                padding: 1.5rem 3rem;
-                font-size: 1rem;
-            }
-        }
-
-        /* Responsive Refinement */
-        @media (max-width: 1200px) {
-            .heritage-frame {
-                grid-template-columns: 1fr;
-                gap: 4rem;
-                text-align: center;
-            }
-            
-            .heritage-title {
-                font-size: 3.5rem;
-            }
-
-            .strategic-paths {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .path-separator {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .revelation {
-                padding: 8rem 1.5rem;
-            }
-            
-            .revelation-title {
-                font-size: 2.8rem;
-            }
-
-            .heritage-title {
-                font-size: 2.8rem;
-            }
-
-            .heritage {
-                padding: 1rem;
-            }
-
-            .strategic-navigation {
-                padding: 6rem 1.5rem;
-            }
-
-            .strategic-path {
-                padding: 3rem 2rem;
-                min-height: auto;
-            }
-
-            .path-title {
-                font-size: 1.6rem;
-            }
-
-            .path-mission {
-                font-size: 0.95rem;
-            }
-
-            .evidence-label {
-                font-size: 0.85rem;
-            }
-
-            .evidence-description {
-                font-size: 0.75rem;
-            }
-
-            .action-button {
-                padding: 1.2rem 2rem;
-                font-size: 0.9rem;
-            }
-
-            .executive-concierge {
-                padding: 6rem 1.5rem;
-                margin: 4rem auto;
-            }
-
-            .evidence-chamber {
-                padding: 3rem 2rem;
-                margin: 4rem auto 3rem auto;
-            }
-
-            .evidence-statement {
-                font-size: 1.1rem;
-            }
-
-            .navigation-question {
-                font-size: 2.2rem;
-            }
-
-            .navigation-insight {
-                font-size: 1.1rem;
-            }
-
-            .revelation-essence {
-                font-size: 1.2rem;
-            }
-
-            .heritage-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .exclusivity-panel {
-                padding: 2.5rem 2rem;
-            }
-
-            .panel-title {
-                font-size: 1rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .distinction-metric {
-                padding: 1.2rem 0;
-            }
-
-            .metric-descriptor {
-                font-size: 0.85rem;
-            }
-
-            .metric-achievement {
-                font-size: 1.1rem;
-            }
-
-            .truth-chamber {
-                padding: 3rem 2rem;
-                margin: 3rem 0;
-            }
-
-            .truth-chamber::before {
-                font-size: 6rem;
-                top: 0.5rem;
-                left: 1rem;
-            }
-
-            .truth-statement {
-                font-size: 1.2rem;
-            }
-
-            .truth-revelation {
-                font-size: 1rem;
-            }
-
-            .contemplation {
-                font-size: 1.3rem;
-                margin: 3rem 0;
-            }
-
-            .data-primary, .cell-revelation {
-                font-size: 3rem;
-            }
-
-            .data-context, .cell-positioning {
-                font-size: 0.8rem;
-            }
-
-            .cell-insight {
-                font-size: 0.85rem;
-            }
-
-            .provenance-mark {
-                padding: 0.6rem 2rem;
-                font-size: 0.7rem;
-                letter-spacing: 2px;
-                margin-bottom: 2rem;
-            }
-
-            .access-indicator {
-                gap: 1rem;
-                margin-bottom: 3rem;
-            }
-
-            .indicator-line {
-                width: 40px;
-            }
-
-            .indicator-text {
-                font-size: 0.65rem;
-                letter-spacing: 3px;
-            }
-
-            .gateway-access {
-                padding: 1.5rem 2rem;
-                font-size: 1rem;
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            /* Mobile Hover States - Disabled for Touch */
-            @media (hover: none) {
-                .strategic-path:hover {
-                    transform: none;
-                    box-shadow: 
-                        0 25px 50px rgba(0, 0, 0, 0.5),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-                }
-
-                .action-button:hover {
-                    transform: none;
-                }
-
-                .gateway-access:hover {
-                    transform: none;
-                }
-
-                .distinction-metric:hover {
-                    background: transparent;
-                    margin: 0;
-                    padding: 1.5rem 0;
-                }
-
-                .evidence-item:hover {
-                    background: transparent;
-                    margin: 0;
-                    padding: 1.2rem 0;
-                }
-            }
-        }
-
-        @media (max-width: 480px) {
-            .heritage-title {
-                font-size: 2.4rem;
-            }
-
-            .revelation-title {
-                font-size: 2rem;
-            }
-
-            .navigation-question {
-                font-size: 1.8rem;
-            }
-
-            .core-statement {
-                font-size: 1.8rem;
-            }
-
-            .strategic-path {
-                padding: 2.5rem 1.5rem;
-            }
-
-            .exclusivity-panel {
-                padding: 2rem 1.5rem;
-            }
-
-            .executive-concierge {
-                padding: 4rem 1rem;
-            }
-
-            .evidence-chamber {
-                padding: 2.5rem 1.5rem;
-            }
-
-            .gateway-access {
-                padding: 1.2rem 1.5rem;
-                font-size: 0.9rem;
-            }
-        }
-
         /* Animation Classes */
         .emerge {
             opacity: 0;
@@ -1302,6 +1070,197 @@
         .manifest-right.visible {
             opacity: 1;
             transform: translateX(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1200px) {
+            .heritage-frame {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                text-align: center;
+            }
+            
+            .heritage-title {
+                font-size: 3.5rem;
+            }
+
+            .strategic-paths {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .path-separator {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .heritage {
+                padding: 1rem;
+            }
+
+            .heritage-title {
+                font-size: 2.8rem;
+            }
+            
+            .heritage-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .revelation {
+                padding: 8rem 1.5rem;
+            }
+            
+            .revelation-title {
+                font-size: 2.8rem;
+            }
+
+            .revelation-essence {
+                font-size: 1.2rem;
+            }
+
+            .strategic-navigation {
+                padding: 6rem 1.5rem;
+            }
+
+            .navigation-question {
+                font-size: 2.2rem;
+            }
+
+            .strategic-path {
+                padding: 3rem 2rem;
+                min-height: auto;
+            }
+
+            .path-title {
+                font-size: 1.6rem;
+            }
+
+            .executive-concierge {
+                padding: 6rem 1.5rem;
+                margin: 4rem auto;
+            }
+
+            .core-statement {
+                font-size: 2.2rem;
+            }
+
+            .intelligence-matrix {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .matrix-divider {
+                width: 80px;
+                height: 1px;
+                margin: 0 auto;
+            }
+
+            .matrix-divider::before {
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .data-primary, .cell-revelation {
+                font-size: 3rem;
+            }
+
+            .evidence-chamber {
+                padding: 3rem 2rem;
+                margin: 4rem auto 3rem auto;
+            }
+
+            .gateway-access {
+                padding: 1.5rem 2rem;
+                font-size: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .truth-chamber {
+                padding: 3rem 2rem;
+                margin: 3rem 0;
+            }
+
+            .truth-chamber::before {
+                font-size: 6rem;
+                top: 0.5rem;
+                left: 1rem;
+            }
+
+            .contemplation {
+                font-size: 1.3rem;
+                margin: 3rem 0;
+            }
+
+            .exclusivity-panel {
+                padding: 2.5rem 2rem;
+            }
+
+            .distinction-metric {
+                padding: 1.2rem 0;
+            }
+
+            .metric-achievement {
+                font-size: 1.1rem;
+            }
+
+            /* Disable hover on mobile */
+            @media (hover: none) {
+                .strategic-path:hover {
+                    transform: none;
+                    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+                }
+
+                .distinction-metric:hover {
+                    background: transparent;
+                    margin: 0;
+                    padding: 1.2rem 0;
+                }
+
+                .evidence-item:hover {
+                    background: transparent;
+                    margin: 0;
+                    padding: 1.2rem 0;
+                }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .heritage-title {
+                font-size: 2.4rem;
+            }
+
+            .revelation-title {
+                font-size: 2rem;
+            }
+
+            .navigation-question {
+                font-size: 1.8rem;
+            }
+
+            .core-statement {
+                font-size: 1.8rem;
+            }
+
+            .strategic-path {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .executive-concierge {
+                padding: 4rem 1rem;
+            }
+
+            .evidence-chamber {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .gateway-access {
+                padding: 1.2rem 1.5rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -1595,7 +1554,7 @@
     </section>
 
     <script>
-        // Prestige Progress Tracking
+        // Progress bar
         function updatePrestigeProgress() {
             const scrollTop = window.pageYOffset;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -1603,7 +1562,7 @@
             document.getElementById('progressIndicator').style.width = scrollPercent + '%';
         }
 
-        // Sophisticated Animation Orchestration
+        // Animation reveal
         function orchestrateReveal() {
             const elements = document.querySelectorAll('.emerge, .ascend, .manifest-left, .manifest-right');
             elements.forEach((element, index) => {
@@ -1617,7 +1576,7 @@
             });
         }
 
-        // Refined Scroll Behavior
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1631,16 +1590,16 @@
             });
         });
 
-        // Elite Event Orchestration
+        // Event listeners
         window.addEventListener('scroll', () => {
             updatePrestigeProgress();
             orchestrateReveal();
         });
 
-        // Initial Revelation
+        // Initial reveal
         orchestrateReveal();
 
-        // Distinguished Interaction Enhancements
+        // Hover effects
         document.querySelectorAll('.strategic-path').forEach(path => {
             path.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-12px) scale(1.02)';
@@ -1651,21 +1610,24 @@
             });
         });
 
-        // Metric Animation Sophistication
+        // Metric animation (only for numbers, not $18,7M)
         function animateDistinctions() {
             const metrics = document.querySelectorAll('.metric-achievement');
             metrics.forEach((metric, index) => {
                 setTimeout(() => {
                     const finalValue = metric.textContent;
+                    
+                    // Skip if contains currency symbols or decimal points
+                    if (finalValue.includes('$') || finalValue.includes('R$') || finalValue.includes(',') || finalValue.includes('.') || finalValue.includes('M')) {
+                        return;
+                    }
+                    
                     const isPercentage = finalValue.includes('%');
-                    const isMultiplier = finalValue.includes('x');
-                    const isCurrency = finalValue.includes('€');
-                    const isNegative = finalValue.includes('-');
                     const isPositive = finalValue.includes('+');
-                    
-                    if (isCurrency || isMultiplier) return; // Skip complex values
-                    
                     const numericValue = parseInt(finalValue.replace(/[^0-9]/g, ''));
+                    
+                    if (isNaN(numericValue) || numericValue === 0) return;
+                    
                     let current = 0;
                     const increment = numericValue / 60;
                     
@@ -1677,7 +1639,6 @@
                         }
                         
                         let displayValue = Math.floor(current);
-                        if (isNegative) displayValue = '-' + displayValue;
                         if (isPositive && current > 0) displayValue = '+' + displayValue;
                         if (isPercentage) displayValue += '%';
                         
@@ -1687,7 +1648,7 @@
             });
         }
 
-        // Trigger Elite Animations
+        // Trigger animations on scroll
         const exclusivityPanel = document.querySelector('.exclusivity-panel');
         const prestigeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1700,25 +1661,14 @@
         
         prestigeObserver.observe(exclusivityPanel);
 
-        // Subtle Parallax for Luxury Feel
+        // Parallax effect
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const excellenceAura = document.querySelector('.excellence-aura');
             excellenceAura.style.transform = `translate3d(0, ${scrolled * 0.1}px, 0)`;
         });
 
-        // Scarcity Elements Animation
-        function animateScarcityElements() {
-            const elements = document.querySelectorAll('.scarcity-element');
-            elements.forEach((element, index) => {
-                setTimeout(() => {
-                    element.style.transform = 'translateY(0)';
-                    element.style.opacity = '1';
-                }, index * 200);
-            });
-        }
-
-        // Enhanced Executive Concierge Observer
+        // Matrix cells animation
         const conciergeSection = document.querySelector('.executive-concierge');
         const conciergeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
