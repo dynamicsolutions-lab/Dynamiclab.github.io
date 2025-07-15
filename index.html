@@ -1,94 +1,743 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- ===== META TAGS ===== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Dynamic Solutions - Excelência em serviços tecnológicos. Desenvolvemos sistemas de IA e automação sob medida para elevar sua operação a níveis de excelência e crescimento exponencial.">
     <meta name="keywords" content="Dynamic Solutions, IA, automação, tecnologia, desenvolvimento, sistemas inteligentes">
     <meta name="author" content="Dynamic Solutions">
     
-    <!-- ===== TITLE ===== -->
     <title>Dynamic Solutions | Excelência em Serviços Tecnológicos</title>
     
-    <!-- ===== EXTERNAL LIBRARIES ===== -->
-    <!-- Particles.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <!-- SPEED OPTIMIZATION: Preconnects -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://dynamicsolutions.digital">
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
     
-    <!-- GSAP Animation Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- SPEED OPTIMIZATION: Preloads críticos -->
+    <link rel="preload" as="image" href="https://github.com/dynamicsolutions-lab/Dynamiclab.github.io/blob/main/img/Logo%20oficial.png?raw=true" crossorigin>
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/raleway/v29/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCGPrcVIT9d0c8.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/playfairdisplay/v30/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvXDTjrMjJ-wU.woff2" type="font/woff2" crossorigin>
     
-    <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- SPEED OPTIMIZATION: Prefetch página destino -->
+    <link rel="prefetch" href="https://dynamicsolutions.digital/Sobre" crossorigin>
+    
+    <!-- EXTERNAL LIBRARIES - Otimizadas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js" crossorigin defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" crossorigin defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" crossorigin defer></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" crossorigin defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" crossorigin defer></script>
     
-    <!-- Sound Library (Optional) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
-    
-    <!-- Confetti Library (Optional) -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    
-    <!-- Google Fonts -->
+    <!-- Google Fonts - Otimizadas -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin>
     
-    <!-- ===== LOCAL STYLES ===== -->
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- ===== FAVICON ===== -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        /* ===== RESET TOTAL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Raleway', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ===== VARIÁVEIS ===== */
+        :root {
+            --primary-gold: #FFD700;
+            --primary-orange: #FF6B35;
+            --gradient-gold: linear-gradient(135deg, #FFD700 0%, #FF6B35 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --backdrop-blur: blur(10px);
+            --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-large: 0 15px 40px rgba(255, 215, 0, 0.4);
+            --shadow-glow: 0 0 20px rgba(255, 215, 0, 0.5);
+            --transition-normal: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            
+            /* LUXURY para CTA mobile apenas */
+            --luxury-gold: #C9A96E;
+            --luxury-black: #0A0A0A;
+            --luxury-platinum: #E5E4E2;
+        }
+
+        /* ===== PARTÍCULAS: FUNDO ABSOLUTO ===== */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: all;
+        }
+
+        #particles-js canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: all;
+        }
+
+        /* ===== CONTEÚDO: CAMADA INTERMEDIÁRIA ===== */
+        .content {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            gap: clamp(20px, 4vh, 40px);
+            pointer-events: none;
+        }
+
+        .logo {
+            margin-bottom: clamp(10px, 2vh, 20px);
+            pointer-events: none;
+        }
+
+        .logo img {
+            width: clamp(180px, 25vw, 320px);
+            height: auto;
+            max-width: 100%;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            pointer-events: none;
+        }
+
+        .content-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(15px, 3vh, 25px);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5.5vw, 4rem);
+            font-weight: 600;
+            line-height: 1.25;
+            margin: 0;
+            margin-bottom: clamp(15px, 3vh, 25px);
+            max-width: 90vw;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            letter-spacing: -0.01em;
+            pointer-events: none;
+        }
+
+        .innovation-text {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 3s ease-in-out infinite;
+        }
+
+        .tagline {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-weight: 300;
+            line-height: 1.65;
+            margin: 0;
+            margin-bottom: clamp(25px, 4vh, 30px);
+            max-width: clamp(300px, 85vw, 850px);
+            text-align: center;
+            letter-spacing: 0.3px;
+            color: rgba(255, 255, 255, 0.9);
+            opacity: 0.95;
+            pointer-events: none;
+        }
+
+        /* ===== CTA LUXURY: DESKTOP E MOBILE UNIFICADOS ===== */
+        .neural-cta-container {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999999;
+            pointer-events: none;
+        }
+
+        .neural-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 22px 35px;
+            min-height: 70px;
+            
+            /* LUXURY TYPOGRAPHY */
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--luxury-black);
+            white-space: nowrap;
+            
+            /* LUXURY VISUAL */
+            background: linear-gradient(135deg, var(--luxury-gold) 0%, var(--luxury-platinum) 50%, var(--luxury-gold) 100%);
+            border: 2px solid rgba(201, 169, 110, 0.8);
+            border-radius: 2px;
+            box-shadow: 
+                0 20px 60px rgba(201, 169, 110, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            
+            /* LUXURY BEHAVIOR */
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            pointer-events: all;
+            isolation: isolate;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neural-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(229, 228, 226, 0.4), transparent);
+            transition: left 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .neural-cta:hover::before {
+            left: 100%;
+        }
+
+        .neural-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 25px 80px rgba(201, 169, 110, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border-color: rgba(201, 169, 110, 1);
+        }
+
+        .neural-cta:active {
+            transform: translateY(-1px);
+        }
+
+        /* ===== CTA MOBILE: LUXURY HIGH-TICKET ===== */
+        .mobile-cta-backup {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999999;
+            padding: 20px 24px 30px;
+            background: linear-gradient(to top, 
+                rgba(10, 10, 10, 0.98) 0%, 
+                rgba(10, 10, 10, 0.8) 70%, 
+                transparent 100%);
+            pointer-events: none;
+            backdrop-filter: blur(30px);
+        }
+
+        .mobile-cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            padding: 22px 28px;
+            min-height: 75px;
+            
+            /* LUXURY TYPOGRAPHY */
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--luxury-black);
+            
+            /* LUXURY VISUAL */
+            background: linear-gradient(135deg, var(--luxury-gold) 0%, var(--luxury-platinum) 50%, var(--luxury-gold) 100%);
+            border: 2px solid rgba(201, 169, 110, 0.8);
+            border-radius: 2px;
+            box-shadow: 
+                0 20px 60px rgba(201, 169, 110, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            
+            /* LUXURY BEHAVIOR */
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            pointer-events: all;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(229, 228, 226, 0.4), transparent);
+            transition: left 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .mobile-cta-btn:active::before {
+            left: 100%;
+        }
+
+        .mobile-cta-btn:active {
+            transform: scale(0.98);
+            box-shadow: 
+                0 15px 45px rgba(201, 169, 110, 0.3),
+                inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-color: rgba(201, 169, 110, 1);
+        }
+
+        .mobile-cta-btn i {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-cta-btn span {
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .neural-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .neural-cta:hover::before {
+            left: 100%;
+        }
+
+        .neural-cta:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 215, 0, 1);
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 107, 53, 0.3));
+        }
+
+        .neural-cta:active {
+            transform: translateY(-1px);
+        }
+
+        .neural-cta-icon {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+        }
+
+        .neural-cta:hover .neural-cta-icon {
+            transform: rotate(5deg) scale(1.05);
+            opacity: 1;
+        }
+
+        .neural-cta-text {
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== ANIMAÇÕES ===== */
+        @keyframes textGlow {
+            0%, 100% { 
+                filter: brightness(1);
+                text-shadow: var(--shadow-glow);
+            }
+            50% { 
+                filter: brightness(1.2);
+                text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 768px) {
+            body {
+                -webkit-tap-highlight-color: transparent;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                user-select: none;
+            }
+            
+            /* ESCONDE CTA PRINCIPAL NO MOBILE */
+            .neural-cta-container {
+                display: none !important;
+            }
+            
+            /* MOSTRA CTA LUXURY NO MOBILE */
+            .mobile-cta-backup {
+                display: block !important;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .content {
+                gap: 25px;
+            }
+            
+            .logo {
+                margin-bottom: -5px;
+            }
+            
+            .logo img {
+                width: 420px;
+                max-width: 420px;
+            }
+            
+            h1 {
+                font-size: 4.5rem;
+                letter-spacing: -0.02em;
+                line-height: 0.95;
+                white-space: nowrap;
+                margin-top: -8px;
+                margin-bottom: 0;
+            }
+            
+            .tagline {
+                font-size: 1.45rem;
+                max-width: 1100px;
+                line-height: 1.45;
+                margin-top: 12px;
+                margin-bottom: 0;
+                padding: 0 20px;
+                margin-left: 50px;
+            }
+            
+            .neural-cta {
+                padding: 24px 40px;
+                font-size: 1rem;
+                letter-spacing: 2.8px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- ===== PARTICLES BACKGROUND ===== -->
-    <div id="particles-js" class="clickable-area" aria-hidden="true"></div>
+    <!-- PARTÍCULAS: CAMADA 1 -->
+    <div id="particles-js"></div>
 
-    <!-- ===== MAIN CONTENT CONTAINER ===== -->
-    <main class="content" role="main">
-        
-        <!-- ===== LOGO SECTION ===== -->
+    <!-- CONTEÚDO: CAMADA 2 -->
+    <main class="content">
         <header class="logo">
             <img src="https://github.com/dynamicsolutions-lab/Dynamiclab.github.io/blob/main/img/Logo%20oficial.png?raw=true" 
                  alt="Dynamic Solutions - Logo da empresa"
                  loading="eager">
         </header>
         
-        <!-- ===== TEXT CONTENT ===== -->
         <section class="content-text">
-            <!-- Main Heading -->
             <h1 data-aos="fade-up">
                 <span class="innovation-text">Excelência</span> em Serviços Tecnológicos
             </h1>
             
-            <!-- Subtitle/Description -->
             <p class="tagline" data-aos="fade-up" data-aos-delay="200">
                 Implementamos processos inteligentes com IA, personalizados exclusivamente para seu negócio. 
                 Gerando resultados Exponenciais através da automação perfeita.
             </p>
         </section>
-        
-        <!-- ===== CALL TO ACTION ===== -->
-        <section class="neural-cta-container">
-            <a href="https://dynamicsolutions.digital/Sobre"
-               class="neural-cta neural-cta-primary clickable-area" 
-               data-aos="fade-up" 
-               data-aos-delay="400"
-               aria-label="Conhecer nossos serviços">
-                <i class="fas fa-key neural-cta-icon" aria-hidden="true"></i>
-                <span class="neural-cta-text">Venha Conhecer</span>
-            </a>
-        </section>
-        
     </main>
 
-    <!-- ===== SCRIPTS ===== -->
-    <script src="script.js"></script>
+    <!-- CTA: CAMADA 3 (SUPREMA) - MOBILE GARANTIDO -->
+    <div class="neural-cta-container" id="cta-container">
+        <a href="https://dynamicsolutions.digital/Sobre"
+           class="neural-cta"
+           id="main-cta"
+           data-aos="fade-up" 
+           data-aos-delay="400">
+            <i class="fas fa-key neural-cta-icon"></i>
+            <span class="neural-cta-text">Venha Conhecer</span>
+        </a>
+    </div>
+
+    <!-- CTA MOBILE BACKUP - GARANTIA ABSOLUTA -->
+    <div class="mobile-cta-backup" id="mobile-backup">
+        <a href="https://dynamicsolutions.digital/Sobre" class="mobile-cta-btn">
+            <i class="fas fa-key"></i>
+            <span>Venha Conhecer</span>
+        </a>
+    </div>
+
+    <script>
+        /* ===== CONFIGURAÇÃO GLOBAL ===== */
+        const DynamicApp = {
+            state: {
+                isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768,
+                touchCount: 0,
+                lastResetTime: 0
+            },
+            config: {
+                resetTouchCount: 13,
+                resetCooldown: 1000
+            }
+        };
+
+        /* ===== SISTEMA DE SOM ===== */
+        const SoundSystem = {
+            sounds: { hover: null, click: null, cyber: null },
+            
+            init() {
+                try {
+                    if (typeof Howl !== 'undefined') {
+                        this.sounds.hover = new Howl({ src: ['assets/sounds/hover.mp3'], volume: 0.3, onloaderror: () => {} });
+                        this.sounds.click = new Howl({ src: ['assets/sounds/click.mp3'], volume: 0.4, onloaderror: () => {} });
+                        this.sounds.cyber = new Howl({ src: ['assets/sounds/cyber.mp3'], volume: 0.2, onloaderror: () => {} });
+                    }
+                } catch (error) {}
+            },
+            
+            play(soundName) {
+                if (this.sounds[soundName]) {
+                    try { this.sounds[soundName].play(); } catch (error) {}
+                }
+            }
+        };
+
+        /* ===== SISTEMA DE PARTÍCULAS ===== */
+        const ParticleSystem = {
+            init() {
+                this.initializeParticles();
+                
+                // Mobile: Touch Events para Reset em 13 toques
+                if (DynamicApp.state.isMobile) {
+                    this.setupMobileReset();
+                }
+            },
+
+            initializeParticles() {
+                if (typeof particlesJS === 'undefined') {
+                    setTimeout(() => this.initializeParticles(), 100);
+                    return;
+                }
+
+                const config = {
+                    particles: {
+                        number: { value: 80, density: { enable: true, value_area: 800 } },
+                        color: { value: "#FFE55C" },
+                        shape: { type: "circle" },
+                        opacity: { 
+                            value: 0.6, 
+                            random: true, 
+                            anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } 
+                        },
+                        size: { 
+                            value: 3, 
+                            random: true, 
+                            anim: { enable: true, speed: 2, size_min: 0.1, sync: false } 
+                        },
+                        line_linked: { 
+                            enable: true, 
+                            distance: 150, 
+                            color: "#FFE55C", 
+                            opacity: 0.4, 
+                            width: 1 
+                        },
+                        move: { 
+                            enable: true, 
+                            speed: 3, 
+                            direction: "none", 
+                            random: true, 
+                            straight: false, 
+                            out_mode: "out", 
+                            bounce: false, 
+                            attract: { enable: true, rotateX: 600, rotateY: 1200 } 
+                        }
+                    },
+                    interactivity: {
+                        detect_on: "canvas",
+                        events: { 
+                            onhover: { enable: true, mode: "grab" }, 
+                            onclick: { enable: true, mode: "push" }, 
+                            resize: true 
+                        },
+                        modes: { 
+                            grab: { distance: 180, line_linked: { opacity: 0.8 } }, 
+                            push: { particles_nb: 6 } 
+                        }
+                    },
+                    retina_detect: true
+                };
+
+                particlesJS("particles-js", config);
+                console.log('✅ Partículas inicializadas');
+            },
+
+            setupMobileReset() {
+                const particlesContainer = document.getElementById('particles-js');
+                
+                particlesContainer.addEventListener('touchstart', (e) => {
+                    // Só conta se NÃO for no CTA
+                    if (!e.target.closest('.neural-cta-container')) {
+                        DynamicApp.state.touchCount++;
+                        this.checkReset();
+                    }
+                }, { passive: true });
+            },
+
+            checkReset() {
+                const now = Date.now();
+                
+                if (DynamicApp.state.touchCount >= DynamicApp.config.resetTouchCount &&
+                    now - DynamicApp.state.lastResetTime > DynamicApp.config.resetCooldown) {
+                    
+                    this.performReset();
+                    DynamicApp.state.touchCount = 0;
+                    DynamicApp.state.lastResetTime = now;
+                    console.log('🔄 Reset em 13 toques');
+                }
+            },
+
+            performReset() {
+                if (window.pJSDom && window.pJSDom[0]) {
+                    const pJS = window.pJSDom[0].pJS;
+                    pJS.particles.array.length = 0;
+                    
+                    for (let i = 0; i < 80; i++) {
+                        pJS.fn.particle(pJS.particles.color, pJS.particles.opacity.value);
+                    }
+                }
+            }
+        };
+
+        /* ===== SISTEMA DE ANIMAÇÕES ===== */
+        const AnimationSystem = {
+            init() {
+                // CTA Events - DESKTOP
+                document.querySelectorAll('.neural-cta').forEach(button => {
+                    button.addEventListener('mouseenter', () => SoundSystem.play('hover'));
+                    button.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        SoundSystem.play('click');
+                    });
+                });
+
+                // CTA Events - MOBILE BACKUP
+                document.querySelectorAll('.mobile-cta-btn').forEach(button => {
+                    button.addEventListener('touchstart', (e) => {
+                        e.stopPropagation();
+                        SoundSystem.play('hover');
+                        
+                        // Visual feedback
+                        button.style.transform = 'scale(0.98)';
+                        button.style.background = 'linear-gradient(135deg, #FFA500 0%, #FFD700 100%)';
+                    }, { passive: false });
+                    
+                    button.addEventListener('touchend', (e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        
+                        SoundSystem.play('click');
+                        
+                        // Reset visual
+                        button.style.transform = 'scale(1)';
+                        button.style.background = 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)';
+                        
+                        // Navegação forçada
+                        const href = button.getAttribute('href');
+                        if (href) {
+                            setTimeout(() => {
+                                window.location.href = href;
+                            }, 150);
+                        }
+                    }, { passive: false });
+                    
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    });
+                });
+                
+                // Logo Events
+                const logo = document.querySelector('.logo img');
+                if (logo) {
+                    logo.addEventListener('click', () => SoundSystem.play('cyber'));
+                    logo.addEventListener('touchstart', () => SoundSystem.play('hover'), { passive: true });
+                }
+                
+                console.log('✅ Animation System: Desktop + Mobile CTA configurados');
+            }
+        };
+
+        /* ===== INICIALIZAÇÃO ===== */
+        const MainInitializer = {
+            init() {
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', () => this.start());
+                } else {
+                    this.start();
+                }
+            },
+            
+            start() {
+                try {
+                    // 1. Som
+                    SoundSystem.init();
+                    
+                    // 2. Partículas (imediato)
+                    ParticleSystem.init();
+                    
+                    // 3. AOS
+                    if (typeof AOS !== 'undefined') {
+                        AOS.init({ duration: 1000, once: true, offset: 100 });
+                    }
+                    
+                    // 4. Animações
+                    setTimeout(() => AnimationSystem.init(), 200);
+                    
+                    console.log('✅ Dynamic Solutions inicializado');
+                    
+                } catch (error) {
+                    console.error('❌ Erro na inicialização:', error);
+                }
+            }
+        };
+
+        // Inicialização automática
+        MainInitializer.init();
+    </script>
     
-    <!-- ===== STRUCTURED DATA ===== -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
