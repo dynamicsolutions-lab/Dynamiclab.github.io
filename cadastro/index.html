@@ -9,16 +9,19 @@
     label { font-weight: bold; }
     button { padding: 10px 20px; background-color: #222; color: white; border: none; cursor: pointer; }
     button:hover { background-color: #444; }
+    .mensagem { margin-top: 20px; padding: 10px; font-weight: bold; display: none; }
+    .sucesso { background-color: #d4edda; color: #155724; }
+    .erro { background-color: #f8d7da; color: #721c24; }
   </style>
 </head>
 <body>
 
   <h2>📋 Cadastro de Projeto – Dynamic Solutions</h2>
 
-  <form id="dynamicForm" method="POST">
-    <!-- 🔗 COLA O WEBHOOK AQUI PARA TESTE -->
-    <label for="webhook_url">🛠️ Cole abaixo seu webhook de teste:</label>
-    <input type="url" id="webhook_url" placeholder="https://01n8n.autodynamic.tech/webhook-test/01" required>
+  <form id="dynamicForm">
+    <!-- Webhook dinâmico -->
+    <label for="webhook_url">🛠️ Webhook do n8n (colar aqui):</label>
+    <input type="url" id="webhook_url" placeholder="https://01n8n.autodynamic.tech/webhook-test/" required>
 
     <!-- CLIENTE -->
     <label for="nome_cliente">Nome do Cliente:</label>
@@ -62,20 +65,57 @@
     <label for="landing_page">URL da Landing Page:</label>
     <input type="url" id="landing_page" name="landing_page">
 
-    <!-- ENVIO -->
+    <!-- BOTÃO -->
     <button type="submit">Cadastrar</button>
   </form>
 
+  <!-- FEEDBACK -->
+  <div id="mensagem" class="mensagem"></div>
+
   <script>
     const form = document.getElementById('dynamicForm');
+    const mensagem = document.getElementById('mensagem');
+
     form.addEventListener('submit', function(event) {
+      event.preventDefault(); // impede o reload
       const webhook = document.getElementById('webhook_url').value.trim();
+
       if (!webhook) {
-        alert('Cole a URL do Webhook antes de enviar.');
-        event.preventDefault();
+        mensagem.textContent = "❌ Cole a URL do webhook.";
+        mensagem.className = "mensagem erro";
+        mensagem.style.display = "block";
         return;
       }
-      form.setAttribute('action', webhook);
+
+      const formData = new FormData(form);
+      const data = new URLSearchParams();
+      for (const pair of formData) {
+        data.append(pair[0], pair[1]);
+      }
+
+      fetch(webhook, {
+        method: 'POST',
+        body: data,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          mensagem.textContent = "✅ Cadastro realizado com sucesso!";
+          mensagem.className = "mensagem sucesso";
+          form.reset(); // limpa os campos
+        } else {
+          mensagem.textContent = "❌ Erro ao cadastrar. Verifique o webhook.";
+          mensagem.className = "mensagem erro";
+        }
+        mensagem.style.display = "block";
+      })
+      .catch(() => {
+        mensagem.textContent = "❌ Erro na conexão com o webhook.";
+        mensagem.className = "mensagem erro";
+        mensagem.style.display = "block";
+      });
     });
   </script>
 
