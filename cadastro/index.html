@@ -2,43 +2,417 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Teste Webhook</title>
+  <title>Cadastro – Dynamic Performance</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Crimson+Text:wght@400;600&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Crimson Text', serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #000000 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Elementos decorativos de fundo */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 20%, rgba(218, 165, 32, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 30px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    /* Logo */
+    .logo-container {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+    
+    .logo-container::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #DAA520, transparent);
+    }
+    
+    .logo {
+      max-width: 300px;
+      height: auto;
+      filter: drop-shadow(0 0 20px rgba(218, 165, 32, 0.3));
+      transition: all 0.3s ease;
+    }
+    
+    .logo:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 30px rgba(218, 165, 32, 0.5));
+    }
+    
+    /* Título */
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 40px;
+      background: linear-gradient(45deg, #DAA520, #FFD700, #B8860B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(218, 165, 32, 0.3);
+      letter-spacing: 2px;
+    }
+    
+    /* Formulário */
+    #dynamicForm {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(218, 165, 32, 0.3);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    #dynamicForm::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #DAA520, transparent);
+    }
+    
+    /* Labels */
+    label {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #DAA520;
+      display: block;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(218, 165, 32, 0.3);
+    }
+    
+    /* Inputs */
+    input, select, textarea {
+      width: 100%;
+      padding: 16px 20px;
+      margin-bottom: 25px;
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid rgba(218, 165, 32, 0.3);
+      border-radius: 10px;
+      color: #ffffff;
+      font-family: 'Crimson Text', serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #DAA520;
+      box-shadow: 0 0 20px rgba(218, 165, 32, 0.4),
+                  inset 0 2px 5px rgba(0, 0, 0, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    input::placeholder, textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+      font-style: italic;
+    }
+    
+    /* Select styling */
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23DAA520' viewBox='0 0 16 16'%3e%3cpath d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 16px;
+      padding-right: 45px;
+    }
+    
+    /* Textarea */
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+      font-family: 'Crimson Text', serif;
+    }
+    
+    /* Botão */
+    button {
+      width: 100%;
+      padding: 18px 24px;
+      background: linear-gradient(45deg, #DAA520, #FFD700);
+      color: #000000;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(218, 165, 32, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    button:hover {
+      background: linear-gradient(45deg, #FFD700, #DAA520);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(218, 165, 32, 0.5);
+    }
+    
+    button:hover::before {
+      left: 100%;
+    }
+    
+    button:active {
+      transform: translateY(-1px);
+    }
+    
+    /* Mensagens */
+    .mensagem {
+      margin-top: 30px;
+      padding: 20px;
+      font-weight: 600;
+      display: none;
+      border-radius: 12px;
+      font-family: 'Crimson Text', serif;
+      font-size: 1.1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .mensagem::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: currentColor;
+      opacity: 0.3;
+    }
+    
+    .sucesso {
+      background: rgba(34, 197, 94, 0.2);
+      color: #4ade80;
+      border: 2px solid rgba(34, 197, 94, 0.3);
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+    }
+    
+    .erro {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border: 2px solid rgba(239, 68, 68, 0.3);
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+    }
+    
+    /* Efeitos de animação */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .container > * {
+      animation: fadeInUp 0.8s ease-out;
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px 15px;
+      }
+      
+      #dynamicForm {
+        padding: 25px;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      .logo {
+        max-width: 250px;
+      }
+    }
+    
+    /* Scrollbar customizada */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(45deg, #DAA520, #FFD700);
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(45deg, #FFD700, #DAA520);
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo-container">
+      <img src="https://github.com/dynamicsolutions-lab/Dynamiclab.github.io/blob/main/img/Logo%20oficial.png?raw=true" alt="Dynamic Solutions Logo" class="logo">
+    </div>
 
-  <form id="formulario">
-    <input type="url" id="webhook_url" placeholder="Cole o webhook" required><br>
-    <input type="text" name="nome_cliente" placeholder="Nome do Cliente" required><br>
-    <button type="submit">Cadastrar</button>
-  </form>
+    <h2>📋 Cadastro de Projeto</h2>
 
-  <div id="mensagem"></div>
+    <form id="dynamicForm">
+      <!-- COLAR WEBHOOK PARA AMBIENTE DE TESTE OU PRODUÇÃO -->
+      <label for="webhook_url">🛠️ Webhook do n8n:</label>
+      <input type="url" id="webhook_url" placeholder="https://01n8n.autodynamic.tech/webhook-test/" required>
+
+      <!-- DADOS DO CLIENTE -->
+      <label for="nome_cliente">Nome do Cliente:</label>
+      <input type="text" id="nome_cliente" name="nome_cliente" required>
+
+      <label for="segmento">Segmento:</label>
+      <input type="text" id="segmento" name="segmento" required>
+
+      <label for="status_cliente">Status do Cliente:</label>
+      <select id="status_cliente" name="status_cliente" required>
+        <option value="ativo">Ativo</option>
+        <option value="pausado">Pausado</option>
+        <option value="encerrado">Encerrado</option>
+      </select>
+
+      <!-- PROJETO -->
+      <label for="nome_projeto">Nome do Projeto:</label>
+      <input type="text" id="nome_projeto" name="nome_projeto" required>
+
+      <label for="objetivo_projeto">Objetivo do Projeto:</label>
+      <textarea id="objetivo_projeto" name="objetivo_projeto" rows="3" required></textarea>
+
+      <!-- CAMPANHA -->
+      <label for="plataforma">Plataforma de Tráfego:</label>
+      <select id="plataforma" name="plataforma" required>
+        <option value="Meta Ads">Meta Ads</option>
+        <option value="Google Ads">Google Ads</option>
+      </select>
+
+      <label for="verba_mensal">Verba Mensal (R$):</label>
+      <input type="number" id="verba_mensal" name="verba_mensal" required>
+
+      <!-- FUNIL -->
+      <label for="tipo_funil">Tipo de Funil:</label>
+      <select id="tipo_funil" name="tipo_funil" required>
+        <option value="Agendamento WhatsApp">Agendamento WhatsApp</option>
+        <option value="Captura de Leads">Captura de Leads</option>
+        <option value="Venda Direta">Venda Direta</option>
+      </select>
+
+      <label for="landing_page">URL da Landing Page:</label>
+      <input type="url" id="landing_page" name="landing_page">
+
+      <!-- BOTÃO DE ENVIO -->
+      <button type="submit">Cadastrar</button>
+    </form>
+
+    <!-- MENSAGEM DE RETORNO -->
+    <div id="mensagem" class="mensagem"></div>
+  </div>
 
   <script>
-    const form = document.getElementById('formulario');
+    const form = document.getElementById('dynamicForm');
     const msg = document.getElementById('mensagem');
 
     form.addEventListener('submit', function(event) {
-      event.preventDefault(); // 🔒 Impede o redirecionamento
+      event.preventDefault(); // impede redirecionamento
       const webhook = document.getElementById('webhook_url').value.trim();
-      const data = new URLSearchParams(new FormData(form));
+      if (!webhook) {
+        msg.textContent = "❌ Cole a URL do Webhook antes de enviar.";
+        msg.className = "mensagem erro";
+        msg.style.display = "block";
+        return;
+      }
+
+      const formData = new FormData(form);
+      const data = new URLSearchParams(formData);
 
       fetch(webhook, {
         method: 'POST',
         body: data,
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
-      })
-      .then(res => {
-        if (res.ok) {
-          msg.innerText = "✅ Sucesso!";
-          form.reset();
-        } else {
-          msg.innerText = "❌ Erro no envio!";
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
         }
       })
-      .catch(() => msg.innerText = "❌ Falha na conexão.");
+      .then(response => {
+        if (response.ok) {
+          msg.textContent = "✅ Cadastro realizado com sucesso!";
+          msg.className = "mensagem sucesso";
+          form.reset();
+        } else {
+          msg.textContent = "❌ Erro no envio. Verifique o webhook.";
+          msg.className = "mensagem erro";
+        }
+        msg.style.display = "block";
+      })
+      .catch(() => {
+        msg.textContent = "❌ Falha na conexão com o webhook.";
+        msg.className = "mensagem erro";
+        msg.style.display = "block";
+      });
     });
   </script>
-
 </body>
 </html>
